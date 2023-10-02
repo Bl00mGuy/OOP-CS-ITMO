@@ -10,7 +10,7 @@ public abstract class Environment
 
     public Dictionary<string, int> Obstacles { get; } = new Dictionary<string, int>();
 
-    public int LengthOfEnvironment { get; protected set; }
+    public double LengthOfEnvironment { get; protected set; }
 
     public void AddRequiredEngineName(string engineName)
     {

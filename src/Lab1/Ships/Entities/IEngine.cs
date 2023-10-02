@@ -2,6 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 public interface IEngine
 {
-    string Name { get; }
+    string EngineName { get; }
     double CalculateFuelConsumption(double distance);
+    double StartEngine();
 }

@@ -1,11 +1,18 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
-public class ImpulseEngineClassC : Entities.IEngine
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
+
+public class ImpulseEngineClassC : Spaceship, Entities.IEngine
 {
-    public string Name => "Impulse Engine Class C";
+    public string EngineName => "Impulse Engine Class C";
 
     public double CalculateFuelConsumption(double distance)
     {
-        return 0.5 * distance;
+        return 0.5 * distance * MassClass;
+    }
+
+    public double StartEngine()
+    {
+        return 10;
     }
 }
