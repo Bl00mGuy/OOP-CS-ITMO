@@ -46,7 +46,11 @@ public abstract class ShipEntersSphere
                     {
                         if (segment.RequiredEngineNames.Contains(spaceship.Engine.EngineName) && segment.RequiredJumpEngineNames.Contains(spaceship.JumpEngine.EngineName))
                         {
-                            // Доделать прыжки в дистанцию
+                            if (segment.LengthOfEnvironment > spaceship.JumpEngine.MaxJumpLength)
+                            {
+                                throw new ArgumentException("Spaceship doesn't have a required jump engine for High-Density Fog!");
+                            }
+
                             if (segment.Obstacles.TryGetValue("AntimatterFlare", out int antimatterFlaresCount))
                             {
                                 for (int i = 0; i < antimatterFlaresCount; i++)

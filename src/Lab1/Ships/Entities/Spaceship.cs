@@ -6,7 +6,7 @@ public abstract class Spaceship
     public bool? IsShipAlive { get; protected set; }
     public bool? IsCrewAlive { get; protected set; }
     public IEngine? Engine { get; protected set; }
-    public IEngine? JumpEngine { get; protected set; }
+    public IJumpEngine? JumpEngine { get; protected set; }
     public IDeflector? Deflector { get; protected set; }
     public IDeflector? PhotonDeflector { get; protected set; }
     public bool? AntiNitrineEmitter { get; protected set; }

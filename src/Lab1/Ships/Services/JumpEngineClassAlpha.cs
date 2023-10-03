@@ -1,15 +1,13 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
-
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-internal class JumpEngineClassAlpha : Spaceship, Entities.IEngine
+internal class JumpEngineClassAlpha : Entities.IJumpEngine
 {
-    // private double maxJumpLength = 100;
+    public double MaxJumpLength => 100;
     public string EngineName => "Jump Engine Alpha";
 
     public double CalculateFuelConsumption(double distance)
     {
-        return 2.0 * distance * MassClass;
+        return 2.0 * distance;
     }
 
     public double StartEngine()

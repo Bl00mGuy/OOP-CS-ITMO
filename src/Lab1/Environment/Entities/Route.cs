@@ -75,6 +75,7 @@ public class Route : Environment
                 foreach (Environment segment in segments)
                 {
                     // Пофиксить длину пути от типа сферы и потребление топлива для прыжковых
+                    ShipEnterSphere(spaceship, segment);
                     totalLength += segment.LengthOfEnvironment;
                     remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
                 }
@@ -83,16 +84,16 @@ public class Route : Environment
 
         // Создание экземпляра маршрута
         var route = new Route(remainingFuelActivePlasma, remainingFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice);
-        route._routeSegments = segments; // Доработать
+        route._routeSegments = segments;
         route.TotalRouteLength = totalLength;
 
         if (spaceship.JumpEngine != null)
         {
-            route.TotalRoutePrice = (remainingFuelActivePlasma * fuelActivePlasmaPrice) + (remainingFuelGravitonMatter * fuelGravitonMatterPrice);
+            route.TotalRoutePrice = (remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.MassClass) + (remainingFuelGravitonMatter * fuelGravitonMatterPrice * spaceship.MassClass);
         }
         else
         {
-            route.TotalRoutePrice = remainingFuelActivePlasma * fuelActivePlasmaPrice;
+            route.TotalRoutePrice = remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.MassClass;
         }
 
         // Исход поездки
