@@ -12,7 +12,6 @@ public abstract class Spaceship
     public bool? AntiNitrineEmitter { get; protected set; }
     public IHullStrength? HullStrength { get; protected set; }
     public int MassClass { get; protected set; }
-    public double? FuelTankVolume { get; protected set; } = 0;
 
     public void SetShipStatus(bool isAlive)
     {

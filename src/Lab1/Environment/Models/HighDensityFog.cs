@@ -6,9 +6,9 @@ public class HighDensityFog : Entities.Environment
     {
         AddRequiredEngineName("Impulse Engine Class C");
         AddRequiredEngineName("Impulse Engine Class E");
-        AddRequiredEngineName("Jump Engine Alpha");
-        AddRequiredEngineName("Jump Engine Omega");
-        AddRequiredEngineName("Jump Engine Gamma");
+        AddRequiredJumpEngineName("Jump Engine Alpha");
+        AddRequiredJumpEngineName("Jump Engine Omega");
+        AddRequiredJumpEngineName("Jump Engine Gamma");
         AddObstacle("AntimatterFlare", antimatterFlaresCount);
         LengthOfEnvironment = lengthOfEnvironment;
     }

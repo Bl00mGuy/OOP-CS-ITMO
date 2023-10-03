@@ -1,20 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
 public class Route : Environment
 {
-    public double InitialFuelActivePlasma { get; private set; }
-    public double FuelActivePlasmaPrice { get; private set; }
-    public double InitialFuelGravitonMatter { get; private set; }
-    public double FuelGravitonMatterPrice { get; private set; }
-    public double TotalRouteLength { get; private set; }
-    public double TotalRoutePrice { get; private set; }
-
     private Collection<Environment> _routeSegments = new Collection<Environment>(); // Список отрезков пути маршрута
-
     public Route(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice)
     {
         InitialFuelActivePlasma = initialFuelActivePlasma;
@@ -25,7 +18,14 @@ public class Route : Environment
         TotalRoutePrice = 0;
     }
 
-    public static Route CreateRoute(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environment> segments)
+    public double InitialFuelActivePlasma { get; private set; }
+    public double FuelActivePlasmaPrice { get; private set; }
+    public double InitialFuelGravitonMatter { get; private set; }
+    public double FuelGravitonMatterPrice { get; private set; }
+    public double TotalRouteLength { get; private set; }
+    public double TotalRoutePrice { get; private set; }
+
+    public static Route SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environment> segments)
     {
         if (spaceship == null)
         {
@@ -63,19 +63,18 @@ public class Route : Environment
                 remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
                 foreach (Environment segment in segments)
                 {
-                    // Пофиксить длину пути от типа сферы
+                    ShipEnterSphere(spaceship, segment);
                     totalLength += segment.LengthOfEnvironment;
                     remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
                 }
             }
-
-            if (spaceship.JumpEngine != null)
+            else
             {
                 remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
                 remainingFuelGravitonMatter -= spaceship.JumpEngine.StartEngine();
                 foreach (Environment segment in segments)
                 {
-                    // Пофиксить длину пути от типа сферы и потреблени топлива для прыжковых
+                    // Пофиксить длину пути от типа сферы и потребление топлива для прыжковых
                     totalLength += segment.LengthOfEnvironment;
                     remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
                 }
@@ -103,5 +102,17 @@ public class Route : Environment
         }
 
         return route;
+    }
+
+    public void CreateSegment(EnvironmentType environmentType, int firstParameter, int secondParameter, int environmentLength)
+    {
+        Environment segment = environmentType switch
+        {
+            EnvironmentType.NormalSpace => new NormalSpace(firstParameter, secondParameter, environmentLength),
+            EnvironmentType.HighDensityFog => new HighDensityFog(firstParameter, environmentLength),
+            EnvironmentType.NitrineParticleFog => new NitrineParticleFog(firstParameter, environmentLength),
+            _ => throw new ArgumentException("Invalid environment type!", nameof(environmentType)),
+        };
+        _routeSegments.Add(segment);
     }
 }
