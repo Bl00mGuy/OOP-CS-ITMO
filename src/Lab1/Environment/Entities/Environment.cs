@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
@@ -18,7 +17,7 @@ public abstract class Environment
     private ReadOnlyCollection<string> RequiredJumpEngineNames => _requiredJumpEngineNames.AsReadOnly();
     private Dictionary<string, int> Obstacles { get; } = new();
 
-    protected static void ShipEnterSphere(Spaceship spaceship, Environment segment)
+    protected static string ShipEnterSphere(Spaceship spaceship, Environment segment)
     {
         if (spaceship.Engine != null)
         {
@@ -47,7 +46,7 @@ public abstract class Environment
                     }
                     else
                     {
-                        throw new ArgumentException("Spaceship doesn't have a required engine for Normal Space!");
+                        return "Spaceship doesn't have a required engine!";
                     }
 
                     break;
@@ -59,7 +58,7 @@ public abstract class Environment
                         {
                             if (segment.LengthOfEnvironment > spaceship.JumpEngine.MaxJumpLength)
                             {
-                                throw new ArgumentException("Spaceship doesn't have a required jump engine for High-Density Fog!");
+                                return "Spaceship doesn't have a required jump engine!";
                             }
 
                             if (segment.Obstacles.TryGetValue("AntimatterFlare", out int antimatterFlaresCount))
@@ -74,7 +73,7 @@ public abstract class Environment
                     }
                     else
                     {
-                        throw new ArgumentException("Spaceship doesn't have a required engine for High-Density Fog!");
+                        return "Spaceship doesn't have a required engine!";
                     }
 
                     break;
@@ -93,12 +92,14 @@ public abstract class Environment
                     }
                     else
                     {
-                        throw new ArgumentException("Spaceship doesn't have a required engine for Nitrine-Particle Fog!");
+                        return "Spaceship doesn't have a required engine!";
                     }
 
                     break;
             }
         }
+
+        return "Spaceship successfully entered the sphere";
     }
 
     protected void AddRequiredEngineName(string engineName)

@@ -25,34 +25,34 @@ public class Route : Environment
     public double TotalRouteLength { get; private set; }
     public double TotalRoutePrice { get; private set; }
 
-    public static void SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environment> segments)
+    public static string SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environment> segments)
     {
         if (spaceship == null)
         {
-            throw new ArgumentNullException(nameof(spaceship), "Unable to identify the spaceship!");
+            return "Unable to identify the spaceship!";
         }
 
         if (initialFuelActivePlasma <= 0 && spaceship.JumpEngine != null)
         {
-            throw new ArgumentOutOfRangeException(nameof(initialFuelActivePlasma), "A spaceship cannot fly with an empty tank!");
+            return "A spaceship cannot fly with an empty tank!";
         }
 
         if (initialFuelGravitonMatter <= 0 && spaceship.JumpEngine != null)
         {
-            throw new ArgumentOutOfRangeException(nameof(initialFuelGravitonMatter), "A spaceship cannot fly with an empty tank!");
+            return "A spaceship cannot fly with an empty tank!";
         }
 
         if (fuelActivePlasmaPrice <= 0 || fuelGravitonMatterPrice <= 0)
         {
-            throw new ArgumentException("Wake up! Fuel cannot be free!");
+            return "Wake up! Fuel cannot be free!";
         }
 
         if (segments == null || segments.Count == 0)
         {
-            throw new ArgumentException("Route must contain at least one segment!", nameof(segments));
+            return "Route must contain at least one segment!";
         }
 
-        // Рассчитываем общую длину маршрута и Расчет оставшегося топлива после прохождения маршрута
+        // Рассчёт общей длины маршрута и расчет топлива
         double remainingFuelActivePlasma = initialFuelActivePlasma;
         double remainingFuelGravitonMatter = initialFuelGravitonMatter;
         double totalLength = 0;
@@ -74,7 +74,6 @@ public class Route : Environment
                 remainingFuelGravitonMatter -= spaceship.JumpEngine.StartEngine();
                 foreach (Environment segment in segments)
                 {
-                    // Пофиксить длину пути от типа сферы и потребление топлива для прыжковых
                     ShipEnterSphere(spaceship, segment);
                     totalLength += segment.LengthOfEnvironment;
                     remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
@@ -99,8 +98,10 @@ public class Route : Environment
         // Исход поездки
         if (remainingFuelActivePlasma < 0 || (spaceship.JumpEngine != null && remainingFuelGravitonMatter < 0))
         {
-            throw new InvalidOperationException($"There is not enough fuel for {spaceship.Name} ship to complete the route! The spaceship was lost!");
+            return "There is not enough fuel for spaceship to complete the route!";
         }
+
+        return "The spacecraft has successfully complete voyage";
     }
 
     public void CreateSegment(EnvironmentType environmentType, int firstParameter, int secondParameter, int environmentLength)

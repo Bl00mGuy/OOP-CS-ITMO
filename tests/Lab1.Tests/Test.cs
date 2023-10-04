@@ -10,9 +10,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class Test
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 200)] // Прогулочный челнок без прыжковых двигателей
+    [InlineData(10000, 10000, 1, 1, 200)]
     public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int highDensityFogLength)
     {
+        // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new AvgurShip();
 
@@ -20,20 +21,41 @@ public class Test
 
         var segments = new Collection<Environment.Entities.Environment> { highDensityFogSegment };
 
-        ArgumentOutOfRangeException ex1 = Assert.Throws<ArgumentOutOfRangeException>(() =>
+        // Act and Assert
+        void SendSpaceship1()
         {
             Route.SendSpaceshipVoyage(spaceship1, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-        });
+        }
 
-        ArgumentOutOfRangeException ex2 = Assert.Throws<ArgumentOutOfRangeException>(() =>
+        void SendSpaceship2()
         {
             Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-        });
+        }
 
-        Assert.Contains("initialFuelActivePlasma", ex1.Message, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("initialFuelGravitonMatter", ex1.Message, StringComparison.OrdinalIgnoreCase);
-
-        Assert.Contains("initialFuelActivePlasma", ex2.Message, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("initialFuelGravitonMatter", ex2.Message, StringComparison.OrdinalIgnoreCase);
+        if (initialFuelActivePlasma < 0 || initialFuelGravitonMatter < 0)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => SendSpaceship1());
+            Assert.Throws<ArgumentOutOfRangeException>(() => SendSpaceship2());
+        }
+        else
+        {
+            if (fuelActivePlasmaPrice <= 0)
+            {
+                Assert.Throws<ArgumentException>(() => SendSpaceship1());
+                Assert.Throws<ArgumentException>(() => SendSpaceship2());
+            }
+            else
+            {
+                Assert.Throws<InvalidOperationException>(() => SendSpaceship1());
+                if (initialFuelGravitonMatter <= 0 || fuelGravitonMatterPrice <= 0)
+                {
+                    Assert.Throws<ArgumentException>(() => SendSpaceship2());
+                }
+                else
+                {
+                    Assert.Throws<InvalidOperationException>(() => SendSpaceship2());
+                }
+            }
+        }
     }
 }
