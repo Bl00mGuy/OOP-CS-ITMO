@@ -11,7 +11,7 @@ public class SpaceWhales : Entities.Obstacle
         {
             if (spaceship.AntiNitrineEmitter == true)
             {
-                return "Spaceship repelled the attack of space-whales with an anti-nitrine emitter.";
+                return "OK";
             }
 
             if (spaceship.Deflector != null)
