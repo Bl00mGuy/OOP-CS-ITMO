@@ -14,7 +14,7 @@ public class FirstTest
     {
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
-        var spaceship2 = new AvgurShip();
+        var spaceship2 = new AvgurShip(false);
         var highDensityFogSegment = new HighDensityFog(0, highDensityFogLength);
 
         var segments = new Collection<Environment.Entities.Environment> { highDensityFogSegment };

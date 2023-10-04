@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
 
 public class MeredianShip : Entities.Spaceship
 {
-    public MeredianShip()
+    public MeredianShip(bool hasPhotonDeflector)
     {
         Name = "Meredian";
         IsShipAlive = true;
@@ -14,5 +14,9 @@ public class MeredianShip : Entities.Spaceship
         AntiNitrineEmitter = true;
         HullStrength = new HullClass2();
         MassClass = 2;
+        if (hasPhotonDeflector)
+        {
+            PhotonDeflector = new DeflectorClassPhoton();
+        }
     }
 }

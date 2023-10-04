@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
 
 public class VaklasShip : Entities.Spaceship
 {
-    public VaklasShip()
+    public VaklasShip(bool hasPhotonDeflector)
     {
         Name = "Vaklas";
         IsShipAlive = true;
@@ -14,5 +14,9 @@ public class VaklasShip : Entities.Spaceship
         Deflector = new DeflectorClass1();
         HullStrength = new HullClass2();
         MassClass = 2;
+        if (hasPhotonDeflector)
+        {
+            PhotonDeflector = new DeflectorClassPhoton();
+        }
     }
 }

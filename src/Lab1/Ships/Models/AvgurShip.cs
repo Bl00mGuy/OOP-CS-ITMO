@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
 
 public class AvgurShip : Entities.Spaceship
 {
-    public AvgurShip()
+    public AvgurShip(bool hasPhotonDeflector)
     {
         Name = "Avgur";
         IsShipAlive = true;
@@ -12,8 +12,11 @@ public class AvgurShip : Entities.Spaceship
         Engine = new ImpulseEngineClassE();
         JumpEngine = new JumpEngineClassAlpha();
         Deflector = new DeflectorClass3();
-        PhotonDeflector = new DeflectorClassPhoton();
         HullStrength = new HullClass3();
         MassClass = 3;
+        if (hasPhotonDeflector)
+        {
+            PhotonDeflector = new DeflectorClassPhoton();
+        }
     }
 }
