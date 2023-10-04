@@ -2,7 +2,7 @@ using System;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-internal class JumpEngineClassOmega : Entities.IJumpEngine
+public class JumpEngineClassOmega : Entities.IJumpEngine
 {
     public double MaxJumpLength => 200;
     public string EngineName => "Jump Engine Omega";

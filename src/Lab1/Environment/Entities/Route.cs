@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
 public class Route : Environment
 {
-    private Collection<Environment> _routeSegments = new Collection<Environment>(); // Список отрезков пути маршрута
+    private Collection<Environment> _routeSegments = new();
     public Route(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice)
     {
         InitialFuelActivePlasma = initialFuelActivePlasma;
@@ -25,7 +25,7 @@ public class Route : Environment
     public double TotalRouteLength { get; private set; }
     public double TotalRoutePrice { get; private set; }
 
-    public static Route SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environment> segments)
+    public static void SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environment> segments)
     {
         if (spaceship == null)
         {
@@ -101,8 +101,6 @@ public class Route : Environment
         {
             throw new InvalidOperationException($"There is not enough fuel for {spaceship.Name} ship to complete the route! The spaceship was lost!");
         }
-
-        return route;
     }
 
     public void CreateSegment(EnvironmentType environmentType, int firstParameter, int secondParameter, int environmentLength)

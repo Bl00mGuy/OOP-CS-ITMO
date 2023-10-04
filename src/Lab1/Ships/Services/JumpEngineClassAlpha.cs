@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-internal class JumpEngineClassAlpha : Entities.IJumpEngine
+public class JumpEngineClassAlpha : Entities.IJumpEngine
 {
     public double MaxJumpLength => 100;
     public string EngineName => "Jump Engine Alpha";
