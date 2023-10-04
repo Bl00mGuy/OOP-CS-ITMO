@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
 public abstract class Obstacle
 {
-    public abstract void ObstacleHit(Spaceship spaceship);
+    public abstract string ObstacleHit(Spaceship spaceship);
 }

@@ -1,4 +1,3 @@
-using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
@@ -6,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public class SmallAsteroid : Entities.Obstacle
 {
-    public override void ObstacleHit(Spaceship spaceship)
+    public override string ObstacleHit(Spaceship spaceship)
     {
         if (spaceship != null && spaceship.HullStrength != null && spaceship.IsCrewAlive == true && spaceship.IsShipAlive == true)
         {
@@ -14,13 +13,11 @@ public class SmallAsteroid : Entities.Obstacle
             {
                 if (spaceship.Deflector.DeflectObstacle(ObstacleType.SmallAsteroid) == false)
                 {
-                    Console.WriteLine($"Ship {spaceship.Name} deflector is destroyed.");
                     if (spaceship.HullStrength.HullObstacle(ObstacleType.SmallAsteroid) == false)
                     {
                         spaceship.SetShipStatus(false);
                         spaceship.SetCrewStatus(false);
-                        Console.WriteLine($"Ship {spaceship.Name} is destroyed.");
-                        return;
+                        return "The spaceship has been destroyed";
                     }
                 }
             }
@@ -30,14 +27,11 @@ public class SmallAsteroid : Entities.Obstacle
                 {
                     spaceship.SetShipStatus(false);
                     spaceship.SetCrewStatus(false);
-                    Console.WriteLine($"Ship {spaceship.Name} is destroyed.");
-                    return;
+                    return "The spaceship has been destroyed";
                 }
             }
         }
-        else
-        {
-            throw new InvalidOperationException("Cannot hit a spaceship (SHIP MISSING OR [DESTROYED/DIED]).");
-        }
+
+        return "Cannot hit a spaceship (SHIP MISSING OR [DESTROYED/DIED]).";
     }
 }
