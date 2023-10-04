@@ -58,7 +58,7 @@ public abstract class Environment
                         {
                             if (segment.LengthOfEnvironment > spaceship.JumpEngine.MaxJumpLength)
                             {
-                                return "Spaceship doesn't have a required jump engine!";
+                                return "Spaceship doesn't have a required jump engine max jump length!";
                             }
 
                             if (segment.Obstacles.TryGetValue("AntimatterFlare", out int antimatterFlaresCount))
@@ -73,7 +73,7 @@ public abstract class Environment
                     }
                     else
                     {
-                        return "Spaceship doesn't have a required engine!";
+                        return "Spaceship doesn't have a required jump engine!";
                     }
 
                     break;

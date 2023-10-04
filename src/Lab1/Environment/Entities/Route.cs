@@ -63,7 +63,12 @@ public class Route : Environment
                 remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
                 foreach (Environment segment in segments)
                 {
-                    ShipEnterSphere(spaceship, segment);
+                    string shipEnter = ShipEnterSphere(spaceship, segment);
+                    if (shipEnter.Length > 0)
+                    {
+                        return shipEnter;
+                    }
+
                     totalLength += segment.LengthOfEnvironment;
                     remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
                 }
@@ -74,7 +79,12 @@ public class Route : Environment
                 remainingFuelGravitonMatter -= spaceship.JumpEngine.StartEngine();
                 foreach (Environment segment in segments)
                 {
-                    ShipEnterSphere(spaceship, segment);
+                    string shipEnter = ShipEnterSphere(spaceship, segment);
+                    if (shipEnter.Length > 0)
+                    {
+                        return shipEnter;
+                    }
+
                     totalLength += segment.LengthOfEnvironment;
                     remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
                 }
