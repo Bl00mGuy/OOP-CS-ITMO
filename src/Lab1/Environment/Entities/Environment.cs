@@ -31,7 +31,11 @@ public abstract class Environment
                             for (int i = 0; i < smallAsteroidCount; i++)
                             {
                                 var smallAsteroid = new SmallAsteroid();
-                                smallAsteroid.ObstacleHit(spaceship);
+                                string shipHit = smallAsteroid.ObstacleHit(spaceship);
+                                if (!Equals(shipHit, "OK"))
+                                {
+                                    return shipHit;
+                                }
                             }
                         }
 
@@ -40,7 +44,11 @@ public abstract class Environment
                             for (int i = 0; i < meteoriteCount; i++)
                             {
                                 var meteorite = new Meteorite();
-                                meteorite.ObstacleHit(spaceship);
+                                string shipHit = meteorite.ObstacleHit(spaceship);
+                                if (!Equals(shipHit, "OK"))
+                                {
+                                    return shipHit;
+                                }
                             }
                         }
                     }
@@ -66,7 +74,11 @@ public abstract class Environment
                                 for (int i = 0; i < antimatterFlaresCount; i++)
                                 {
                                     var antimatterFlare = new AntimatterFlares();
-                                    antimatterFlare.ObstacleHit(spaceship);
+                                    string shipHit = antimatterFlare.ObstacleHit(spaceship);
+                                    if (!Equals(shipHit, "OK"))
+                                    {
+                                        return shipHit;
+                                    }
                                 }
                             }
                         }
@@ -86,7 +98,11 @@ public abstract class Environment
                             for (int i = 0; i < spaceWhalesCount; i++)
                             {
                                 var spaceWhales = new SpaceWhales();
-                                spaceWhales.ObstacleHit(spaceship);
+                                string shipHit = spaceWhales.ObstacleHit(spaceship);
+                                if (!Equals(shipHit, "OK"))
+                                {
+                                    return shipHit;
+                                }
                             }
                         }
                     }
@@ -99,7 +115,7 @@ public abstract class Environment
             }
         }
 
-        return "Spaceship successfully entered the sphere";
+        return "OK";
     }
 
     protected void AddRequiredEngineName(string engineName)

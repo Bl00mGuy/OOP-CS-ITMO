@@ -64,7 +64,7 @@ public class Route : Environment
                 foreach (Environment segment in segments)
                 {
                     string shipEnter = ShipEnterSphere(spaceship, segment);
-                    if (shipEnter.Length > 0)
+                    if (!Equals(shipEnter, "OK"))
                     {
                         return shipEnter;
                     }
@@ -80,7 +80,7 @@ public class Route : Environment
                 foreach (Environment segment in segments)
                 {
                     string shipEnter = ShipEnterSphere(spaceship, segment);
-                    if (shipEnter.Length > 0)
+                    if (!Equals(shipEnter, "OK"))
                     {
                         return shipEnter;
                     }

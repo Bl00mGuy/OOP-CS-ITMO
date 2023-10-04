@@ -11,11 +11,7 @@ public class AntimatterFlares : Entities.Obstacle
         {
             if (spaceship.PhotonDeflector != null)
             {
-                if (spaceship.PhotonDeflector.DeflectObstacle(ObstacleType.AntimatterFlare) == false)
-                {
-                    spaceship.SetCrewStatus(false);
-                    return "The ship's crew died";
-                }
+                spaceship.PhotonDeflector.DeflectObstacle(ObstacleType.AntimatterFlare);
             }
             else
             {
@@ -24,6 +20,6 @@ public class AntimatterFlares : Entities.Obstacle
             }
         }
 
-        return "Cannot hit a spaceship (SHIP MISSING OR [DESTROYED/DIED]).";
+        return "OK";
     }
 }

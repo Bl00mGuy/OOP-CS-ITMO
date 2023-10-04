@@ -31,6 +31,6 @@ public class SpaceWhales : Entities.Obstacle
             }
         }
 
-        return "Cannot hit a spaceship (SHIP MISSING OR [DESTROYED/DIED]).";
+        return "OK";
     }
 }

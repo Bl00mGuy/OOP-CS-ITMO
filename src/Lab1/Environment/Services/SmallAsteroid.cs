@@ -32,6 +32,6 @@ public class SmallAsteroid : Entities.Obstacle
             }
         }
 
-        return "Cannot hit a spaceship (SHIP MISSING OR [DESTROYED/DIED]).";
+        return "OK";
     }
 }
