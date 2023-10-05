@@ -9,7 +9,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class FourthTest
 {
     [Theory]
-    [InlineData(10000, 10000, 12, 14, 100)]
+    [InlineData(10000, 10000, 12, 14, (int)DistanceType.Small)]
     public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int normalSpaceLength)
     {
         // Arrange

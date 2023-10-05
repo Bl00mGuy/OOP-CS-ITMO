@@ -1,8 +1,10 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 public class JumpEngineClassGamma : Entities.IJumpEngine
 {
-    public double MaxJumpLength => 300;
+    public double MaxJumpLength => (double)DistanceType.Big;
     public string EngineName => "Jump Engine Gamma";
 
     public double CalculateFuelConsumption(double distance)

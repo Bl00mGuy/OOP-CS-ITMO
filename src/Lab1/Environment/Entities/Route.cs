@@ -1,6 +1,4 @@
-using System;
 using System.Collections.ObjectModel;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
@@ -105,26 +103,14 @@ public class Route : Environment
             route.TotalRoutePrice = remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.MassClass;
         }
 
-        spaceship.SetRoute(route);
-
         // Исход поездки
         if (remainingFuelActivePlasma < 0 || (spaceship.JumpEngine != null && remainingFuelGravitonMatter < 0))
         {
             return "There is not enough fuel for spaceship to complete the route!";
         }
 
-        return "The spacecraft has successfully complete voyage";
-    }
+        spaceship.SetRoute(route);
 
-    public void CreateSegment(EnvironmentType environmentType, int firstParameter, int secondParameter, int environmentLength)
-    {
-        Environment segment = environmentType switch
-        {
-            EnvironmentType.NormalSpace => new NormalSpace(firstParameter, secondParameter, environmentLength),
-            EnvironmentType.HighDensityFog => new HighDensityFog(firstParameter, environmentLength),
-            EnvironmentType.NitrineParticleFog => new NitrineParticleFog(firstParameter, environmentLength),
-            _ => throw new ArgumentException("Invalid environment type!", nameof(environmentType)),
-        };
-        _routeSegments.Add(segment);
+        return "The spacecraft has successfully complete voyage";
     }
 }
