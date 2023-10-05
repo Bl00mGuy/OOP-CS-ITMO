@@ -22,7 +22,7 @@ public class FirstTest
         string expectedOutput1 = "Spaceship doesn't have a required jump engine!";
         string expectedOutput2 = "Spaceship doesn't have a required jump engine max jump length!";
 
-        // Act and Assert
+        // Act
         string SendSpaceship1()
         {
             return Route.SendSpaceshipVoyage(spaceship1, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
@@ -33,6 +33,7 @@ public class FirstTest
             return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         }
 
+        // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1());
         Assert.Equal(expectedOutput2, SendSpaceship2());
     }

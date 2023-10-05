@@ -22,7 +22,7 @@ public class SecondTest
         string expectedOutput1 = "The ship's crew died";
         string expectedOutput2 = "The spacecraft has successfully complete voyage";
 
-        // Act and Assert
+        // Act
         string SendSpaceship1()
         {
             return Route.SendSpaceshipVoyage(spaceship1, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
@@ -33,6 +33,7 @@ public class SecondTest
             return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         }
 
+        // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1());
         Assert.Equal(expectedOutput2, SendSpaceship2());
     }
