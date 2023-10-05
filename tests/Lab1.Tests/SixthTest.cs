@@ -15,12 +15,18 @@ public class SixthTest
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new VaklasShip(false);
+
         var nitrineParticleFog = new NitrineParticleFog(0, nitrineParticleFogLength);
 
         var segments = new Collection<Environment.Entities.Environment> { nitrineParticleFog };
 
-        string expectedOutput1 = "Spaceship doesn't have a required engine!";
-        string expectedOutput2 = "The spacecraft has successfully complete voyage";
+        const string expectedOutput1 = "Spaceship doesn't have a required engine!";
+        const string expectedOutput2 = "The spacecraft has successfully complete voyage";
+
+        // Assert
+        Assert.Equal(expectedOutput1, SendSpaceship1());
+        Assert.Equal(expectedOutput2, SendSpaceship2());
+        return;
 
         // Act
         string SendSpaceship1()
@@ -32,9 +38,5 @@ public class SixthTest
         {
             return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         }
-
-        // Assert
-        Assert.Equal(expectedOutput1, SendSpaceship1());
-        Assert.Equal(expectedOutput2, SendSpaceship2());
     }
 }

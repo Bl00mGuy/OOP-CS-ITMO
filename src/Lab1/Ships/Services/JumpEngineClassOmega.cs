@@ -1,9 +1,10 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-public class JumpEngineClassOmega : Entities.IJumpEngine
+public class JumpEngineClassOmega : IJumpEngine
 {
     public double MaxJumpLength => (double)DistanceType.Medium;
     public string EngineName => "Jump Engine Omega";

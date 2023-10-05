@@ -1,8 +1,9 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-public class JumpEngineClassGamma : Entities.IJumpEngine
+public class JumpEngineClassGamma : IJumpEngine
 {
     public double MaxJumpLength => (double)DistanceType.Big;
     public string EngineName => "Jump Engine Gamma";

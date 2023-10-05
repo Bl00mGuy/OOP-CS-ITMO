@@ -15,12 +15,17 @@ public class FirstTest
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new AvgurShip(false);
+
         var highDensityFogSegment = new HighDensityFog(0, highDensityFogLength);
 
         var segments = new Collection<Environment.Entities.Environment> { highDensityFogSegment };
 
-        string expectedOutput1 = "Spaceship doesn't have a required jump engine!";
-        string expectedOutput2 = "Spaceship doesn't have a required jump engine max jump length!";
+        const string expectedOutput1 = "Spaceship doesn't have a required jump engine!";
+        const string expectedOutput2 = "Spaceship doesn't have a required jump engine max jump length!";
+
+        // Assert
+        Assert.Equal(expectedOutput1, SendSpaceship1());
+        Assert.Equal(expectedOutput2, SendSpaceship2());
 
         // Act
         string SendSpaceship1()
@@ -32,9 +37,5 @@ public class FirstTest
         {
             return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         }
-
-        // Assert
-        Assert.Equal(expectedOutput1, SendSpaceship1());
-        Assert.Equal(expectedOutput2, SendSpaceship2());
     }
 }

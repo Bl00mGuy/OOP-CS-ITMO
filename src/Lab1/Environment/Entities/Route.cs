@@ -5,7 +5,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
 public class Route : Environment
 {
-    private Collection<Environment> _routeSegments = new();
     private Route(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice)
     {
         InitialFuelActivePlasma = initialFuelActivePlasma;
@@ -25,11 +24,6 @@ public class Route : Environment
 
     public static string SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environment> segments)
     {
-        if (spaceship == null)
-        {
-            return "Unable to identify the spaceship!";
-        }
-
         if (initialFuelActivePlasma <= 0 && spaceship.JumpEngine != null)
         {
             return "A spaceship cannot fly with an empty tank!";
@@ -45,12 +39,12 @@ public class Route : Environment
             return "Wake up! Fuel cannot be free!";
         }
 
-        if (segments == null || segments.Count == 0)
+        if (segments.Count == 0)
         {
             return "Route must contain at least one segment!";
         }
 
-        // Рассчёт общей длины маршрута и расчет топлива
+        // Calculation of total route length and fuel calculation
         double remainingFuelActivePlasma = initialFuelActivePlasma;
         double remainingFuelGravitonMatter = initialFuelGravitonMatter;
         double totalLength = 0;
@@ -89,9 +83,8 @@ public class Route : Environment
             }
         }
 
-        // Создание экземпляра маршрута
+        // Creating a route instance
         var route = new Route(remainingFuelActivePlasma, remainingFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice);
-        route._routeSegments = segments;
         route.TotalRouteLength = totalLength;
 
         if (spaceship.JumpEngine != null)
@@ -103,7 +96,6 @@ public class Route : Environment
             route.TotalRoutePrice = remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.MassClass;
         }
 
-        // Исход поездки
         if (remainingFuelActivePlasma < 0 || (spaceship.JumpEngine != null && remainingFuelGravitonMatter < 0))
         {
             return "There is not enough fuel for spaceship to complete the route!";

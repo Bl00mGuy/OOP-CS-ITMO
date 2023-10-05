@@ -15,12 +15,18 @@ public class SecondTest
         // Arrange
         var spaceship1 = new VaklasShip(false);
         var spaceship2 = new VaklasShip(true);
+
         var highDensityFogSegment = new HighDensityFog(1, highDensityFogLength);
 
         var segments = new Collection<Environment.Entities.Environment> { highDensityFogSegment };
 
-        string expectedOutput1 = "The ship's crew died";
-        string expectedOutput2 = "The spacecraft has successfully complete voyage";
+        const string expectedOutput1 = "The ship's crew died";
+        const string expectedOutput2 = "The spacecraft has successfully complete voyage";
+
+        // Assert
+        Assert.Equal(expectedOutput1, SendSpaceship1());
+        Assert.Equal(expectedOutput2, SendSpaceship2());
+        return;
 
         // Act
         string SendSpaceship1()
@@ -32,9 +38,5 @@ public class SecondTest
         {
             return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         }
-
-        // Assert
-        Assert.Equal(expectedOutput1, SendSpaceship1());
-        Assert.Equal(expectedOutput2, SendSpaceship2());
     }
 }

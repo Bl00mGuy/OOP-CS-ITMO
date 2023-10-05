@@ -1,14 +1,15 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 public class DeflectorClassPhoton : IDeflector
 {
     private int _remainingAntimatterFlares = 3;
 
-    public bool IsDeflectorAlive { get; private set; } = true;
     public string Name => "Deflector Class Photon";
+
+    private bool IsDeflectorAlive { get; set; } = true;
 
     public bool DeflectObstacle(ObstacleType obstacleType)
     {

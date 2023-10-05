@@ -20,6 +20,19 @@ public class FourthTest
 
         var segments = new Collection<Environment.Entities.Environment> { normalSpace };
 
+        const string expectedOutput1 = "The spacecraft has successfully complete voyage";
+        const string expectedOutput2 = "The spacecraft has successfully complete voyage";
+
+        // Assert
+        if (spaceship1.Route != null && spaceship2.Route != null)
+        {
+            Assert.Equal(expectedOutput1, SendSpaceship1());
+            Assert.Equal(expectedOutput2, SendSpaceship2());
+            Assert.True(spaceship1.Route.TotalRoutePrice < spaceship2.Route.TotalRoutePrice);
+        }
+
+        return;
+
         // Act
         string SendSpaceship1()
         {
@@ -29,14 +42,6 @@ public class FourthTest
         string SendSpaceship2()
         {
             return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-        }
-
-        // Assert
-        if (spaceship1.Route != null && spaceship2.Route != null)
-        {
-            Assert.Equal("The spacecraft has successfully complete voyage", SendSpaceship1());
-            Assert.Equal("The spacecraft has successfully complete voyage", SendSpaceship2());
-            Assert.True(spaceship1.Route.TotalRoutePrice < spaceship2.Route.TotalRoutePrice);
         }
     }
 }

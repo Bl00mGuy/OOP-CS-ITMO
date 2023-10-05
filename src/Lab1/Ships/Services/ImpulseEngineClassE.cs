@@ -1,6 +1,8 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-public class ImpulseEngineClassE : Entities.IEngine
+public class ImpulseEngineClassE : IEngine
 {
     public string EngineName => "Impulse Engine Class E";
 

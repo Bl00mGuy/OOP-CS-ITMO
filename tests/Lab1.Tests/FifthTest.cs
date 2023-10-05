@@ -15,12 +15,18 @@ public class FifthTest
         // Arrange
         var spaceship1 = new AvgurShip(false);
         var spaceship2 = new StellaShip(false);
+
         var highDensityFogSegment = new HighDensityFog(0, highDensityFogLength);
 
         var segments = new Collection<Environment.Entities.Environment> { highDensityFogSegment };
 
-        string expectedOutput1 = "Spaceship doesn't have a required jump engine max jump length!";
-        string expectedOutput2 = "The spacecraft has successfully complete voyage";
+        const string expectedOutput1 = "Spaceship doesn't have a required jump engine max jump length!";
+        const string expectedOutput2 = "The spacecraft has successfully complete voyage";
+
+        // Assert
+        Assert.Equal(expectedOutput1, SendSpaceship1());
+        Assert.Equal(expectedOutput2, SendSpaceship2());
+        return;
 
         // Act
         string SendSpaceship1()
@@ -32,9 +38,5 @@ public class FifthTest
         {
             return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         }
-
-        // Assert
-        Assert.Equal(expectedOutput1, SendSpaceship1());
-        Assert.Equal(expectedOutput2, SendSpaceship2());
     }
 }

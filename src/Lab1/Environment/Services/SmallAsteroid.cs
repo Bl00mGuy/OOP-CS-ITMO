@@ -3,11 +3,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public class SmallAsteroid : Entities.Obstacle
+public class SmallAsteroid : Obstacle
 {
     public override string ObstacleHit(Spaceship spaceship)
     {
-        if (spaceship != null && spaceship.HullStrength != null && spaceship.IsCrewAlive == true && spaceship.IsShipAlive == true)
+        if (spaceship.HullStrength != null && spaceship.IsCrewAlive == true && spaceship.IsShipAlive == true)
         {
             if (spaceship.Deflector != null)
             {

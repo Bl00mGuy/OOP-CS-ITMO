@@ -9,8 +9,9 @@ public class DeflectorClass3 : IDeflector
     private int _remainingMeteoriteHits = 10;
     private int _remainingSpaceWhaleHits = 1;
 
-    public bool IsDeflectorAlive { get; private set; } = true;
     public string Name => "Deflector Class 3";
+
+    private bool IsDeflectorAlive { get; set; } = true;
 
     public bool DeflectObstacle(ObstacleType obstacleType)
     {

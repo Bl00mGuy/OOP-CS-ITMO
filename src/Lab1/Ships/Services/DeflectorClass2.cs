@@ -1,15 +1,16 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 public class DeflectorClass2 : IDeflector
 {
     private int _remainingSmallAsteroidsHits = 10;
     private int _remainingMeteoriteHits = 3;
 
-    public bool IsDeflectorAlive { get; private set; } = true;
     public string Name => "Deflector Class 2";
+
+    private bool IsDeflectorAlive { get; set; } = true;
 
     public bool DeflectObstacle(ObstacleType obstacleType)
     {

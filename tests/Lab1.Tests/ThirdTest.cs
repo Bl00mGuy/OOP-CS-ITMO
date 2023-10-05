@@ -21,9 +21,15 @@ public class ThirdTest
 
         var segments = new Collection<Environment.Entities.Environment> { nitrineParticleFog };
 
-        string expectedOutput1 = "The spaceship has been destroyed";
-        string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        string expectedOutput3 = "The spacecraft has successfully complete voyage";
+        const string expectedOutput1 = "The spaceship has been destroyed";
+        const string expectedOutput2 = "The spacecraft has successfully complete voyage";
+        const string expectedOutput3 = "The spacecraft has successfully complete voyage";
+
+        // Assert
+        Assert.Equal(expectedOutput1, SendSpaceship1());
+        Assert.Equal(expectedOutput2, SendSpaceship2());
+        Assert.Equal(expectedOutput3, SendSpaceship3());
+        return;
 
         // Act
         string SendSpaceship1()
@@ -40,10 +46,5 @@ public class ThirdTest
         {
             return Route.SendSpaceshipVoyage(spaceship3, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         }
-
-        // Assert
-        Assert.Equal(expectedOutput1, SendSpaceship1());
-        Assert.Equal(expectedOutput2, SendSpaceship2());
-        Assert.Equal(expectedOutput3, SendSpaceship3());
     }
 }
