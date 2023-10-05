@@ -10,13 +10,13 @@ public class FourthTest
 {
     [Theory]
     [InlineData(10000, 10000, 12, 14, 100)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int highDensityFogLength)
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int normalSpaceLength)
     {
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new VaklasShip(false);
 
-        var normalSpace = new NormalSpace(0, 0, highDensityFogLength);
+        var normalSpace = new NormalSpace(0, 0, normalSpaceLength);
 
         var segments = new Collection<Environment.Entities.Environment> { normalSpace };
 

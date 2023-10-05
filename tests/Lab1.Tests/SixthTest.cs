@@ -10,12 +10,12 @@ public class SixthTest
 {
     [Theory]
     [InlineData(10000, 10000, 1, 1, 200)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int highDensityFogLength)
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int nitrineParticleFogLength)
     {
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new VaklasShip(false);
-        var nitrineParticleFog = new NitrineParticleFog(0, highDensityFogLength);
+        var nitrineParticleFog = new NitrineParticleFog(0, nitrineParticleFogLength);
 
         var segments = new Collection<Environment.Entities.Environment> { nitrineParticleFog };
 

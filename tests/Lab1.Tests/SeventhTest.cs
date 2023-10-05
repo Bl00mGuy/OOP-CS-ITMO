@@ -6,24 +6,24 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class ThirdTest
+public class SeventhTest
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 100)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int nitrineParticleFogLength)
+    [InlineData(10000, 10000, 1, 1, 200, 100, 200)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int normalSpaceLength, int highDensityFogLength, int nitrineParticleFogLength)
     {
         // Arrange
-        var spaceship1 = new VaklasShip(false);
-        var spaceship2 = new AvgurShip(false);
-        var spaceship3 = new MeredianShip(false);
+        var spaceship1 = new PleasureShuttleShip();
+        var spaceship2 = new AvgurShip(true);
 
+        var normalSpace = new NormalSpace(3, 4, normalSpaceLength);
+        var highDensityFogSegment = new HighDensityFog(1, highDensityFogLength);
         var nitrineParticleFog = new NitrineParticleFog(1, nitrineParticleFogLength);
 
-        var segments = new Collection<Environment.Entities.Environment> { nitrineParticleFog };
+        var segments = new Collection<Environment.Entities.Environment> { normalSpace, highDensityFogSegment, nitrineParticleFog };
 
         string expectedOutput1 = "The spaceship has been destroyed";
         string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        string expectedOutput3 = "The spacecraft has successfully complete voyage";
 
         // Act
         string SendSpaceship1()
@@ -36,14 +36,8 @@ public class ThirdTest
             return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         }
 
-        string SendSpaceship3()
-        {
-            return Route.SendSpaceshipVoyage(spaceship3, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-        }
-
         // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1());
         Assert.Equal(expectedOutput2, SendSpaceship2());
-        Assert.Equal(expectedOutput3, SendSpaceship3());
     }
 }
