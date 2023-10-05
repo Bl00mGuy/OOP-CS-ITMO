@@ -8,7 +8,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 public class Route : Environment
 {
     private Collection<Environment> _routeSegments = new();
-    public Route(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice)
+    private Route(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice)
     {
         InitialFuelActivePlasma = initialFuelActivePlasma;
         FuelActivePlasmaPrice = fuelActivePlasmaPrice;
@@ -104,6 +104,8 @@ public class Route : Environment
         {
             route.TotalRoutePrice = remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.MassClass;
         }
+
+        spaceship.SetRoute(route);
 
         // Исход поездки
         if (remainingFuelActivePlasma < 0 || (spaceship.JumpEngine != null && remainingFuelGravitonMatter < 0))

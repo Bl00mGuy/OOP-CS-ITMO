@@ -1,3 +1,5 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 public abstract class Spaceship
@@ -12,6 +14,7 @@ public abstract class Spaceship
     public bool? AntiNitrineEmitter { get; protected set; }
     public IHullStrength? HullStrength { get; protected set; }
     public int MassClass { get; protected set; }
+    public Route? Route { get; private set; }
 
     public void SetShipStatus(bool isAlive)
     {
@@ -21,5 +24,10 @@ public abstract class Spaceship
     public void SetCrewStatus(bool isAlive)
     {
         IsCrewAlive = isAlive;
+    }
+
+    public void SetRoute(Route route)
+    {
+        Route = route;
     }
 }
