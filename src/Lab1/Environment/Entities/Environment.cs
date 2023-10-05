@@ -6,7 +6,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
-public abstract class Environment
+public class Environment
 {
     private readonly Collection<string> _requiredEngineNames = new();
     private readonly Collection<string> _requiredJumpEngineNames = new();

@@ -1,8 +1,9 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-public class HullClass1 : Entities.IHullStrength
+public class HullClass1 : IHullStrength
 {
     private int _remainingSmallAsteroidsHits = 1;
     private bool _isShipAlive = true;

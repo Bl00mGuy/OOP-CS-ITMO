@@ -9,8 +9,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class SecondTest
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, (int)DistanceType.Small)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, int highDensityFogLength)
+    [InlineData(10000, 10000, 1, 1, (double)DistanceType.Small)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength)
     {
         // Arrange
         var spaceship1 = new VaklasShip(false);

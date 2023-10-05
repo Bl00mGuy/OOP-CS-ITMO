@@ -2,7 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 
 public class NormalSpace : Entities.Environment
 {
-    public NormalSpace(int smallAsteroidsCount, int meteoritesCount, int lengthOfEnvironment)
+    public NormalSpace(int smallAsteroidsCount, int meteoritesCount, double lengthOfEnvironment)
     {
         AddRequiredEngineName("Impulse Engine Class C");
         AddRequiredEngineName("Impulse Engine Class E");

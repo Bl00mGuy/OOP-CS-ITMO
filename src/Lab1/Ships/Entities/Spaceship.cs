@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
-public abstract class Spaceship
+public class Spaceship
 {
     public string? Name { get; protected set; }
     public bool? IsShipAlive { get; protected init; }

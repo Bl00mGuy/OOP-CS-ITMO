@@ -1,8 +1,9 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-public class HullClass3 : Entities.IHullStrength
+public class HullClass3 : IHullStrength
 {
     private int _remainingSmallAsteroidsHits = 20;
     private int _remainingMeteoriteHits = 5;

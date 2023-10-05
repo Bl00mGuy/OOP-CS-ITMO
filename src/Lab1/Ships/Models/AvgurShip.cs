@@ -1,8 +1,9 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
 
-public class AvgurShip : Entities.Spaceship
+public class AvgurShip : Spaceship
 {
     public AvgurShip(bool hasPhotonDeflector)
     {
