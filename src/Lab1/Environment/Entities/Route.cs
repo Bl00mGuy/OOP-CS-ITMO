@@ -87,11 +87,11 @@ public class Route : Environment
 
         if (spaceship.JumpEngine != null)
         {
-            route.TotalRoutePrice = (remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.MassClass) + (remainingFuelGravitonMatter * fuelGravitonMatterPrice * spaceship.MassClass);
+            route.TotalRoutePrice = (remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.DimensionClassCategory) + (remainingFuelGravitonMatter * fuelGravitonMatterPrice * spaceship.DimensionClassCategory);
         }
         else
         {
-            route.TotalRoutePrice = remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.MassClass;
+            route.TotalRoutePrice = remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.DimensionClassCategory;
         }
 
         if (remainingFuelActivePlasma < 0 || (spaceship.JumpEngine != null && remainingFuelGravitonMatter < 0))

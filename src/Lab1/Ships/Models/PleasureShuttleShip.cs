@@ -11,7 +11,7 @@ public class PleasureShuttleShip : Spaceship
         IsShipAlive = true;
         IsCrewAlive = true;
         Engine = new ImpulseEngineClassC();
-        HullStrength = new HullClass1();
-        MassClass = 1;
+        HullStrength = new HullClassFirst();
+        DimensionClassCategory = 1;
     }
 }

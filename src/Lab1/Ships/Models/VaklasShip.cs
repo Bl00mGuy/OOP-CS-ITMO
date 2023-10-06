@@ -13,8 +13,8 @@ public class VaklasShip : Spaceship
         Engine = new ImpulseEngineClassE();
         JumpEngine = new JumpEngineClassGamma();
         Deflector = new DeflectorClassFirst();
-        HullStrength = new HullClass2();
-        MassClass = 2;
+        HullStrength = new HullClassSecond();
+        DimensionClassCategory = 2;
         if (hasPhotonDeflector)
         {
             PhotonDeflector = new DeflectorClassPhoton();

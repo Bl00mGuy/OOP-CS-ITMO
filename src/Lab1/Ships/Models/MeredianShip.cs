@@ -13,8 +13,8 @@ public class MeredianShip : Spaceship
         Engine = new ImpulseEngineClassE();
         Deflector = new DeflectorClassSecond();
         AntiNitrineEmitter = true;
-        HullStrength = new HullClass2();
-        MassClass = 2;
+        HullStrength = new HullClassSecond();
+        DimensionClassCategory = 2;
         if (hasPhotonDeflector)
         {
             PhotonDeflector = new DeflectorClassPhoton();

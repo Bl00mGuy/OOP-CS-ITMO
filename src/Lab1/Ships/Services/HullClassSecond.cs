@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-public class HullClass2 : IHullStrength
+public class HullClassSecond : IHullStrength
 {
     private int _remainingSmallAsteroidsHits = 5;
     private int _remainingMeteoriteHits = 2;

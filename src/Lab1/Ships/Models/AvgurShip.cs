@@ -13,8 +13,8 @@ public class AvgurShip : Spaceship
         Engine = new ImpulseEngineClassE();
         JumpEngine = new JumpEngineClassAlpha();
         Deflector = new DeflectorClassThird();
-        HullStrength = new HullClass3();
-        MassClass = 3;
+        HullStrength = new HullClassThird();
+        DimensionClassCategory = 3;
         if (hasPhotonDeflector)
         {
             PhotonDeflector = new DeflectorClassPhoton();

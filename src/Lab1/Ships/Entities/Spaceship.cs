@@ -14,7 +14,7 @@ public class Spaceship
     public IDeflector? PhotonDeflector { get; protected init; }
     public bool? AntiNitrineEmitter { get; protected init; }
     public IHullStrength? HullStrength { get; protected init; }
-    public int MassClass { get; protected init; }
+    public int DimensionClassCategory { get; protected init; }
     public Route? Route { get; private set; }
 
     public void SetShipStatus(bool isAlive)

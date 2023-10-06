@@ -13,8 +13,8 @@ public class StellaShip : Spaceship
         Engine = new ImpulseEngineClassC();
         JumpEngine = new JumpEngineClassOmega();
         Deflector = new DeflectorClassFirst();
-        HullStrength = new HullClass1();
-        MassClass = 1;
+        HullStrength = new HullClassFirst();
+        DimensionClassCategory = 1;
         if (hasPhotonDeflector)
         {
             PhotonDeflector = new DeflectorClassPhoton();

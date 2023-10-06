@@ -8,8 +8,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
 public class Environment
 {
-    private readonly Collection<string> _requiredEngineNames = new();
-    private readonly Collection<string> _requiredJumpEngineNames = new();
+    private readonly Collection<string> _requiredEngineNames;
+    private readonly Collection<string> _requiredJumpEngineNames;
+
+    protected Environment()
+    {
+        _requiredEngineNames = new Collection<string>();
+        _requiredJumpEngineNames = new Collection<string>();
+    }
 
     public double LengthOfEnvironment { get; protected init; }
 
