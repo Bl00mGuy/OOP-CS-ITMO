@@ -18,7 +18,7 @@ public class SecondTest
 
         var highDensityFogSegment = new HighDensityFog(1, highDensityFogLength);
 
-        var segments = new Collection<Environment.Entities.Environment> { highDensityFogSegment };
+        var segments = new Collection<Environment.Entities.Environments> { highDensityFogSegment };
 
         const string expectedOutput1 = "The ship's crew died";
         const string expectedOutput2 = "The spacecraft has successfully complete voyage";

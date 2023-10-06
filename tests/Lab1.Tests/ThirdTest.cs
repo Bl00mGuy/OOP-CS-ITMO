@@ -19,7 +19,7 @@ public class ThirdTest
 
         var nitrineParticleFog = new NitrineParticleFog(1, nitrineParticleFogLength);
 
-        var segments = new Collection<Environment.Entities.Environment> { nitrineParticleFog };
+        var segments = new Collection<Environment.Entities.Environments> { nitrineParticleFog };
 
         const string expectedOutput1 = "The spaceship has been destroyed";
         const string expectedOutput2 = "The spacecraft has successfully complete voyage";

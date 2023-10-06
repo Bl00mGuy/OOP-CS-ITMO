@@ -18,7 +18,7 @@ public class SixthTest
 
         var nitrineParticleFog = new NitrineParticleFog(0, nitrineParticleFogLength);
 
-        var segments = new Collection<Environment.Entities.Environment> { nitrineParticleFog };
+        var segments = new Collection<Environment.Entities.Environments> { nitrineParticleFog };
 
         const string expectedOutput1 = "Spaceship doesn't have a required engine!";
         const string expectedOutput2 = "The spacecraft has successfully complete voyage";

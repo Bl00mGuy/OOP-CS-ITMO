@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
-public class Route : Environment
+public class Route : Environments
 {
     private Route(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice)
     {
@@ -20,7 +20,7 @@ public class Route : Environment
     public double TotalRouteLength { get; private set; }
     public double TotalRoutePrice { get; private set; }
 
-    public static string SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environment> segments)
+    public static string SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
     {
         if (initialFuelActivePlasma <= 0 && spaceship.JumpEngine != null)
         {
@@ -51,7 +51,7 @@ public class Route : Environment
             if (spaceship.JumpEngine == null)
             {
                 remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
-                foreach (Environment segment in segments)
+                foreach (Environments segment in segments)
                 {
                     string shipEnter = ShipEnterSphere(spaceship, segment);
                     if (!Equals(shipEnter, "OK"))
@@ -67,7 +67,7 @@ public class Route : Environment
             {
                 remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
                 remainingFuelGravitonMatter -= spaceship.JumpEngine.StartEngine();
-                foreach (Environment segment in segments)
+                foreach (Environments segment in segments)
                 {
                     string shipEnter = ShipEnterSphere(spaceship, segment);
                     if (!Equals(shipEnter, "OK"))

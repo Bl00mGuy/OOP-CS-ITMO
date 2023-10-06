@@ -18,7 +18,7 @@ public class FifthTest
 
         var highDensityFogSegment = new HighDensityFog(0, highDensityFogLength);
 
-        var segments = new Collection<Environment.Entities.Environment> { highDensityFogSegment };
+        var segments = new Collection<Environment.Entities.Environments> { highDensityFogSegment };
 
         const string expectedOutput1 = "Spaceship doesn't have a required jump engine max jump length!";
         const string expectedOutput2 = "The spacecraft has successfully complete voyage";

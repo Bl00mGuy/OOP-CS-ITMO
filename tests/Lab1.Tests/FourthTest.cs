@@ -18,7 +18,7 @@ public class FourthTest
 
         var normalSpace = new NormalSpace(0, 0, normalSpaceLength);
 
-        var segments = new Collection<Environment.Entities.Environment> { normalSpace };
+        var segments = new Collection<Environment.Entities.Environments> { normalSpace };
 
         const string expectedOutput1 = "The spacecraft has successfully complete voyage";
         const string expectedOutput2 = "The spacecraft has successfully complete voyage";

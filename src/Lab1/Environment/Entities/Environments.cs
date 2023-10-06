@@ -6,12 +6,12 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
-public class Environment
+public class Environments
 {
     private readonly Collection<string> _requiredEngineNames;
     private readonly Collection<string> _requiredJumpEngineNames;
 
-    protected Environment()
+    protected Environments()
     {
         _requiredEngineNames = new Collection<string>();
         _requiredJumpEngineNames = new Collection<string>();
@@ -23,7 +23,7 @@ public class Environment
     private ReadOnlyCollection<string> RequiredJumpEngineNames => _requiredJumpEngineNames.AsReadOnly();
     private Dictionary<string, int> Obstacles { get; } = new();
 
-    protected static string ShipEnterSphere(Spaceship spaceship, Environment segment)
+    protected static string ShipEnterSphere(Spaceship spaceship, Environments segment)
     {
         if (spaceship.Engine != null)
         {

@@ -20,7 +20,7 @@ public class SeventhTest
         var highDensityFogSegment = new HighDensityFog(1, highDensityFogLength);
         var nitrineParticleFog = new NitrineParticleFog(1, nitrineParticleFogLength);
 
-        var segments = new Collection<Environment.Entities.Environment> { normalSpace, highDensityFogSegment, nitrineParticleFog };
+        var segments = new Collection<Environment.Entities.Environments> { normalSpace, highDensityFogSegment, nitrineParticleFog };
 
         const string expectedOutput1 = "The spaceship has been destroyed";
         const string expectedOutput2 = "The spacecraft has successfully complete voyage";

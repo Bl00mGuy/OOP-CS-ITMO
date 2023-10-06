@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 
-public class NitrineParticleFog : Entities.Environment
+public class NitrineParticleFog : Entities.Environments
 {
     public NitrineParticleFog(int spaceWhalesCount, double lengthOfEnvironment)
     {

@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 
-public class HighDensityFog : Entities.Environment
+public class HighDensityFog : Entities.Environments
 {
     public HighDensityFog(int antimatterFlaresCount, double lengthOfEnvironment)
     {
