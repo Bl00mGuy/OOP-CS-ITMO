@@ -12,7 +12,7 @@ public class AvgurShip : Spaceship
         IsCrewAlive = true;
         Engine = new ImpulseEngineClassE();
         JumpEngine = new JumpEngineClassAlpha();
-        Deflector = new DeflectorClass3();
+        Deflector = new DeflectorClassThird();
         HullStrength = new HullClass3();
         MassClass = 3;
         if (hasPhotonDeflector)

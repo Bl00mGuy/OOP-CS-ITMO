@@ -11,8 +11,6 @@ public class Route : Environment
         FuelActivePlasmaPrice = fuelActivePlasmaPrice;
         InitialFuelGravitonMatter = initialFuelGravitonMatter;
         FuelGravitonMatterPrice = fuelGravitonMatterPrice;
-        TotalRouteLength = 0;
-        TotalRoutePrice = 0;
     }
 
     public double InitialFuelActivePlasma { get; private set; }

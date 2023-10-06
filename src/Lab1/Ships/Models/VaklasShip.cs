@@ -12,7 +12,7 @@ public class VaklasShip : Spaceship
         IsCrewAlive = true;
         Engine = new ImpulseEngineClassE();
         JumpEngine = new JumpEngineClassGamma();
-        Deflector = new DeflectorClass1();
+        Deflector = new DeflectorClassFirst();
         HullStrength = new HullClass2();
         MassClass = 2;
         if (hasPhotonDeflector)

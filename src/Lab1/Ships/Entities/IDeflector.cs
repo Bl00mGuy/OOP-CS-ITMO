@@ -4,6 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 public interface IDeflector
 {
-    string Name { get; }
-    bool DeflectObstacle(ObstacleType obstacleType);
+    bool DeflectObstacle(Spaceship spaceship, ObstacleType obstacleType);
 }

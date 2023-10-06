@@ -7,13 +7,9 @@ public class DeflectorClassPhoton : IDeflector
 {
     private int _remainingAntimatterFlares = 3;
 
-    public string Name => "Deflector Class Photon";
-
-    private bool IsDeflectorAlive { get; set; } = true;
-
-    public bool DeflectObstacle(ObstacleType obstacleType)
+    public bool DeflectObstacle(Spaceship spaceship, ObstacleType obstacleType)
     {
-        if (IsDeflectorAlive == false)
+        if (spaceship.IsDeflectorAlive == false)
         {
             return false;
         }
@@ -24,7 +20,7 @@ public class DeflectorClassPhoton : IDeflector
             return true;
         }
 
-        IsDeflectorAlive = false;
+        spaceship.SetDeflectorStatus(false);
 
         return false;
     }

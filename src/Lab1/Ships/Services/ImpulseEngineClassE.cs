@@ -4,15 +4,18 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 public class ImpulseEngineClassE : IEngine
 {
+    private const int RequiredAmountOfFuelToStartTheEngine = 20;
+    private const double AccelerationFactor = 1.5;
+
     public string EngineName => "Impulse Engine Class E";
 
     public double CalculateFuelConsumption(double distance)
     {
-        return 1.5 * distance;
+        return AccelerationFactor * distance;
     }
 
     public double StartEngine()
     {
-        return 20;
+        return RequiredAmountOfFuelToStartTheEngine;
     }
 }

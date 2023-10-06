@@ -11,7 +11,7 @@ public class AntimatterFlares : Obstacle
         {
             if (spaceship.PhotonDeflector != null)
             {
-                spaceship.PhotonDeflector.DeflectObstacle(ObstacleType.AntimatterFlare);
+                spaceship.PhotonDeflector.DeflectObstacle(spaceship, ObstacleType.AntimatterFlare);
             }
             else
             {

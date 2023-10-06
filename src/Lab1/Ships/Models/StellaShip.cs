@@ -12,7 +12,7 @@ public class StellaShip : Spaceship
         IsCrewAlive = true;
         Engine = new ImpulseEngineClassC();
         JumpEngine = new JumpEngineClassOmega();
-        Deflector = new DeflectorClass1();
+        Deflector = new DeflectorClassFirst();
         HullStrength = new HullClass1();
         MassClass = 1;
         if (hasPhotonDeflector)

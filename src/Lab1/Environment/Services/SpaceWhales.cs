@@ -16,7 +16,7 @@ public class SpaceWhales : Obstacle
 
             if (spaceship.Deflector != null)
             {
-                if (spaceship.Deflector.DeflectObstacle(ObstacleType.SpaceWhale) == false)
+                if (spaceship.Deflector.DeflectObstacle(spaceship, ObstacleType.SpaceWhale) == false)
                 {
                     spaceship.SetShipStatus(false);
                     spaceship.SetCrewStatus(false);

@@ -6,16 +6,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 public class JumpEngineClassOmega : IJumpEngine
 {
+    private const int RequiredAmountOfFuelToStartTheEngine = 16;
+    private const double AccelerationFactor = 3.0;
+
     public double MaxJumpLength => (double)DistanceType.Medium;
     public string EngineName => "Jump Engine Omega";
 
     public double CalculateFuelConsumption(double distance)
     {
-        return 3.0 * Math.Log(2.0 * distance);
+        return AccelerationFactor * Math.Log(distance);
     }
 
     public double StartEngine()
     {
-        return 16;
+        return RequiredAmountOfFuelToStartTheEngine;
     }
 }

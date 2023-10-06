@@ -11,7 +11,7 @@ public class Meteorite : Obstacle
         {
             if (spaceship.Deflector != null)
             {
-                if (spaceship.Deflector.DeflectObstacle(ObstacleType.Meteorite) == false)
+                if (spaceship.Deflector.DeflectObstacle(spaceship, ObstacleType.Meteorite) == false)
                 {
                     if (spaceship.HullStrength.HullObstacle(ObstacleType.Meteorite) == false)
                     {

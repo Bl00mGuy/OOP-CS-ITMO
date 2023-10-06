@@ -3,19 +3,14 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-public class DeflectorClass3 : IDeflector
+public class DeflectorClassFirst : IDeflector
 {
-    private int _remainingSmallAsteroidsHits = 40;
-    private int _remainingMeteoriteHits = 10;
-    private int _remainingSpaceWhaleHits = 1;
+    private int _remainingSmallAsteroidsHits = 2;
+    private int _remainingMeteoriteHits = 1;
 
-    public string Name => "Deflector Class 3";
-
-    private bool IsDeflectorAlive { get; set; } = true;
-
-    public bool DeflectObstacle(ObstacleType obstacleType)
+    public bool DeflectObstacle(Spaceship spaceship, ObstacleType obstacleType)
     {
-        if (IsDeflectorAlive == false)
+        if (spaceship.IsDeflectorAlive == false)
         {
             return false;
         }
@@ -39,18 +34,9 @@ public class DeflectorClass3 : IDeflector
                 }
 
                 break;
-
-            case ObstacleType.SpaceWhale:
-                if (_remainingSpaceWhaleHits > 0)
-                {
-                    _remainingSpaceWhaleHits--;
-                    return true;
-                }
-
-                break;
         }
 
-        IsDeflectorAlive = false;
+        spaceship.SetDeflectorStatus(false);
 
         return false;
     }

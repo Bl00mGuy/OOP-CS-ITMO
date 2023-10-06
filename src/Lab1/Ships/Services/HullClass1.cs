@@ -8,8 +8,6 @@ public class HullClass1 : IHullStrength
     private int _remainingSmallAsteroidsHits = 1;
     private bool _isShipAlive = true;
 
-    public string Name => "Hull Class 1";
-
     public bool HullObstacle(ObstacleType obstacleType)
     {
         if (_isShipAlive == false)

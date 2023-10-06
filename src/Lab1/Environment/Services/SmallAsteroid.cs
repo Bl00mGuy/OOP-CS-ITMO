@@ -11,7 +11,7 @@ public class SmallAsteroid : Obstacle
         {
             if (spaceship.Deflector != null)
             {
-                if (spaceship.Deflector.DeflectObstacle(ObstacleType.SmallAsteroid) == false)
+                if (spaceship.Deflector.DeflectObstacle(spaceship, ObstacleType.SmallAsteroid) == false)
                 {
                     if (spaceship.HullStrength.HullObstacle(ObstacleType.SmallAsteroid) == false)
                     {

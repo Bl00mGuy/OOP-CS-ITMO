@@ -9,6 +9,7 @@ public class Spaceship
     public bool? IsCrewAlive { get; protected set; }
     public IEngine? Engine { get; protected init; }
     public IJumpEngine? JumpEngine { get; protected init; }
+    public bool? IsDeflectorAlive { get; private set; }
     public IDeflector? Deflector { get; protected init; }
     public IDeflector? PhotonDeflector { get; protected init; }
     public bool? AntiNitrineEmitter { get; protected init; }
@@ -19,6 +20,11 @@ public class Spaceship
     public void SetShipStatus(bool isAlive)
     {
         IsCrewAlive = isAlive;
+    }
+
+    public void SetDeflectorStatus(bool isAlive)
+    {
+        IsDeflectorAlive = isAlive;
     }
 
     public void SetCrewStatus(bool isAlive)

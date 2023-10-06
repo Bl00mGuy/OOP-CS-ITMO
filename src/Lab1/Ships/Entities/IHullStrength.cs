@@ -4,6 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 public interface IHullStrength
 {
-    string Name { get; }
     bool HullObstacle(ObstacleType obstacleType);
 }

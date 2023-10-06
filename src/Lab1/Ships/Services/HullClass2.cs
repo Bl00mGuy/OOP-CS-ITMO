@@ -9,8 +9,6 @@ public class HullClass2 : IHullStrength
     private int _remainingMeteoriteHits = 2;
     private bool _isShipAlive = true;
 
-    public string Name => "Hull Class 2";
-
     public bool HullObstacle(ObstacleType obstacleType)
     {
         if (_isShipAlive == false)

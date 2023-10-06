@@ -11,7 +11,7 @@ public class MeredianShip : Spaceship
         IsShipAlive = true;
         IsCrewAlive = true;
         Engine = new ImpulseEngineClassE();
-        Deflector = new DeflectorClass2();
+        Deflector = new DeflectorClassSecond();
         AntiNitrineEmitter = true;
         HullStrength = new HullClass2();
         MassClass = 2;
