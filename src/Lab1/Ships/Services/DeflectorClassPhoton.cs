@@ -1,26 +1,17 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
-
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
-public class DeflectorClassPhoton : IDeflector
+public class DeflectorClassPhoton
 {
     private int _remainingAntimatterFlares = 3;
 
-    public bool DeflectObstacle(Spaceship spaceship, ObstacleType obstacleType)
+    public bool DeflectObstacle()
     {
-        if (spaceship.IsDeflectorAlive == false)
+        if (_remainingAntimatterFlares > 0)
         {
-            return false;
-        }
+            _remainingAntimatterFlares -= 1;
 
-        if (obstacleType == ObstacleType.AntimatterFlare && _remainingAntimatterFlares > 0)
-        {
-            _remainingAntimatterFlares--;
             return true;
         }
-
-        spaceship.SetDeflectorStatus(false);
 
         return false;
     }

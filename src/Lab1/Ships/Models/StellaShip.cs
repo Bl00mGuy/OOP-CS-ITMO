@@ -7,17 +7,10 @@ public class StellaShip : Spaceship
 {
     public StellaShip(bool hasPhotonDeflector)
     {
-        Name = "Stella";
-        IsShipAlive = true;
-        IsCrewAlive = true;
         Engine = new ImpulseEngineClassC();
         JumpEngine = new JumpEngineClassOmega();
-        Deflector = new DeflectorClassFirst();
+        Deflector = new DeflectorClassFirst(hasPhotonDeflector);
         HullStrength = new HullClassFirst();
         DimensionClassCategory = 1;
-        if (hasPhotonDeflector)
-        {
-            PhotonDeflector = new DeflectorClassPhoton();
-        }
     }
 }

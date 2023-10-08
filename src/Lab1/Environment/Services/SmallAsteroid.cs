@@ -5,33 +5,31 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public class SmallAsteroid : Obstacle
 {
-    public override string ObstacleHit(Spaceship spaceship)
+    private const int PowerOfObstacleDamage = 210;
+
+    public override VoyageErrorType ObstacleHit(Spaceship spaceship)
     {
-        if (spaceship.HullStrength != null && spaceship.IsCrewAlive == true && spaceship.IsShipAlive == true)
+        if (spaceship.HullStrength != null)
         {
             if (spaceship.Deflector != null)
             {
-                if (spaceship.Deflector.DeflectObstacle(spaceship, ObstacleType.SmallAsteroid) == false)
+                if (spaceship.Deflector.DeflectObstacle(PowerOfObstacleDamage) == false)
                 {
-                    if (spaceship.HullStrength.HullObstacle(ObstacleType.SmallAsteroid) == false)
+                    if (spaceship.HullStrength.HullObstacle(PowerOfObstacleDamage) == false)
                     {
-                        spaceship.SetShipStatus(false);
-                        spaceship.SetCrewStatus(false);
-                        return "The spaceship has been destroyed";
+                        return VoyageErrorType.ShipDestroyed;
                     }
                 }
             }
             else
             {
-                if (spaceship.HullStrength.HullObstacle(ObstacleType.SmallAsteroid) == false)
+                if (spaceship.HullStrength.HullObstacle(PowerOfObstacleDamage) == false)
                 {
-                    spaceship.SetShipStatus(false);
-                    spaceship.SetCrewStatus(false);
-                    return "The spaceship has been destroyed";
+                    return VoyageErrorType.ShipDestroyed;
                 }
             }
         }
 
-        return "OK";
+        return VoyageErrorType.NoError;
     }
 }

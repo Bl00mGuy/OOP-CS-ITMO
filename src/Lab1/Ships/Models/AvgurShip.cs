@@ -7,17 +7,10 @@ public class AvgurShip : Spaceship
 {
     public AvgurShip(bool hasPhotonDeflector)
     {
-        Name = "Avgur";
-        IsShipAlive = true;
-        IsCrewAlive = true;
         Engine = new ImpulseEngineClassE();
         JumpEngine = new JumpEngineClassAlpha();
-        Deflector = new DeflectorClassThird();
+        Deflector = new DeflectorClassThird(hasPhotonDeflector);
         HullStrength = new HullClassThird();
         DimensionClassCategory = 3;
-        if (hasPhotonDeflector)
-        {
-            PhotonDeflector = new DeflectorClassPhoton();
-        }
     }
 }

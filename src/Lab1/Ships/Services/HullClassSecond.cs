@@ -1,40 +1,19 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 public class HullClassSecond : IHullStrength
 {
-    private int _remainingSmallAsteroidsHits = 5;
-    private int _remainingMeteoriteHits = 2;
     private bool _isShipAlive = true;
+    private int HullSafetyMargin { get; set; } = 1785;
 
-    public bool HullObstacle(ObstacleType obstacleType)
+    public bool HullObstacle(int obstacleDamage)
     {
-        if (_isShipAlive == false)
+        if (_isShipAlive && HullSafetyMargin > 0)
         {
-            return false;
-        }
+            HullSafetyMargin -= obstacleDamage;
 
-        switch (obstacleType)
-        {
-            case ObstacleType.SmallAsteroid:
-                if (_remainingSmallAsteroidsHits > 0)
-                {
-                    _remainingSmallAsteroidsHits--;
-                    return true;
-                }
-
-                break;
-
-            case ObstacleType.Meteorite:
-                if (_remainingMeteoriteHits > 0)
-                {
-                    _remainingMeteoriteHits--;
-                    return true;
-                }
-
-                break;
+            return true;
         }
 
         _isShipAlive = false;

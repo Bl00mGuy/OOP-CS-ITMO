@@ -9,7 +9,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class FourthTest
 {
     [Theory]
-    [InlineData(10000, 10000, 12, 14, (double)DistanceType.Small)]
+    [InlineData(10000, 10000, 12, 14, 100)]
     public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double normalSpaceLength)
     {
         // Arrange
@@ -18,30 +18,31 @@ public class FourthTest
 
         var normalSpace = new NormalSpace(0, 0, normalSpaceLength);
 
-        var segments = new Collection<Environment.Entities.Environments> { normalSpace };
+        var segments = new Collection<Environments> { normalSpace };
 
-        const string expectedOutput1 = "The spacecraft has successfully complete voyage";
-        const string expectedOutput2 = "The spacecraft has successfully complete voyage";
+        // const string expectedOutput1 = "The spacecraft has successfully complete voyage";
+        // const string expectedOutput2 = "The spacecraft has successfully complete voyage";
+        const VoyageErrorType expectedOutput1 = VoyageErrorType.NoError;
+        const VoyageErrorType expectedOutput2 = VoyageErrorType.NoError;
 
         // Assert
-        if (spaceship1.Route != null && spaceship2.Route != null)
-        {
-            Assert.Equal(expectedOutput1, SendSpaceship1());
-            Assert.Equal(expectedOutput2, SendSpaceship2());
-            Assert.True(spaceship1.Route.TotalRoutePrice < spaceship2.Route.TotalRoutePrice);
-        }
+        Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);
+        Assert.Equal(expectedOutput2, SendSpaceship2().ResultOfTheSpaceshipVoyage);
+        Assert.True(SendSpaceship1().TotalRoutePrice < SendSpaceship2().TotalRoutePrice);
 
         return;
 
         // Act
-        string SendSpaceship1()
+        Route SendSpaceship1()
         {
-            return Route.SendSpaceshipVoyage(spaceship1, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+            var route1 = new Route(spaceship1, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+            return route1;
         }
 
-        string SendSpaceship2()
+        Route SendSpaceship2()
         {
-            return Route.SendSpaceshipVoyage(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+            var route2 = new Route(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+            return route2;
         }
     }
 }

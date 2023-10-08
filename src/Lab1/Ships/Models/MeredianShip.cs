@@ -7,17 +7,10 @@ public class MeredianShip : Spaceship
 {
     public MeredianShip(bool hasPhotonDeflector)
     {
-        Name = "Meredian";
-        IsShipAlive = true;
-        IsCrewAlive = true;
         Engine = new ImpulseEngineClassE();
-        Deflector = new DeflectorClassSecond();
+        Deflector = new DeflectorClassSecond(hasPhotonDeflector);
         AntiNitrineEmitter = true;
         HullStrength = new HullClassSecond();
         DimensionClassCategory = 2;
-        if (hasPhotonDeflector)
-        {
-            PhotonDeflector = new DeflectorClassPhoton();
-        }
     }
 }

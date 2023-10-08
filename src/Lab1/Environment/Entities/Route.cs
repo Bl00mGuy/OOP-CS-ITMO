@@ -5,8 +5,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
 public class Route : Environments
 {
-    private Route(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice)
+    public Route(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
     {
+        ResultOfTheSpaceshipVoyage = SendSpaceshipVoyage(spaceship, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         InitialFuelActivePlasma = initialFuelActivePlasma;
         FuelActivePlasmaPrice = fuelActivePlasmaPrice;
         InitialFuelGravitonMatter = initialFuelGravitonMatter;
@@ -19,27 +20,23 @@ public class Route : Environments
     public double FuelGravitonMatterPrice { get; private set; }
     public double TotalRouteLength { get; private set; }
     public double TotalRoutePrice { get; private set; }
+    public VoyageErrorType ResultOfTheSpaceshipVoyage { get; private set; }
 
-    public static string SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
+    public static VoyageErrorType SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
     {
         if (initialFuelActivePlasma <= 0 && spaceship.JumpEngine != null)
         {
-            return "A spaceship cannot fly with an empty tank!";
-        }
-
-        if (initialFuelGravitonMatter <= 0 && spaceship.JumpEngine != null)
-        {
-            return "A spaceship cannot fly with an empty tank!";
+            return VoyageErrorType.EmptyTank;
         }
 
         if (fuelActivePlasmaPrice <= 0 || fuelGravitonMatterPrice <= 0)
         {
-            return "Wake up! Fuel cannot be free!";
+            return VoyageErrorType.FuelNotFree;
         }
 
         if (segments.Count == 0)
         {
-            return "Route must contain at least one segment!";
+            return VoyageErrorType.NoSegments;
         }
 
         // Calculation of total route length and fuel calculation
@@ -53,8 +50,8 @@ public class Route : Environments
                 remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
                 foreach (Environments segment in segments)
                 {
-                    string shipEnter = ShipEnterSphere(spaceship, segment);
-                    if (!Equals(shipEnter, "OK"))
+                    VoyageErrorType shipEnter = ShipEnterSphere(spaceship, segment);
+                    if (!Equals(shipEnter, VoyageErrorType.NoError))
                     {
                         return shipEnter;
                     }
@@ -69,8 +66,8 @@ public class Route : Environments
                 remainingFuelGravitonMatter -= spaceship.JumpEngine.StartEngine();
                 foreach (Environments segment in segments)
                 {
-                    string shipEnter = ShipEnterSphere(spaceship, segment);
-                    if (!Equals(shipEnter, "OK"))
+                    VoyageErrorType shipEnter = ShipEnterSphere(spaceship, segment);
+                    if (!Equals(shipEnter, VoyageErrorType.NoError))
                     {
                         return shipEnter;
                     }
@@ -82,7 +79,7 @@ public class Route : Environments
         }
 
         // Creating a route instance
-        var route = new Route(remainingFuelActivePlasma, remainingFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice);
+        var route = new Route(spaceship, remainingFuelActivePlasma, remainingFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
         route.TotalRouteLength = totalLength;
 
         if (spaceship.JumpEngine != null)
@@ -96,11 +93,9 @@ public class Route : Environments
 
         if (remainingFuelActivePlasma < 0 || (spaceship.JumpEngine != null && remainingFuelGravitonMatter < 0))
         {
-            return "There is not enough fuel for spaceship to complete the route!";
+            return VoyageErrorType.NotEnoughFuel;
         }
 
-        spaceship.SetRoute(route);
-
-        return "The spacecraft has successfully complete voyage";
+        return VoyageErrorType.NoError;
     }
 }

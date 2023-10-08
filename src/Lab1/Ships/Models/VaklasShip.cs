@@ -7,17 +7,10 @@ public class VaklasShip : Spaceship
 {
     public VaklasShip(bool hasPhotonDeflector)
     {
-        Name = "Vaklas";
-        IsShipAlive = true;
-        IsCrewAlive = true;
         Engine = new ImpulseEngineClassE();
         JumpEngine = new JumpEngineClassGamma();
-        Deflector = new DeflectorClassFirst();
+        Deflector = new DeflectorClassFirst(hasPhotonDeflector);
         HullStrength = new HullClassSecond();
         DimensionClassCategory = 2;
-        if (hasPhotonDeflector)
-        {
-            PhotonDeflector = new DeflectorClassPhoton();
-        }
     }
 }
