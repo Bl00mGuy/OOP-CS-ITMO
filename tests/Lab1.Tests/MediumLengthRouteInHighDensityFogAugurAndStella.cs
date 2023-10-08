@@ -6,25 +6,23 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SeventhTest
+public class MediumLengthRouteInHighDensityFogAugurAndStella
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 300, 100, 200)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double normalSpaceLength, double highDensityFogLength, double nitrineParticleFogLength)
+    [InlineData(10000, 10000, 1, 1, 200)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength)
     {
         // Arrange
-        var spaceship1 = new PleasureShuttleShip();
-        var spaceship2 = new AvgurShip(true);
+        var spaceship1 = new AvgurShip(false);
+        var spaceship2 = new StellaShip(false);
 
-        var normalSpace = new NormalSpace(3, 4, normalSpaceLength);
-        var highDensityFogSegment = new HighDensityFog(1, highDensityFogLength);
-        var nitrineParticleFog = new NitrineParticleFog(1, nitrineParticleFogLength);
+        var highDensityFogSegment = new HighDensityFog(0, highDensityFogLength);
 
-        var segments = new Collection<Environments> { normalSpace, highDensityFogSegment, nitrineParticleFog };
+        var segments = new Collection<Environments> { highDensityFogSegment };
 
-        // const string expectedOutput1 = "The spaceship has been destroyed";
+        // const string expectedOutput1 = "Spaceship doesn't have a required jump engine max jump length!";
         // const string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        const VoyageErrorType expectedOutput1 = VoyageErrorType.ShipDestroyed;
+        const VoyageErrorType expectedOutput1 = VoyageErrorType.MaxJumpLengthExceeded;
         const VoyageErrorType expectedOutput2 = VoyageErrorType.NoError;
 
         // Assert

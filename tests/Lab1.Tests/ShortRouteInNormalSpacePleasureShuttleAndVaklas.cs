@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class FourthTest
+public class ShortRouteInNormalSpacePleasureShuttleAndVaklas
 {
     [Theory]
     [InlineData(10000, 10000, 12, 14, 100)]

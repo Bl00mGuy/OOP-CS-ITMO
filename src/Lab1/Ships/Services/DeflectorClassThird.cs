@@ -9,7 +9,7 @@ public class DeflectorClassThird : Deflector
     public DeflectorClassThird(bool hasPhotonDeflectAddition)
         : base(hasPhotonDeflectAddition)
     {
-        DeflectorSafetyMargin = 8400;
+        DeflectorSafetyMargin = 21010;
     }
 
     public override bool DeflectObstacle(int obstacleDamage)

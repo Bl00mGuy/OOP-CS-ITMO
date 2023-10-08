@@ -4,98 +4,96 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
 public class Route : Environments
-{
-    public Route(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
     {
-        ResultOfTheSpaceshipVoyage = SendSpaceshipVoyage(spaceship, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-        InitialFuelActivePlasma = initialFuelActivePlasma;
-        FuelActivePlasmaPrice = fuelActivePlasmaPrice;
-        InitialFuelGravitonMatter = initialFuelGravitonMatter;
-        FuelGravitonMatterPrice = fuelGravitonMatterPrice;
-    }
-
-    public double InitialFuelActivePlasma { get; private set; }
-    public double FuelActivePlasmaPrice { get; private set; }
-    public double InitialFuelGravitonMatter { get; private set; }
-    public double FuelGravitonMatterPrice { get; private set; }
-    public double TotalRouteLength { get; private set; }
-    public double TotalRoutePrice { get; private set; }
-    public VoyageErrorType ResultOfTheSpaceshipVoyage { get; private set; }
-
-    public static VoyageErrorType SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
-    {
-        if (initialFuelActivePlasma <= 0 && spaceship.JumpEngine != null)
+        public Route(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
         {
-            return VoyageErrorType.EmptyTank;
+            RouteResult result = SendSpaceshipVoyage(spaceship, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+            TotalRoutePrice = result.Price;
+            ResultOfTheSpaceshipVoyage = result.ErrorType;
         }
 
-        if (fuelActivePlasmaPrice <= 0 || fuelGravitonMatterPrice <= 0)
-        {
-            return VoyageErrorType.FuelNotFree;
-        }
+        public double TotalRouteLength { get; private set; }
+        public double TotalRoutePrice { get; private set; }
+        public VoyageErrorType ResultOfTheSpaceshipVoyage { get; private set; }
 
-        if (segments.Count == 0)
+        private static RouteResult SendSpaceshipVoyage(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
         {
-            return VoyageErrorType.NoSegments;
-        }
+            var result = new RouteResult();
 
-        // Calculation of total route length and fuel calculation
-        double remainingFuelActivePlasma = initialFuelActivePlasma;
-        double remainingFuelGravitonMatter = initialFuelGravitonMatter;
-        double totalLength = 0;
-        if (spaceship.Engine != null)
-        {
-            if (spaceship.JumpEngine == null)
+            if (initialFuelActivePlasma <= 0 && spaceship.JumpEngine != null)
             {
-                remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
-                foreach (Environments segment in segments)
-                {
-                    VoyageErrorType shipEnter = ShipEnterSphere(spaceship, segment);
-                    if (!Equals(shipEnter, VoyageErrorType.NoError))
-                    {
-                        return shipEnter;
-                    }
+                result.ErrorType = VoyageErrorType.EmptyTank;
+                return result;
+            }
 
-                    totalLength += segment.LengthOfEnvironment;
-                    remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
+            if (fuelActivePlasmaPrice <= 0 || fuelGravitonMatterPrice <= 0)
+            {
+                result.ErrorType = VoyageErrorType.FuelNotFree;
+                return result;
+            }
+
+            if (segments.Count == 0)
+            {
+                result.ErrorType = VoyageErrorType.NoSegments;
+                return result;
+            }
+
+            double remainingFuelActivePlasma = initialFuelActivePlasma;
+            double remainingFuelGravitonMatter = initialFuelGravitonMatter;
+            double totalLength = 0;
+            if (spaceship.Engine != null)
+            {
+                if (spaceship.JumpEngine == null)
+                {
+                    remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
+                    foreach (Environments segment in segments)
+                    {
+                        VoyageErrorType shipEnter = ShipEnterSphere(spaceship, segment);
+                        if (!Equals(shipEnter, VoyageErrorType.NoError))
+                        {
+                            result.ErrorType = shipEnter;
+                            return result;
+                        }
+
+                        totalLength += segment.LengthOfEnvironment;
+                        remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
+                    }
                 }
+                else
+                {
+                    remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
+                    remainingFuelGravitonMatter -= spaceship.JumpEngine.StartEngine();
+                    foreach (Environments segment in segments)
+                    {
+                        VoyageErrorType shipEnter = ShipEnterSphere(spaceship, segment);
+                        if (!Equals(shipEnter, VoyageErrorType.NoError))
+                        {
+                            result.ErrorType = shipEnter;
+                            return result;
+                        }
+
+                        totalLength += segment.LengthOfEnvironment;
+                        remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
+                    }
+                }
+            }
+
+            result.Price = totalLength;
+
+            if (spaceship.JumpEngine != null)
+            {
+                result.Price = (remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.DimensionClassCategory) + (remainingFuelGravitonMatter * fuelGravitonMatterPrice * spaceship.DimensionClassCategory);
             }
             else
             {
-                remainingFuelActivePlasma -= spaceship.Engine.StartEngine();
-                remainingFuelGravitonMatter -= spaceship.JumpEngine.StartEngine();
-                foreach (Environments segment in segments)
-                {
-                    VoyageErrorType shipEnter = ShipEnterSphere(spaceship, segment);
-                    if (!Equals(shipEnter, VoyageErrorType.NoError))
-                    {
-                        return shipEnter;
-                    }
-
-                    totalLength += segment.LengthOfEnvironment;
-                    remainingFuelActivePlasma -= spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
-                }
+                result.Price = remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.DimensionClassCategory;
             }
-        }
 
-        // Creating a route instance
-        var route = new Route(spaceship, remainingFuelActivePlasma, remainingFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-        route.TotalRouteLength = totalLength;
+            if (remainingFuelActivePlasma < 0 || (spaceship.JumpEngine != null && remainingFuelGravitonMatter < 0))
+            {
+                result.ErrorType = VoyageErrorType.NotEnoughFuel;
+            }
 
-        if (spaceship.JumpEngine != null)
-        {
-            route.TotalRoutePrice = (remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.DimensionClassCategory) + (remainingFuelGravitonMatter * fuelGravitonMatterPrice * spaceship.DimensionClassCategory);
+            return result;
         }
-        else
-        {
-            route.TotalRoutePrice = remainingFuelActivePlasma * fuelActivePlasmaPrice * spaceship.DimensionClassCategory;
-        }
-
-        if (remainingFuelActivePlasma < 0 || (spaceship.JumpEngine != null && remainingFuelGravitonMatter < 0))
-        {
-            return VoyageErrorType.NotEnoughFuel;
-        }
-
-        return VoyageErrorType.NoError;
     }
-}

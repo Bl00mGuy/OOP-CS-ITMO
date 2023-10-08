@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
@@ -9,7 +10,7 @@ public class HighDensityFog : Environments
     {
         RequiredEngines = typeof(IEngine);
         RequiredJumpEngines = typeof(IJumpEngine);
-        AddObstacle("AntimatterFlare", antimatterFlaresCount);
+        AddObstacle(new AntimatterFlares(), antimatterFlaresCount);
         LengthOfEnvironment = lengthOfEnvironment;
     }
 }

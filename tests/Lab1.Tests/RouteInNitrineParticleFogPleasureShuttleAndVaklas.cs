@@ -6,23 +6,23 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class SecondTest
+public class RouteInNitrineParticleFogPleasureShuttleAndVaklas
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 100)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength)
+    [InlineData(10000, 10000, 1, 1, 200)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double nitrineParticleFogLength)
     {
         // Arrange
-        var spaceship1 = new VaklasShip(false);
-        var spaceship2 = new VaklasShip(true);
+        var spaceship1 = new PleasureShuttleShip();
+        var spaceship2 = new VaklasShip(false);
 
-        var highDensityFogSegment = new HighDensityFog(1, highDensityFogLength);
+        var nitrineParticleFog = new NitrineParticleFog(0, nitrineParticleFogLength);
 
-        var segments = new Collection<Environments> { highDensityFogSegment };
+        var segments = new Collection<Environments> { nitrineParticleFog };
 
-        // const string expectedOutput1 = "The ship's crew died";
+        // const string expectedOutput1 = "Spaceship doesn't have a required engine!";
         // const string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        const VoyageErrorType expectedOutput1 = VoyageErrorType.CrewDied;
+        const VoyageErrorType expectedOutput1 = VoyageErrorType.MissingRequiredEngine;
         const VoyageErrorType expectedOutput2 = VoyageErrorType.NoError;
 
         // Assert

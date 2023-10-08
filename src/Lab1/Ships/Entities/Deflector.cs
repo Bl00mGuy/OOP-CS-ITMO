@@ -11,7 +11,7 @@ public abstract class Deflector
 
     public DeflectorClassPhoton? HasPhotonDeflectAddition { get; protected set; }
 
-    public int DeflectorSafetyMargin { get; protected set; }
+    protected int DeflectorSafetyMargin { get; set; }
 
     public abstract bool DeflectObstacle(int obstacleDamage);
 }

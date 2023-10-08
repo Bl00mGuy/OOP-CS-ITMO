@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
-public class FirstTest
+public class MediumLengthRouteInHighDensityFogPleasureShuttleAndAvgur
 {
     [Theory]
     [InlineData(10000, 10000, 1, 1, 200)]

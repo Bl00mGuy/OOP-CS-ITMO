@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
@@ -11,7 +10,7 @@ public class Environments
     public double LengthOfEnvironment { get; protected init; }
     protected Type? RequiredEngines { get; init; }
     protected Type? RequiredJumpEngines { get; init; }
-    private Dictionary<string, int> Obstacles { get; } = new();
+    private List<Obstacle> Obstacles { get; } = new();
 
     protected static VoyageErrorType ShipEnterSphere(Spaceship spaceship, Environments segment)
     {
@@ -22,29 +21,12 @@ public class Environments
                 case NormalSpace:
                     if (segment.RequiredEngines != null && segment.RequiredEngines.IsInstanceOfType(spaceship.Engine))
                     {
-                        if (segment.Obstacles.TryGetValue("SmallAsteroid", out int smallAsteroidCount))
+                        foreach (Obstacle obstacle in segment.Obstacles)
                         {
-                            for (int i = 0; i < smallAsteroidCount; i++)
+                            VoyageErrorType shipHit = obstacle.ObstacleHit(spaceship);
+                            if (!Equals(shipHit, VoyageErrorType.NoError))
                             {
-                                var smallAsteroid = new SmallAsteroid();
-                                VoyageErrorType shipHit = smallAsteroid.ObstacleHit(spaceship);
-                                if (!Equals(shipHit, VoyageErrorType.NoError))
-                                {
-                                    return shipHit;
-                                }
-                            }
-                        }
-
-                        if (segment.Obstacles.TryGetValue("Meteorite", out int meteoriteCount))
-                        {
-                            for (int i = 0; i < meteoriteCount; i++)
-                            {
-                                var meteorite = new Meteorite();
-                                VoyageErrorType shipHit = meteorite.ObstacleHit(spaceship);
-                                if (!Equals(shipHit, VoyageErrorType.NoError))
-                                {
-                                    return shipHit;
-                                }
+                                return shipHit;
                             }
                         }
                     }
@@ -67,16 +49,12 @@ public class Environments
                                     return VoyageErrorType.MaxJumpLengthExceeded;
                                 }
 
-                                if (segment.Obstacles.TryGetValue("AntimatterFlare", out int antimatterFlaresCount))
+                                foreach (Obstacle obstacle in segment.Obstacles)
                                 {
-                                    for (int i = 0; i < antimatterFlaresCount; i++)
+                                    VoyageErrorType shipHit = obstacle.ObstacleHit(spaceship);
+                                    if (!Equals(shipHit, VoyageErrorType.NoError))
                                     {
-                                        var antimatterFlare = new AntimatterFlares();
-                                        VoyageErrorType shipHit = antimatterFlare.ObstacleHit(spaceship);
-                                        if (!Equals(shipHit, VoyageErrorType.NoError))
-                                        {
-                                            return shipHit;
-                                        }
+                                        return shipHit;
                                     }
                                 }
                             }
@@ -100,16 +78,12 @@ public class Environments
                 case NitrineParticleFog:
                     if (segment.RequiredEngines != null && segment.RequiredEngines.IsInstanceOfType(spaceship.Engine))
                     {
-                        if (segment.Obstacles.TryGetValue("SpaceWhale", out int spaceWhalesCount))
+                        foreach (Obstacle obstacle in segment.Obstacles)
                         {
-                            for (int i = 0; i < spaceWhalesCount; i++)
+                            VoyageErrorType shipHit = obstacle.ObstacleHit(spaceship);
+                            if (!Equals(shipHit, VoyageErrorType.NoError))
                             {
-                                var spaceWhales = new SpaceWhales();
-                                VoyageErrorType shipHit = spaceWhales.ObstacleHit(spaceship);
-                                if (!Equals(shipHit, VoyageErrorType.NoError))
-                                {
-                                    return shipHit;
-                                }
+                                return shipHit;
                             }
                         }
                     }
@@ -125,8 +99,11 @@ public class Environments
         return VoyageErrorType.NoError;
     }
 
-    protected void AddObstacle(string obstacle, int count)
+    protected void AddObstacle(Obstacle obstacle, int count)
     {
-        Obstacles[obstacle] = count;
+        for (int i = 0; i < count; i++)
+        {
+            Obstacles.Add(obstacle);
+        }
     }
 }
