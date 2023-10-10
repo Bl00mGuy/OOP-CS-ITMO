@@ -9,7 +9,7 @@ public abstract class Deflector
         HasPhotonDeflectAddition = hasPhotonDeflectAddition ? new DeflectorClassPhoton() : null;
     }
 
-    public DeflectorClassPhoton? HasPhotonDeflectAddition { get; protected set; }
+    public DeflectorClassPhoton? HasPhotonDeflectAddition { get; }
 
     protected int DeflectorSafetyMargin { get; set; }
 

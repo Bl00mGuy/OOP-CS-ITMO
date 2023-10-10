@@ -11,6 +11,6 @@ public class AvgurShip : Spaceship
         JumpEngine = new JumpEngineClassAlpha();
         Deflector = new DeflectorClassThird(hasPhotonDeflector);
         HullStrength = new HullClassThird();
-        DimensionClassCategory = 3;
+        DimensionCategory = new HeavyDimensions();
     }
 }

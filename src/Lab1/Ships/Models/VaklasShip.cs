@@ -11,6 +11,6 @@ public class VaklasShip : Spaceship
         JumpEngine = new JumpEngineClassGamma();
         Deflector = new DeflectorClassFirst(hasPhotonDeflector);
         HullStrength = new HullClassSecond();
-        DimensionClassCategory = 2;
+        DimensionCategory = new RegularDimensions();
     }
 }

@@ -7,28 +7,28 @@ public class SpaceWhales : Obstacle
 {
     private const int PowerOfObstacleDamage = 21000;
 
-    public override VoyageErrorType ObstacleHit(Spaceship spaceship)
+    public override VoyageOutcomeType ObstacleHit(Spaceship spaceship)
     {
-        if (spaceship.HullStrength != null)
+        if (spaceship.HullStrength is not null)
         {
-            if (spaceship.AntiNitrineEmitter == true)
+            if (spaceship.AntiNitrineEmitter is true)
             {
-                return VoyageErrorType.NoError;
+                return VoyageOutcomeType.NoError;
             }
 
-            if (spaceship.Deflector != null)
+            if (spaceship.Deflector is not null)
             {
-                if (spaceship.Deflector.DeflectObstacle(PowerOfObstacleDamage) == false)
+                if (spaceship.Deflector.DeflectObstacle(PowerOfObstacleDamage) is false)
                 {
-                    return VoyageErrorType.ShipDestroyed;
+                    return VoyageOutcomeType.ShipDestroyed;
                 }
             }
             else
             {
-                return VoyageErrorType.ShipDestroyed;
+                return VoyageOutcomeType.ShipDestroyed;
             }
         }
 
-        return VoyageErrorType.NoError;
+        return VoyageOutcomeType.NoError;
     }
 }

@@ -9,6 +9,6 @@ public class PleasureShuttleShip : Spaceship
     {
         Engine = new ImpulseEngineClassC();
         HullStrength = new HullClassFirst();
-        DimensionClassCategory = 1;
+        DimensionCategory = new LightDimensions();
     }
 }

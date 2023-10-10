@@ -9,21 +9,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class RouteInNitrineParticleFogPleasureShuttleAndVaklas
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 200)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double nitrineParticleFogLength)
+    [InlineData(10000, 10000, 1, 1, 200, 0)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double nitrineParticleFogLength, int spaceWhalesCount)
     {
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new VaklasShip(false);
 
-        var nitrineParticleFog = new NitrineParticleFog(0, nitrineParticleFogLength);
+        var nitrineParticleFog = new NitrineParticleFog(spaceWhalesCount, nitrineParticleFogLength);
 
         var segments = new Collection<Environments> { nitrineParticleFog };
 
-        // const string expectedOutput1 = "Spaceship doesn't have a required engine!";
-        // const string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        const VoyageErrorType expectedOutput1 = VoyageErrorType.MissingRequiredEngine;
-        const VoyageErrorType expectedOutput2 = VoyageErrorType.NoError;
+        const VoyageOutcomeType expectedOutput1 = VoyageOutcomeType.MissingRequiredEngine;
+        const VoyageOutcomeType expectedOutput2 = VoyageOutcomeType.NoError;
 
         // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);

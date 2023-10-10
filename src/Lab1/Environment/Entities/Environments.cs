@@ -1,30 +1,28 @@
-using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
-public class Environments
+public abstract class Environments
 {
     public double LengthOfEnvironment { get; protected init; }
-    protected Type? RequiredEngines { get; init; }
-    protected Type? RequiredJumpEngines { get; init; }
     private List<Obstacle> Obstacles { get; } = new();
 
-    protected static VoyageErrorType ShipEnterSphere(Spaceship spaceship, Environments segment)
+    protected static VoyageOutcomeType ShipEnterSphere(Spaceship spaceship, Environments segment)
     {
-        if (spaceship.Engine != null)
+        if (spaceship.Engine is not null)
         {
             switch (segment)
             {
                 case NormalSpace:
-                    if (segment.RequiredEngines != null && segment.RequiredEngines.IsInstanceOfType(spaceship.Engine))
+                    if (spaceship.Engine is IImpulseEngine)
                     {
                         foreach (Obstacle obstacle in segment.Obstacles)
                         {
-                            VoyageErrorType shipHit = obstacle.ObstacleHit(spaceship);
-                            if (!Equals(shipHit, VoyageErrorType.NoError))
+                            VoyageOutcomeType shipHit = obstacle.ObstacleHit(spaceship);
+                            if (!Equals(shipHit, VoyageOutcomeType.NoError))
                             {
                                 return shipHit;
                             }
@@ -32,27 +30,27 @@ public class Environments
                     }
                     else
                     {
-                        return VoyageErrorType.MissingRequiredEngine;
+                        return VoyageOutcomeType.MissingRequiredEngine;
                     }
 
                     break;
 
                 case HighDensityFog:
-                    if (spaceship.JumpEngine != null)
+                    if (spaceship.JumpEngine is not null)
                     {
-                        if (segment.RequiredEngines != null && segment.RequiredEngines.IsInstanceOfType(spaceship.Engine))
+                        if (spaceship.Engine is IImpulseEngine)
                         {
-                            if (segment.RequiredJumpEngines != null && segment.RequiredJumpEngines.IsInstanceOfType(spaceship.JumpEngine))
+                            if (spaceship.JumpEngine is IJumpEngine)
                             {
                                 if (segment.LengthOfEnvironment > spaceship.JumpEngine.MaxJumpLength)
                                 {
-                                    return VoyageErrorType.MaxJumpLengthExceeded;
+                                    return VoyageOutcomeType.MaxJumpLengthExceeded;
                                 }
 
                                 foreach (Obstacle obstacle in segment.Obstacles)
                                 {
-                                    VoyageErrorType shipHit = obstacle.ObstacleHit(spaceship);
-                                    if (!Equals(shipHit, VoyageErrorType.NoError))
+                                    VoyageOutcomeType shipHit = obstacle.ObstacleHit(spaceship);
+                                    if (!Equals(shipHit, VoyageOutcomeType.NoError))
                                     {
                                         return shipHit;
                                     }
@@ -60,28 +58,28 @@ public class Environments
                             }
                             else
                             {
-                                return VoyageErrorType.MissingRequiredJumpEngine;
+                                return VoyageOutcomeType.MissingRequiredJumpEngine;
                             }
                         }
                         else
                         {
-                            return VoyageErrorType.MissingRequiredEngine;
+                            return VoyageOutcomeType.MissingRequiredEngine;
                         }
                     }
                     else
                     {
-                        return VoyageErrorType.MissingRequiredJumpEngine;
+                        return VoyageOutcomeType.MissingRequiredJumpEngine;
                     }
 
                     break;
 
                 case NitrineParticleFog:
-                    if (segment.RequiredEngines != null && segment.RequiredEngines.IsInstanceOfType(spaceship.Engine))
+                    if (spaceship.Engine is ImpulseEngineClassE)
                     {
                         foreach (Obstacle obstacle in segment.Obstacles)
                         {
-                            VoyageErrorType shipHit = obstacle.ObstacleHit(spaceship);
-                            if (!Equals(shipHit, VoyageErrorType.NoError))
+                            VoyageOutcomeType shipHit = obstacle.ObstacleHit(spaceship);
+                            if (!Equals(shipHit, VoyageOutcomeType.NoError))
                             {
                                 return shipHit;
                             }
@@ -89,14 +87,14 @@ public class Environments
                     }
                     else
                     {
-                        return VoyageErrorType.MissingRequiredEngine;
+                        return VoyageOutcomeType.MissingRequiredEngine;
                     }
 
                     break;
             }
         }
 
-        return VoyageErrorType.NoError;
+        return VoyageOutcomeType.NoError;
     }
 
     protected void AddObstacle(Obstacle obstacle, int count)

@@ -9,24 +9,21 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class SpaceWhalesInNitrineParticleFogVaklasAndAugurAndMeridian
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 100)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double nitrineParticleFogLength)
+    [InlineData(10000, 10000, 1, 1, 100, 2)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double nitrineParticleFogLength, int spaceWhalesCount)
     {
         // Arrange
         var spaceship1 = new VaklasShip(false);
         var spaceship2 = new AvgurShip(false);
         var spaceship3 = new MeredianShip(false);
 
-        var nitrineParticleFog = new NitrineParticleFog(2, nitrineParticleFogLength);
+        var nitrineParticleFog = new NitrineParticleFog(spaceWhalesCount, nitrineParticleFogLength);
 
         var segments = new Collection<Environments> { nitrineParticleFog };
 
-        // const string expectedOutput1 = "The spaceship has been destroyed";
-        // const string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        // const string expectedOutput3 = "The spacecraft has successfully complete voyage";
-        const VoyageErrorType expectedOutput1 = VoyageErrorType.ShipDestroyed;
-        const VoyageErrorType expectedOutput2 = VoyageErrorType.NoError;
-        const VoyageErrorType expectedOutput3 = VoyageErrorType.NoError;
+        const VoyageOutcomeType expectedOutput1 = VoyageOutcomeType.ShipDestroyed;
+        const VoyageOutcomeType expectedOutput2 = VoyageOutcomeType.NoError;
+        const VoyageOutcomeType expectedOutput3 = VoyageOutcomeType.NoError;
 
         // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);

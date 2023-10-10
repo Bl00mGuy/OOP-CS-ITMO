@@ -5,17 +5,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public class AntimatterFlares : Obstacle
 {
-    public override VoyageErrorType ObstacleHit(Spaceship spaceship)
+    public override VoyageOutcomeType ObstacleHit(Spaceship spaceship)
     {
-        if (spaceship.Deflector != null && spaceship.Deflector.HasPhotonDeflectAddition != null)
+        if (spaceship.Deflector?.HasPhotonDeflectAddition is not null)
         {
             spaceship.Deflector.HasPhotonDeflectAddition.DeflectObstacle();
         }
         else
         {
-            return VoyageErrorType.CrewDied;
+            return VoyageOutcomeType.CrewDied;
         }
 
-        return VoyageErrorType.NoError;
+        return VoyageOutcomeType.NoError;
     }
 }

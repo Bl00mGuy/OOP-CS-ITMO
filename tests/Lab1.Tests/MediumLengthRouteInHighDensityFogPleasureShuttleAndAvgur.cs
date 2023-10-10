@@ -9,21 +9,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class MediumLengthRouteInHighDensityFogPleasureShuttleAndAvgur
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 200)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength)
+    [InlineData(10000, 10000, 1, 1, 200, 0)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength, int antimatterFlaresCount)
     {
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new AvgurShip(false);
 
-        var highDensityFogSegment = new HighDensityFog(0, highDensityFogLength);
+        var highDensityFogSegment = new HighDensityFog(antimatterFlaresCount, highDensityFogLength);
 
         var segments = new Collection<Environments> { highDensityFogSegment };
 
-        // const string expectedOutput1 = "Spaceship doesn't have a required jump engine!";
-        // const string expectedOutput2 = "Spaceship doesn't have a required jump engine max jump length!";
-        const VoyageErrorType expectedOutput1 = VoyageErrorType.MissingRequiredJumpEngine;
-        const VoyageErrorType expectedOutput2 = VoyageErrorType.MaxJumpLengthExceeded;
+        const VoyageOutcomeType expectedOutput1 = VoyageOutcomeType.MissingRequiredJumpEngine;
+        const VoyageOutcomeType expectedOutput2 = VoyageOutcomeType.MaxJumpLengthExceeded;
 
         // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);

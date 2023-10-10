@@ -11,6 +11,6 @@ public class MeredianShip : Spaceship
         Deflector = new DeflectorClassSecond(hasPhotonDeflector);
         AntiNitrineEmitter = true;
         HullStrength = new HullClassSecond();
-        DimensionClassCategory = 2;
+        DimensionCategory = new RegularDimensions();
     }
 }

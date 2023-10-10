@@ -7,29 +7,29 @@ public class Meteorite : Obstacle
 {
     private const int PowerOfObstacleDamage = 840;
 
-    public override VoyageErrorType ObstacleHit(Spaceship spaceship)
+    public override VoyageOutcomeType ObstacleHit(Spaceship spaceship)
     {
-        if (spaceship.HullStrength != null)
+        if (spaceship.HullStrength is not null)
         {
-            if (spaceship.Deflector != null)
+            if (spaceship.Deflector is not null)
             {
-                if (spaceship.Deflector.DeflectObstacle(PowerOfObstacleDamage) == false)
+                if (spaceship.Deflector.DeflectObstacle(PowerOfObstacleDamage) is false)
                 {
-                    if (spaceship.HullStrength.HullObstacle(PowerOfObstacleDamage) == false)
+                    if (spaceship.HullStrength.HullObstacle(PowerOfObstacleDamage) is false)
                     {
-                        return VoyageErrorType.ShipDestroyed;
+                        return VoyageOutcomeType.ShipDestroyed;
                     }
                 }
             }
             else
             {
-                if (spaceship.HullStrength.HullObstacle(PowerOfObstacleDamage) == false)
+                if (spaceship.HullStrength.HullObstacle(PowerOfObstacleDamage) is false)
                 {
-                    return VoyageErrorType.ShipDestroyed;
+                    return VoyageOutcomeType.ShipDestroyed;
                 }
             }
         }
 
-        return VoyageErrorType.NoError;
+        return VoyageOutcomeType.NoError;
     }
 }

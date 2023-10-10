@@ -9,21 +9,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class AntimatterFlashInHighDensityFogVaklasandVaklasWithPhotonDeflectors
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 100)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength)
+    [InlineData(10000, 10000, 1, 1, 100, 1)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength, int antimatterFlaresCount)
     {
         // Arrange
         var spaceship1 = new VaklasShip(false);
         var spaceship2 = new VaklasShip(true);
 
-        var highDensityFogSegment = new HighDensityFog(1, highDensityFogLength);
+        var highDensityFogSegment = new HighDensityFog(antimatterFlaresCount, highDensityFogLength);
 
         var segments = new Collection<Environments> { highDensityFogSegment };
 
-        // const string expectedOutput1 = "The ship's crew died";
-        // const string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        const VoyageErrorType expectedOutput1 = VoyageErrorType.CrewDied;
-        const VoyageErrorType expectedOutput2 = VoyageErrorType.NoError;
+        const VoyageOutcomeType expectedOutput1 = VoyageOutcomeType.CrewDied;
+        const VoyageOutcomeType expectedOutput2 = VoyageOutcomeType.NoError;
 
         // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);

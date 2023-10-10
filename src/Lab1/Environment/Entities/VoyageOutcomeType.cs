@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 
-public enum VoyageErrorType
+public enum VoyageOutcomeType
 {
     NoError,
     EmptyTank,

@@ -9,21 +9,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class ShortRouteInNormalSpacePleasureShuttleAndVaklas
 {
     [Theory]
-    [InlineData(10000, 10000, 12, 14, 100)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double normalSpaceLength)
+    [InlineData(10000, 10000, 12, 14, 100, 0, 0)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double normalSpaceLength, int smallAsteroidsCount, int meteoritesCount)
     {
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new VaklasShip(false);
 
-        var normalSpace = new NormalSpace(0, 0, normalSpaceLength);
+        var normalSpace = new NormalSpace(smallAsteroidsCount, meteoritesCount, normalSpaceLength);
 
         var segments = new Collection<Environments> { normalSpace };
 
-        // const string expectedOutput1 = "The spacecraft has successfully complete voyage";
-        // const string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        const VoyageErrorType expectedOutput1 = VoyageErrorType.NoError;
-        const VoyageErrorType expectedOutput2 = VoyageErrorType.NoError;
+        const VoyageOutcomeType expectedOutput1 = VoyageOutcomeType.NoError;
+        const VoyageOutcomeType expectedOutput2 = VoyageOutcomeType.NoError;
 
         // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);

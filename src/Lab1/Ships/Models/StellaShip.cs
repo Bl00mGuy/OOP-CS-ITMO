@@ -11,6 +11,6 @@ public class StellaShip : Spaceship
         JumpEngine = new JumpEngineClassOmega();
         Deflector = new DeflectorClassFirst(hasPhotonDeflector);
         HullStrength = new HullClassFirst();
-        DimensionClassCategory = 1;
+        DimensionCategory = new LightDimensions();
     }
 }

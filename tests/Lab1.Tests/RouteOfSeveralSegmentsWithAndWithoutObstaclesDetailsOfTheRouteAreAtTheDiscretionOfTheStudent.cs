@@ -9,23 +9,21 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class RouteOfSeveralSegmentsWithAndWithoutObstaclesDetailsOfTheRouteAreAtTheDiscretionOfTheStudent
 {
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 300, 100, 200)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double normalSpaceLength, double highDensityFogLength, double nitrineParticleFogLength)
+    [InlineData(10000, 10000, 1, 1, 300, 100, 200, 3, 4, 1, 1)]
+    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double normalSpaceLength, double highDensityFogLength, double nitrineParticleFogLength, int smallAsteroidsCount, int meteoritesCount, int antimatterFlaresCount, int spaceWhalesCount)
     {
         // Arrange
         var spaceship1 = new PleasureShuttleShip();
         var spaceship2 = new AvgurShip(true);
 
-        var normalSpace = new NormalSpace(3, 4, normalSpaceLength);
-        var highDensityFogSegment = new HighDensityFog(1, highDensityFogLength);
-        var nitrineParticleFog = new NitrineParticleFog(1, nitrineParticleFogLength);
+        var normalSpace = new NormalSpace(smallAsteroidsCount, meteoritesCount, normalSpaceLength);
+        var highDensityFogSegment = new HighDensityFog(antimatterFlaresCount, highDensityFogLength);
+        var nitrineParticleFog = new NitrineParticleFog(spaceWhalesCount, nitrineParticleFogLength);
 
         var segments = new Collection<Environments> { normalSpace, highDensityFogSegment, nitrineParticleFog };
 
-        // const string expectedOutput1 = "The spaceship has been destroyed";
-        // const string expectedOutput2 = "The spacecraft has successfully complete voyage";
-        const VoyageErrorType expectedOutput1 = VoyageErrorType.ShipDestroyed;
-        const VoyageErrorType expectedOutput2 = VoyageErrorType.NoError;
+        const VoyageOutcomeType expectedOutput1 = VoyageOutcomeType.ShipDestroyed;
+        const VoyageOutcomeType expectedOutput2 = VoyageOutcomeType.NoError;
 
         // Assert
         Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);

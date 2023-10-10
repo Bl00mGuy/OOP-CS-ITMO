@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 public class HullClassFirst : IHullStrength
 {
     private bool _isShipAlive = true;
-    public int HullSafetyMargin { get; private set; } = 315;
+    private int HullSafetyMargin { get; set; } = 315;
 
     public bool HullObstacle(int obstacleDamage)
     {
