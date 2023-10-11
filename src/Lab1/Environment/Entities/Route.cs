@@ -44,7 +44,8 @@ public class Route : Environments
             {
                 if (spaceship.JumpEngine is null)
                 {
-                    remainingFuelActivePlasma -= 1; // spaceship.Engine.StartEngine();
+                    remainingFuelActivePlasma -= 1;
+                    spaceship.Engine.StartEngine();
                     foreach (Environments segment in segments)
                     {
                         VoyageOutcomeType shipEnter = ShipEnterSphere(spaceship, segment);
@@ -55,12 +56,14 @@ public class Route : Environments
                         }
 
                         totalLength += segment.LengthOfEnvironment;
-                        remainingFuelActivePlasma -= 1; // spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
+                        remainingFuelActivePlasma -= 1;
+                        spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
                     }
                 }
                 else
                 {
-                    remainingFuelActivePlasma -= 1; // spaceship.Engine.StartEngine();
+                    remainingFuelActivePlasma -= 1;
+                    spaceship.Engine.StartEngine();
                     remainingFuelGravitonMatter -= spaceship.JumpEngine.StartEngine();
                     foreach (Environments segment in segments)
                     {
@@ -72,7 +75,8 @@ public class Route : Environments
                         }
 
                         totalLength += segment.LengthOfEnvironment;
-                        remainingFuelActivePlasma -= 1; // spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
+                        remainingFuelActivePlasma -= 1;
+                        spaceship.Engine.CalculateFuelConsumption(segment.LengthOfEnvironment);
                     }
                 }
             }
