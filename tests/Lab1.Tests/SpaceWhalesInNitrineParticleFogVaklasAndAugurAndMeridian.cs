@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
 using Xunit;
 
@@ -8,16 +11,30 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class SpaceWhalesInNitrineParticleFogVaklasAndAugurAndMeridian
 {
+    public static IEnumerable<object[]> TestParameters()
+    {
+        const double initialFuelActivePlasma = 10000;
+        const double initialFuelGravitonMatter = 10000;
+        const double fuelActivePlasmaPrice = 1;
+        const double fuelGravitonMatterPrice = 1;
+        const double nitrineParticleFogLength = 100;
+        const int countOfSpaceWhales = 2;
+        const bool noPhotonDeflector = false;
+        yield return new object[] { countOfSpaceWhales, noPhotonDeflector, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, nitrineParticleFogLength };
+    }
+
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 100, 2)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double nitrineParticleFogLength, int spaceWhalesCount)
+    [MemberData(nameof(TestParameters))]
+    public void TestRouteForSpaceships(int countOfSpaceWhales, bool noPhotonDeflector, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double nitrineParticleFogLength)
     {
         // Arrange
-        var spaceship1 = new VaklasShip(false);
-        var spaceship2 = new AvgurShip(false);
-        var spaceship3 = new MeredianShip(false);
+        var spaceship1 = new VaklasShip(noPhotonDeflector);
+        var spaceship2 = new AvgurShip(noPhotonDeflector);
+        var spaceship3 = new MeredianShip(noPhotonDeflector);
 
-        var nitrineParticleFog = new NitrineParticleFog(spaceWhalesCount, nitrineParticleFogLength);
+        var obstacles = new Collection<Obstacle> { new SpaceWhales(countOfSpaceWhales) };
+
+        var nitrineParticleFog = new NitrineParticleFog(obstacles, nitrineParticleFogLength);
 
         var segments = new Collection<Environments> { nitrineParticleFog };
 
@@ -25,29 +42,19 @@ public class SpaceWhalesInNitrineParticleFogVaklasAndAugurAndMeridian
         const VoyageOutcomeType expectedOutput2 = VoyageOutcomeType.NoError;
         const VoyageOutcomeType expectedOutput3 = VoyageOutcomeType.NoError;
 
-        // Assert
-        Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);
-        Assert.Equal(expectedOutput2, SendSpaceship2().ResultOfTheSpaceshipVoyage);
-        Assert.Equal(expectedOutput3, SendSpaceship3().ResultOfTheSpaceshipVoyage);
-        return;
-
         // Act
-        Route SendSpaceship1()
-        {
-            var route1 = new Route(spaceship1, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-            return route1;
-        }
+        Route result1 = SendSpaceship(spaceship1, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+        Route result2 = SendSpaceship(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+        Route result3 = SendSpaceship(spaceship3, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
 
-        Route SendSpaceship2()
-        {
-            var route2 = new Route(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-            return route2;
-        }
+        // Assert
+        Assert.Equal(expectedOutput1, result1.ResultOfTheSpaceshipVoyage);
+        Assert.Equal(expectedOutput2, result2.ResultOfTheSpaceshipVoyage);
+        Assert.Equal(expectedOutput3, result3.ResultOfTheSpaceshipVoyage);
+    }
 
-        Route SendSpaceship3()
-        {
-            var route3 = new Route(spaceship3, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-            return route3;
-        }
+    private static Route SendSpaceship(Spaceship spaceship, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
+    {
+        return new Route(spaceship, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
     }
 }

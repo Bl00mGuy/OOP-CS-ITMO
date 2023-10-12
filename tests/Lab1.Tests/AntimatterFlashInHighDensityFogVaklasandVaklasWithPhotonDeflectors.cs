@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models;
 using Xunit;
 
@@ -8,37 +10,53 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class AntimatterFlashInHighDensityFogVaklasandVaklasWithPhotonDeflectors
 {
+    public static IEnumerable<object[]> TestParameters()
+    {
+        const double initialFuelActivePlasma = 10000;
+        const double initialFuelGravitonMatter = 10000;
+        const double fuelActivePlasmaPrice = 1;
+        const double fuelGravitonMatterPrice = 1;
+        const double highDensityFogLength = 100;
+        const int countOfAntimatterFlares = 1;
+        const bool hasPhotonDeflector = true;
+        yield return new object[] { !hasPhotonDeflector, hasPhotonDeflector, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, highDensityFogLength, countOfAntimatterFlares };
+    }
+
     [Theory]
-    [InlineData(10000, 10000, 1, 1, 100, 1)]
-    public void TestRouteForSpaceships(double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength, int antimatterFlaresCount)
+    [MemberData(nameof(TestParameters))]
+    public void TestRouteForSpaceships(bool noPhotonDeflector, bool hasPhotonDeflector, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, double highDensityFogLength, int countOfAntimatterFlares)
     {
         // Arrange
-        var spaceship1 = new VaklasShip(false);
-        var spaceship2 = new VaklasShip(true);
+        var spaceshipFirst = new VaklasShip(noPhotonDeflector);
+        var spaceshipSecond = new VaklasShip(hasPhotonDeflector);
 
-        var highDensityFogSegment = new HighDensityFog(antimatterFlaresCount, highDensityFogLength);
+        var obstacles = new List<Obstacle> { new AntimatterFlares(countOfAntimatterFlares) };
+
+        var highDensityFogSegment = new HighDensityFog(obstacles, highDensityFogLength);
 
         var segments = new Collection<Environments> { highDensityFogSegment };
 
         const VoyageOutcomeType expectedOutput1 = VoyageOutcomeType.CrewDied;
         const VoyageOutcomeType expectedOutput2 = VoyageOutcomeType.NoError;
 
-        // Assert
-        Assert.Equal(expectedOutput1, SendSpaceship1().ResultOfTheSpaceshipVoyage);
-        Assert.Equal(expectedOutput2, SendSpaceship2().ResultOfTheSpaceshipVoyage);
-        return;
-
         // Act
-        Route SendSpaceship1()
-        {
-            var route1 = new Route(spaceship1, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-            return route1;
-        }
+        Route result1 = SendSpaceship1(spaceshipFirst, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+        Route result2 = SendSpaceship2(spaceshipSecond, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
 
-        Route SendSpaceship2()
-        {
-            var route2 = new Route(spaceship2, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
-            return route2;
-        }
+        // Assert
+        Assert.Equal(expectedOutput1, result1.ResultOfTheSpaceshipVoyage);
+        Assert.Equal(expectedOutput2, result2.ResultOfTheSpaceshipVoyage);
+    }
+
+    private static Route SendSpaceship1(VaklasShip spaceshipFirst, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
+    {
+        var route1 = new Route(spaceshipFirst, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+        return route1;
+    }
+
+    private static Route SendSpaceship2(VaklasShip spaceshipSecond, double initialFuelActivePlasma, double initialFuelGravitonMatter, double fuelActivePlasmaPrice, double fuelGravitonMatterPrice, Collection<Environments> segments)
+    {
+        var route2 = new Route(spaceshipSecond, initialFuelActivePlasma, initialFuelGravitonMatter, fuelActivePlasmaPrice, fuelGravitonMatterPrice, segments);
+        return route2;
     }
 }
