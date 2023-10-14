@@ -11,9 +11,9 @@ public abstract class Environments
         Obstacles = new List<Obstacle>();
     }
 
-    public IList<Obstacle> Obstacles { get; private set; }
-
     public double LengthOfEnvironment { get; private init; }
+
+    protected IList<Obstacle> Obstacles { get; private init; }
 
     public abstract VoyageOutcomeType ShipEnterSphere(Spaceship spaceship);
 }
