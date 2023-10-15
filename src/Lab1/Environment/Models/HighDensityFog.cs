@@ -6,6 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 
 public class HighDensityFog : Environments
 {
+    private readonly IList<Obstacle> _obstacles = new List<Obstacle>();
+
     public HighDensityFog(IList<Obstacle> obstacles, double lengthOfEnvironment)
         : base(lengthOfEnvironment)
     {
@@ -13,7 +15,7 @@ public class HighDensityFog : Environments
         {
             if (obstacle is HighDensityFogObstacles)
             {
-                Obstacles.Add(obstacle);
+                _obstacles.Add(obstacle);
             }
         }
     }
@@ -31,7 +33,7 @@ public class HighDensityFog : Environments
                         return VoyageOutcomeType.MaxJumpLengthExceeded;
                     }
 
-                    foreach (Obstacle obstacle in Obstacles)
+                    foreach (Obstacle obstacle in _obstacles)
                     {
                         VoyageOutcomeType shipHit = obstacle.ObstacleHit(spaceship);
                         if (!Equals(shipHit, VoyageOutcomeType.NoError))

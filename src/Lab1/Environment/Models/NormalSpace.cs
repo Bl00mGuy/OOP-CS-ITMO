@@ -6,6 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 
 public class NormalSpace : Environments
 {
+    private readonly IList<Obstacle> _obstacles = new List<Obstacle>();
+
     public NormalSpace(IList<Obstacle> obstacles, double lengthOfEnvironment)
         : base(lengthOfEnvironment)
     {
@@ -13,7 +15,7 @@ public class NormalSpace : Environments
         {
             if (obstacle is NormalSpaceObstacles)
             {
-                Obstacles.Add(obstacle);
+                _obstacles.Add(obstacle);
             }
         }
     }
@@ -22,7 +24,7 @@ public class NormalSpace : Environments
     {
         if (spaceship.Engine is IImpulseEngine)
         {
-            foreach (Obstacle obstacle in Obstacles)
+            foreach (Obstacle obstacle in _obstacles)
             {
                 VoyageOutcomeType shipHit = obstacle.ObstacleHit(spaceship);
                 if (!Equals(shipHit, VoyageOutcomeType.NoError))

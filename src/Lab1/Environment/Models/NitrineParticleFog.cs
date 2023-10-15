@@ -7,6 +7,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models;
 
 public class NitrineParticleFog : Environments
 {
+    private readonly IList<Obstacle> _obstacles = new List<Obstacle>();
+
     public NitrineParticleFog(IList<Obstacle> obstacles, double lengthOfEnvironment)
         : base(lengthOfEnvironment)
     {
@@ -14,7 +16,7 @@ public class NitrineParticleFog : Environments
         {
             if (obstacle is NitrineParticleFogObstacles)
             {
-                Obstacles.Add(obstacle);
+                _obstacles.Add(obstacle);
             }
         }
     }
@@ -23,7 +25,7 @@ public class NitrineParticleFog : Environments
     {
         if (spaceship.Engine is ImpulseEngineClassE)
         {
-            foreach (Obstacle obstacle in Obstacles)
+            foreach (Obstacle obstacle in _obstacles)
             {
                 VoyageOutcomeType shipHit = obstacle.ObstacleHit(spaceship);
                 if (!Equals(shipHit, VoyageOutcomeType.NoError))
