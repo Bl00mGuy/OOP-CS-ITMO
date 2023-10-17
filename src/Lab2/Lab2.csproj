@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="PersonalComputer\GraphicsProcessingUnit\" />
       <Folder Include="PersonalComputer\Motherboard\BiOs\" />
     </ItemGroup>
 
