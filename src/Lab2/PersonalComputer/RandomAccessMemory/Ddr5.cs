@@ -1,17 +1,21 @@
-using System;
 using System.Collections.Generic;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
 
-public class Ddr5 : IDdrStandard
+public class Ddr5 : IRam
 {
-    public Ddr5(IList<Tuple<int, int>> jedecSettings, IList<string> xmpProfiles)
+    public Ddr5(int memorySize, IList<IJedecProfile> supportedJedecSettings, IList<IXmpProfile> supportedXmpProfiles, RamFormFactor formFactor, int powerConsumption)
     {
-        SupportedJedecSettings = jedecSettings;
-        SupportedXmpProfiles = xmpProfiles;
+        MemorySize = memorySize;
+        SupportedJedecSettings = supportedJedecSettings;
+        SupportedXmpProfiles = supportedXmpProfiles;
+        FormFactor = formFactor;
+        PowerConsumption = powerConsumption;
     }
 
-    public IList<Tuple<int, int>> SupportedJedecSettings { get; }
-
-    public IList<string> SupportedXmpProfiles { get; }
+    public int MemorySize { get; }
+    public IList<IJedecProfile> SupportedJedecSettings { get; }
+    public IList<IXmpProfile> SupportedXmpProfiles { get; }
+    public RamFormFactor FormFactor { get; }
+    public int PowerConsumption { get; }
 }

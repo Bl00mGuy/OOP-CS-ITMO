@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessing
 
 public class Lga1700 : ICpu
 {
-    public Lga1700(string cpuName, int numberOfCores, int coresFrequency, bool hasIntegratedGraphics, DdrVersion supportedMemoryVersion, int supportedMemoryFrequencies, int thermalDesignPower, int powerConsumption)
+    public Lga1700(string cpuName, int numberOfCores, int coresFrequency, bool hasIntegratedGraphics, IRam supportedMemoryVersion, int supportedMemoryFrequencies, int thermalDesignPower, int powerConsumption)
     {
         CpuName = cpuName;
         NumberOfCores = numberOfCores;
@@ -24,7 +24,7 @@ public class Lga1700 : ICpu
 
     public bool HasIntegratedGraphics { get; }
 
-    public DdrVersion SupportedMemoryVersion { get; }
+    public IRam SupportedMemoryVersion { get; }
 
     public int SupportedMemoryFrequencies { get; }
 

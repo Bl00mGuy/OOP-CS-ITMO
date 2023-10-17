@@ -1,8 +1,5 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
 
-public enum DdrVersion
+public class SoDimmFormFactor : RamFormFactor
 {
-    Ddr3,
-    Ddr4,
-    Ddr5,
 }

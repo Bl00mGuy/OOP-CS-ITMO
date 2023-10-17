@@ -8,7 +8,7 @@ public interface ICpu
     int NumberOfCores { get; }
     int CoresFrequency { get; }
     bool HasIntegratedGraphics { get; }
-    DdrVersion SupportedMemoryVersion { get; }
+    IRam SupportedMemoryVersion { get; }
     int SupportedMemoryFrequencies { get; }
     int ThermalDesignPower { get; }
     int PowerConsumption { get; }

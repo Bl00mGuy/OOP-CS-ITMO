@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessing
 
 public class Am4 : ICpu
 {
-    public Am4(string cpuName, int numberOfCores, int coresFrequency, bool hasIntegratedGraphics, DdrVersion supportedMemoryVersion, int supportedMemoryFrequencies, int thermalDesignPower, int powerConsumption)
+    public Am4(string cpuName, int numberOfCores, int coresFrequency, bool hasIntegratedGraphics, IRam supportedMemoryVersion, int supportedMemoryFrequencies, int thermalDesignPower, int powerConsumption)
     {
         CpuName = cpuName;
         NumberOfCores = numberOfCores;
@@ -24,7 +24,7 @@ public class Am4 : ICpu
 
     public bool HasIntegratedGraphics { get; }
 
-    public DdrVersion SupportedMemoryVersion { get; }
+    public IRam SupportedMemoryVersion { get; }
 
     public int SupportedMemoryFrequencies { get; }
 

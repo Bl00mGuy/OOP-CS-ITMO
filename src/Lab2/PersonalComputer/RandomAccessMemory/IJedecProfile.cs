@@ -1,5 +1,7 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
 
-public abstract class RamFormFactor
+public interface IJedecProfile
 {
+    int Frequency { get; }
+    float Voltage { get; }
 }
