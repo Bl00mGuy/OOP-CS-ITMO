@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Rom;
+namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Storage;
 
 public interface IStorageFactory
 {
