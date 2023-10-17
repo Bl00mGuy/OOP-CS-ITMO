@@ -9,7 +9,6 @@
       <Folder Include="PersonalComputer\CoolingSystem\" />
       <Folder Include="PersonalComputer\Gpu\" />
       <Folder Include="PersonalComputer\Motherboard\" />
-      <Folder Include="PersonalComputer\PowerSupply\" />
     </ItemGroup>
 
 </Project>
