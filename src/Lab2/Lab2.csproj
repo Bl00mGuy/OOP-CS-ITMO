@@ -10,7 +10,6 @@
       <Folder Include="PersonalComputer\Gpu\" />
       <Folder Include="PersonalComputer\Motherboard\" />
       <Folder Include="PersonalComputer\PowerSupply\" />
-      <Folder Include="PersonalComputer\Rom\" />
     </ItemGroup>
 
 </Project>
