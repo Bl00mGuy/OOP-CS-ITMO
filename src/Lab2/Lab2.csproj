@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <Folder Include="PersonalComputer\Case\" />
-      <Folder Include="PersonalComputer\CoolingSystem\" />
       <Folder Include="PersonalComputer\Gpu\" />
       <Folder Include="PersonalComputer\Motherboard\" />
     </ItemGroup>
