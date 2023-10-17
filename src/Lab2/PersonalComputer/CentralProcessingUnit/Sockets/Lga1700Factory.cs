@@ -1,4 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Ram;
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit.Sockets;
 

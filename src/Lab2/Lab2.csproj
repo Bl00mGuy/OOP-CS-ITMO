@@ -5,9 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="PersonalComputer\Case\" />
-      <Folder Include="PersonalComputer\Gpu\" />
-      <Folder Include="PersonalComputer\Motherboard\" />
+      <Folder Include="PersonalComputer\GraphicsProcessingUnit\" />
+      <Folder Include="PersonalComputer\Motherboard\BiOs\" />
     </ItemGroup>
 
 </Project>
