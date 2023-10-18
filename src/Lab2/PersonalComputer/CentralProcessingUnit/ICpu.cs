@@ -1,14 +1,12 @@
-using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit;
 
-public interface ICpu
+public interface ICpu : IComponent
 {
-    string CpuName { get; }
     int NumberOfCores { get; }
     int CoresFrequency { get; }
     bool HasIntegratedGraphics { get; }
-    IRam SupportedMemoryVersion { get; }
     int SupportedMemoryFrequencies { get; }
     int ThermalDesignPower { get; }
     int PowerConsumption { get; }

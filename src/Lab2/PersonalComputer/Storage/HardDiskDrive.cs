@@ -2,16 +2,18 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Storage;
 
 public class HardDiskDrive : IHdd
 {
-    public HardDiskDrive(int capacity, int spindleSpeed, double powerConsumptionWatt)
+    public HardDiskDrive(int capacity, int spindleSpeed, int powerConsumption)
     {
         Capacity = capacity;
         SpindleSpeed = spindleSpeed;
-        PowerConsumptionWatt = powerConsumptionWatt;
+        PowerConsumption = powerConsumption;
     }
 
     public int Capacity { get; }
 
     public int SpindleSpeed { get; }
 
-    public double PowerConsumptionWatt { get; }
+    public int PowerConsumption { get; }
+
+    public string? Name { get; }
 }

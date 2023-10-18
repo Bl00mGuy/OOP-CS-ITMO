@@ -1,26 +1,12 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.PowerSupply;
 
-public class PowerSupplyModel : PowerSupply
+public class PowerSupplyModel : IPowerSupply
 {
     public PowerSupplyModel(int peakLoad)
     {
         PeakLoad = peakLoad;
     }
 
-    private int PeakLoad { get; }
-
-    public override int GetPower()
-    {
-        return PeakLoad;
-    }
-
-    public override ValidationStatus ValidatePower(int requiredPower)
-    {
-        return PeakLoad switch
-        {
-            _ when PeakLoad < requiredPower => ValidationStatus.InsufficientPower,
-            _ when PeakLoad > requiredPower => ValidationStatus.ExceedsRecommendedPower,
-            _ => ValidationStatus.Valid,
-        };
-    }
+    public int PeakLoad { get; }
+    public string? Name { get; }
 }

@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard;
 
 public class ComputerMotherboard : IMotherboard
 {
-    public ComputerMotherboard(ICpuFactory socket, int countOfPciExpressPorts, int countOfSataPorts, IChipset chipset, IRam ddr, int countOfRamPorts, MotherboardFormFactor formFactor, IBiOs bios)
+    public ComputerMotherboard(ICpu socket, int countOfPciExpressPorts, int countOfSataPorts, IChipset chipset, IRam ddr, int countOfRamPorts, MotherboardFormFactor formFactor, IBiOs bios)
     {
         Socket = socket;
         CountOfPciExpressPorts = countOfPciExpressPorts;
@@ -18,7 +18,7 @@ public class ComputerMotherboard : IMotherboard
         MotherboardBiOs = bios;
     }
 
-    public ICpuFactory Socket { get; }
+    public ICpu Socket { get; }
     public int CountOfPciExpressPorts { get; }
     public int CountOfSataPorts { get; }
     public IChipset MotherboardChipset { get; }
@@ -26,4 +26,5 @@ public class ComputerMotherboard : IMotherboard
     public int CountOfRamPorts { get; }
     public MotherboardFormFactor FormFactor { get; }
     public IBiOs MotherboardBiOs { get; }
+    public string? Name { get; }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit;
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CoolingSystem;
 
@@ -20,4 +21,6 @@ public class CpuCoolingSystem : ICoolingSystem
     public int MaxThermalDesignPower { get; }
 
     public int PowerConsumption { get; }
+
+    public string? Name { get; }
 }

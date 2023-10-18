@@ -1,30 +1,25 @@
-using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
-
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit.Sockets;
 
 public class Am4 : ICpu
 {
-    public Am4(string cpuName, int numberOfCores, int coresFrequency, bool hasIntegratedGraphics, IRam supportedMemoryVersion, int supportedMemoryFrequencies, int thermalDesignPower, int powerConsumption)
+    public Am4(string cpuName, int numberOfCores, int coresFrequency, bool hasIntegratedGraphics, int supportedMemoryFrequencies, int thermalDesignPower, int powerConsumption)
     {
-        CpuName = cpuName;
+        Name = cpuName;
         NumberOfCores = numberOfCores;
         CoresFrequency = coresFrequency;
         HasIntegratedGraphics = hasIntegratedGraphics;
-        SupportedMemoryVersion = supportedMemoryVersion;
         SupportedMemoryFrequencies = supportedMemoryFrequencies;
         ThermalDesignPower = thermalDesignPower;
         PowerConsumption = powerConsumption;
     }
 
-    public string CpuName { get; }
+    public string Name { get; }
 
     public int NumberOfCores { get; }
 
     public int CoresFrequency { get; }
 
     public bool HasIntegratedGraphics { get; }
-
-    public IRam SupportedMemoryVersion { get; }
 
     public int SupportedMemoryFrequencies { get; }
 

@@ -2,5 +2,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemor
 
 public interface IRamFactory
 {
-    IRam CreateRam(int memorySize, int ddrFrequency, RamFormFactor formFactor, int powerConsumption);
+    IRam CreateRam(int numberOfRamPads, int memorySize, int ddrFrequency, RamFormFactor formFactor, int powerConsumption);
 }

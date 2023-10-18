@@ -2,12 +2,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Storage;
 
 public class SolidStateDrive : ISsd
 {
-    public SolidStateDrive(DriveConnectionType connectionType, int capacity, int maxSpeed, double powerConsumptionWatt)
+    public SolidStateDrive(DriveConnectionType connectionType, int capacity, int maxSpeed, int powerConsumption)
     {
         ConnectionType = connectionType;
         Capacity = capacity;
         MaxSpeed = maxSpeed;
-        PowerConsumptionWatt = powerConsumptionWatt;
+        PowerConsumption = powerConsumption;
     }
 
     public DriveConnectionType ConnectionType { get; }
@@ -16,5 +16,7 @@ public class SolidStateDrive : ISsd
 
     public int MaxSpeed { get; }
 
-    public double PowerConsumptionWatt { get; }
+    public int PowerConsumption { get; }
+
+    public string? Name { get; }
 }

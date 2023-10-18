@@ -2,8 +2,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemor
 
 public class Ddr4Factory : IRamFactory
 {
-    public IRam CreateRam(int memorySize, int ddrFrequency, RamFormFactor formFactor, int powerConsumption)
+    public IRam CreateRam(int numberOfRamPads, int memorySize, int ddrFrequency, RamFormFactor formFactor, int powerConsumption)
     {
-        return new Ddr4(memorySize, ddrFrequency, formFactor, powerConsumption);
+        return new Ddr4(numberOfRamPads, memorySize, ddrFrequency, formFactor, powerConsumption);
     }
 }

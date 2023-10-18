@@ -1,15 +1,19 @@
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Services;
+
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.GraphicsProcessingUnit;
 
 public class GpuPciExpressVersion3 : IVideoCard
 {
-    public GpuPciExpressVersion3(Dimensions dimensions, int videoMemory, int chipFrequency, int powerConsumption)
+    public GpuPciExpressVersion3(string gpuName, Dimensions dimensions, int videoMemory, int chipFrequency, int powerConsumption)
     {
+        Name = gpuName;
         DimensionsOfVideoCard = dimensions;
         VideoMemory = videoMemory;
         ChipFrequency = chipFrequency;
         PowerConsumption = powerConsumption;
     }
 
+    public string Name { get; }
     public Dimensions DimensionsOfVideoCard { get; }
     public int VideoMemory { get; }
     public int ChipFrequency { get; }
