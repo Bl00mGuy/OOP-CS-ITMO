@@ -1,8 +1,8 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.WiFi;
 
-public class WiFiAdapter : IWiFi
+public class WiFiAdapterPciExpressVersion4 : IWiFi
 {
-    public WiFiAdapter(int wifiStandardVersion, bool hasBluetooth, int powerConsumption)
+    public WiFiAdapterPciExpressVersion4(int wifiStandardVersion, bool hasBluetooth, int powerConsumption)
     {
         WifiStandardVersion = wifiStandardVersion;
         HasBluetooth = hasBluetooth;
