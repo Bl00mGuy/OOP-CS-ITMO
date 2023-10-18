@@ -1,8 +1,8 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.GraphicsProcessingUnit;
 
-public class PciExpressVersion3 : IVideoCard
+public class GpuPciExpressVersion4 : IVideoCard
 {
-    public PciExpressVersion3(Dimensions dimensions, int videoMemory, int chipFrequency, int powerConsumption)
+    public GpuPciExpressVersion4(Dimensions dimensions, int videoMemory, int chipFrequency, int powerConsumption)
     {
         DimensionsOfVideoCard = dimensions;
         VideoMemory = videoMemory;

@@ -3,15 +3,14 @@ using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard.BiOs;
 
-public class BiosVersion1 : IBiOs
+public class MotherboardBios : IBiOs
 {
-    public BiosVersion1(string type, IList<ICpuFactory> supportedCpus)
+    public MotherboardBios(int version, IList<ICpuFactory> supportedCpus)
     {
-        Type = type;
+        BiosVersion = version;
         SupportedCpus = supportedCpus;
     }
 
-    public string Type { get; }
-
+    public int BiosVersion { get; }
     public IList<ICpuFactory> SupportedCpus { get; }
 }

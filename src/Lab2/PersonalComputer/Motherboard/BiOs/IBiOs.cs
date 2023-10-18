@@ -5,6 +5,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard.BiOs;
 
 public interface IBiOs
 {
-    string Type { get; }
+    int BiosVersion { get; }
     IList<ICpuFactory> SupportedCpus { get; }
 }

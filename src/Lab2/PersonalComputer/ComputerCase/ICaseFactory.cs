@@ -3,9 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.ComputerCase;
 
-public interface ICase
+public interface ICaseFactory
 {
-    Dimensions DimensionsOfCase { get; }
-    Dimensions DimensionsOfGpu { get; }
-    IList<MotherboardFormFactor> SupportedMotherboards { get; }
+    ICase CreateCase(Dimensions caseDimensions, Dimensions gpuDimensions, IList<MotherboardFormFactor> supportedMotherboards);
 }

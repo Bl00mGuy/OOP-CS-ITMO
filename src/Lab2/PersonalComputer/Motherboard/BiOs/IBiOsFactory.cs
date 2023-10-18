@@ -5,5 +5,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard.BiOs;
 
 public interface IBiOsFactory
 {
-    IBiOs CreateBiOs(string type, IList<ICpuFactory> supportedCpus);
+    IBiOs CreateBiOs(int version, IList<ICpuFactory> supportedCpus);
 }
