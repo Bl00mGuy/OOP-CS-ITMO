@@ -13,17 +13,92 @@ public class Am4 : ICpu
         PowerConsumption = powerConsumption;
     }
 
-    public string Name { get; }
+    public string Name { get; private set; }
 
-    public int NumberOfCores { get; }
+    public int NumberOfCores { get; private set; }
 
-    public int CoresFrequency { get; }
+    public int CoresFrequency { get; private set; }
 
-    public bool HasIntegratedGraphics { get; }
+    public bool HasIntegratedGraphics { get; private set; }
 
-    public int SupportedMemoryFrequencies { get; }
+    public int SupportedMemoryFrequencies { get; private set; }
 
-    public int ThermalDesignPower { get; }
+    public int ThermalDesignPower { get; private set; }
 
-    public int PowerConsumption { get; }
+    public int PowerConsumption { get; private set; }
+
+    public Am4 SetCpuName(string name)
+    {
+        Am4 cloneCpu = Clone();
+
+        cloneCpu.Name = name;
+
+        return cloneCpu;
+    }
+
+    public Am4 SetCpuNumberOfCores(int numberOfCores)
+    {
+        Am4 cloneCpu = Clone();
+
+        cloneCpu.NumberOfCores = numberOfCores;
+
+        return cloneCpu;
+    }
+
+    public Am4 SetCpuCoresFrequency(int coresFrequency)
+    {
+        Am4 cloneCpu = Clone();
+
+        cloneCpu.CoresFrequency = coresFrequency;
+
+        return cloneCpu;
+    }
+
+    public Am4 SetCpuHasIntegratedGraphics(bool hasIntegratedGraphics)
+    {
+        Am4 cloneCpu = Clone();
+
+        cloneCpu.HasIntegratedGraphics = hasIntegratedGraphics;
+
+        return cloneCpu;
+    }
+
+    public Am4 SetCpuSupportedMemoryFrequencies(int supportedMemoryFrequencies)
+    {
+        Am4 cloneCpu = Clone();
+
+        cloneCpu.SupportedMemoryFrequencies = supportedMemoryFrequencies;
+
+        return cloneCpu;
+    }
+
+    public Am4 SetCpuThermalDesignPower(int thermalDesignPower)
+    {
+        Am4 cloneCpu = Clone();
+
+        cloneCpu.ThermalDesignPower = thermalDesignPower;
+
+        return cloneCpu;
+    }
+
+    public Am4 SetCpuPowerConsumption(int powerConsumption)
+    {
+        Am4 cloneCpu = Clone();
+
+        cloneCpu.PowerConsumption = powerConsumption;
+
+        return cloneCpu;
+    }
+
+    public Am4 Clone()
+    {
+        return new Am4(
+            (string)Name.Clone(),
+            NumberOfCores,
+            CoresFrequency,
+            HasIntegratedGraphics,
+            SupportedMemoryFrequencies,
+            ThermalDesignPower,
+            PowerConsumption);
+    }
 }

@@ -10,9 +10,9 @@ public interface IMotherboard : IComponent
     ICpu Socket { get; }
     int CountOfPciExpressPorts { get; }
     int CountOfSataPorts { get; }
-    IChipset MotherboardChipset { get; }
-    IRam RequiredDdrVersion { get; }
+    MotherboardChipset MotherboardChipset { get; }
+    DdrVersion RequiredDdrVersion { get; }
     int CountOfRamPorts { get; }
     MotherboardFormFactor FormFactor { get; }
-    IBiOs MotherboardBiOs { get; }
+    MotherboardBios MotherboardBiOs { get; }
 }

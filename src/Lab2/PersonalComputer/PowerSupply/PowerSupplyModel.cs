@@ -7,6 +7,30 @@ public class PowerSupplyModel : IPowerSupply
         PeakLoad = peakLoad;
     }
 
-    public int PeakLoad { get; }
-    public string? Name { get; }
+    public string? Name { get; private set; }
+    public int PeakLoad { get; private set; }
+
+    public PowerSupplyModel Clone()
+    {
+        return new PowerSupplyModel(
+            PeakLoad);
+    }
+
+    public PowerSupplyModel SetPowerSupplyName(string name)
+    {
+        PowerSupplyModel powerSupplyClone = Clone();
+
+        powerSupplyClone.Name = name;
+
+        return powerSupplyClone;
+    }
+
+    public PowerSupplyModel SetPowerSupplyPeakLoad(int peakLoad)
+    {
+        PowerSupplyModel powerSupplyClone = Clone();
+
+        powerSupplyClone.PeakLoad = peakLoad;
+
+        return powerSupplyClone;
+    }
 }

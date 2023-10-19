@@ -13,7 +13,52 @@ public class ComputerCase : ICase
         SupportedMotherboards = supportedMotherboards;
     }
 
-    public Dimensions DimensionsOfCase { get; }
-    public Dimensions DimensionsOfGpu { get; }
-    public IList<MotherboardFormFactor> SupportedMotherboards { get; }
+    public string? Name { get; private set; }
+    public Dimensions DimensionsOfCase { get; private set; }
+    public Dimensions DimensionsOfGpu { get; private set; }
+    public IList<MotherboardFormFactor> SupportedMotherboards { get; private set; }
+
+    public ComputerCase Clone()
+    {
+        return new ComputerCase(
+        DimensionsOfCase,
+        DimensionsOfGpu,
+        SupportedMotherboards);
+    }
+
+    public ComputerCase SetCaseName(string name)
+    {
+        ComputerCase caseClone = Clone();
+
+        caseClone.Name = name;
+
+        return caseClone;
+    }
+
+    public ComputerCase SetCaseDimensions(Dimensions caseDimensions)
+    {
+        ComputerCase caseClone = Clone();
+
+        caseClone.DimensionsOfCase = caseDimensions;
+
+        return caseClone;
+    }
+
+    public ComputerCase SetCaseGpuDimensions(Dimensions gpuDimensions)
+    {
+        ComputerCase caseClone = Clone();
+
+        caseClone.DimensionsOfGpu = gpuDimensions;
+
+        return caseClone;
+    }
+
+    public ComputerCase SetCaseSupportedMotherboards(IList<MotherboardFormFactor> supportedMotherboards)
+    {
+        ComputerCase caseClone = Clone();
+
+        caseClone.SupportedMotherboards = supportedMotherboards;
+
+        return caseClone;
+    }
 }

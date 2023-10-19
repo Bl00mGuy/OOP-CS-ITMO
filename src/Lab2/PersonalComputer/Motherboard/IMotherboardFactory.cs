@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard;
 
 public interface IMotherboardFactory
 {
-    IMotherboard CreateMotherboard(ICpu socket, int countOfPciExpressPorts, int countOfSataPorts, IChipset chipset, IRam ddr, int countOfRamPorts, MotherboardFormFactor formFactor, IBiOs bios);
+    IMotherboard CreateMotherboard(ICpu socket, int countOfPciExpressPorts, int countOfSataPorts, MotherboardChipset chipset, DdrVersion ddr, int countOfRamPorts, MotherboardFormFactor formFactor, MotherboardBios bios);
 }

@@ -10,13 +10,67 @@ public class SolidStateDrive : ISsd
         PowerConsumption = powerConsumption;
     }
 
-    public DriveConnectionType ConnectionType { get; }
+    public string? Name { get; private set; }
 
-    public int Capacity { get; }
+    public DriveConnectionType ConnectionType { get; private set; }
 
-    public int MaxSpeed { get; }
+    public int Capacity { get; private set; }
 
-    public int PowerConsumption { get; }
+    public int MaxSpeed { get; private set; }
 
-    public string? Name { get; }
+    public int PowerConsumption { get; private set; }
+
+    public SolidStateDrive Clone()
+    {
+        return new SolidStateDrive(
+            ConnectionType,
+            Capacity,
+            MaxSpeed,
+            PowerConsumption);
+    }
+
+    public SolidStateDrive SetSsdName(string name)
+    {
+        SolidStateDrive ssdClone = Clone();
+
+        ssdClone.Name = name;
+
+        return ssdClone;
+    }
+
+    public SolidStateDrive SetSsdConnectionType(DriveConnectionType connectionType)
+    {
+        SolidStateDrive ssdClone = Clone();
+
+        ssdClone.ConnectionType = connectionType;
+
+        return ssdClone;
+    }
+
+    public SolidStateDrive SetSsdCapacity(int capacity)
+    {
+        SolidStateDrive ssdClone = Clone();
+
+        ssdClone.Capacity = capacity;
+
+        return ssdClone;
+    }
+
+    public SolidStateDrive SetSsdMaxSpeed(int maxSpeed)
+    {
+        SolidStateDrive ssdClone = Clone();
+
+        ssdClone.MaxSpeed = maxSpeed;
+
+        return ssdClone;
+    }
+
+    public SolidStateDrive SetSsdPowerConsumption(int powerConsumption)
+    {
+        SolidStateDrive ssdClone = Clone();
+
+        ssdClone.PowerConsumption = powerConsumption;
+
+        return ssdClone;
+    }
 }

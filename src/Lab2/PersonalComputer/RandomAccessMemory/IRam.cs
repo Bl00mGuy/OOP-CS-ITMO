@@ -6,6 +6,7 @@ public interface IRam : IComponent
 {
     int NumberOfRamPads { get; }
     int MemorySize { get; }
+    DdrVersion DdrVersion { get; }
     int DdrFrequency { get; }
     RamFormFactor FormFactor { get; }
     int PowerConsumption { get; }

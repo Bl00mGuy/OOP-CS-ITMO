@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit.Sockets;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.GraphicsProcessingUnit;
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard;
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard.BiOs;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.PowerSupply;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Storage;
@@ -11,7 +14,20 @@ public class ShopComponentsDatabase
 {
     // Const
     private const int FirstGpuWidth = 155;
+    private const int SecondGpuWidth = 175;
     private const int FirstGpuHeight = 130;
+    private const int SecondGpuHeight = 150;
+    private const int FirstPossibleDdrFrequency = 2400;
+    private const int SecondPossibleDdrFrequency = 3200;
+    private const int ThirdPossibleDdrFrequency = 5600;
+    private const int FirstMotherboardBiosVersion = 1;
+    private const string DefaultCpuName = "Motherboard Socket Initialization";
+    private const int DefaultCpuNumberOfCores = 0;
+    private const int DefaultCpuCoresFrequency = 0;
+    private const bool DefaultCpuHasIntegratedGraphics = false;
+    private const int DefaultCpuMemoryFrequency = 0;
+    private const int DefaultCpuThermalDesignPower = 0;
+    private const int DefaultCpuPowerConsumption = 0;
 
     private readonly ICollection<IComponent> _computerComponents = new List<IComponent>();
 
@@ -48,7 +64,7 @@ public class ShopComponentsDatabase
 
     // Second GPU
     private readonly string _secondGpuName = "RTX 4090";
-    private readonly Dimensions _secondGpuDimensions = new(FirstGpuWidth, FirstGpuHeight);
+    private readonly Dimensions _secondGpuDimensions = new(SecondGpuWidth, SecondGpuHeight);
     private readonly int _secondGpuMemory = 24;
     private readonly int _secondGpuChipFrequency = 2235;
     private readonly int _secondGpuPowerConsumption = 1175;
@@ -73,6 +89,7 @@ public class ShopComponentsDatabase
     // DDR3 DIMM
     private readonly int _firstDdrNumberOfPads = 2;
     private readonly int _firstDdrMemorySize = 16;
+    private readonly DdrVersion _firstDdrVersion = new Ddr3();
     private readonly int _firstDdrFrequency = 1600;
     private readonly RamFormFactor _firstDdrRamFormFactor = new DimmFormFactor();
     private readonly int _firstDdrPowerConsumption = 12;
@@ -80,6 +97,7 @@ public class ShopComponentsDatabase
     // DDR4 DIMM
     private readonly int _secondDdrNumberOfPads = 2;
     private readonly int _secondDdrMemorySize = 16;
+    private readonly DdrVersion _secondDdrVersion = new Ddr4();
     private readonly int _secondDdrFrequency = 3200;
     private readonly RamFormFactor _secondDdrRamFormFactor = new DimmFormFactor();
     private readonly int _secondDdrPowerConsumption = 14;
@@ -87,12 +105,58 @@ public class ShopComponentsDatabase
     // DDR5 DIMM
     private readonly int _thirdDdrNumberOfPads = 2;
     private readonly int _thirdDdrMemorySize = 16;
+    private readonly DdrVersion _thirdDdrVersion = new Ddr5();
     private readonly int _thirdDdrFrequency = 5600;
     private readonly RamFormFactor _thirdDdrRamFormFactor = new DimmFormFactor();
     private readonly int _thirdDdrPowerConsumption = 16;
 
+    // DDR3 SODIMM
+    private readonly int _fourthDdrNumberOfPads = 2;
+    private readonly int _fourthDdrMemorySize = 16;
+    private readonly DdrVersion _fourthDdrVersion = new Ddr3();
+    private readonly int _fourthDdrFrequency = 1600;
+    private readonly RamFormFactor _fourthDdrRamFormFactor = new SoDimmFormFactor();
+    private readonly int _fourthDdrPowerConsumption = 12;
+
+    // DDR4 SODIMM
+    private readonly int _fifthDdrNumberOfPads = 2;
+    private readonly int _fifthDdrMemorySize = 16;
+    private readonly DdrVersion _fifthDdrVersion = new Ddr4();
+    private readonly int _fifthDdrFrequency = 3200;
+    private readonly RamFormFactor _fifthDdrRamFormFactor = new SoDimmFormFactor();
+    private readonly int _fifthDdrPowerConsumption = 14;
+
+    // DDR5 SODIMM
+    private readonly int _sixthDdrNumberOfPads = 2;
+    private readonly int _sixthDdrMemorySize = 16;
+    private readonly DdrVersion _sixthDdrVersion = new Ddr5();
+    private readonly int _sixthDdrFrequency = 5600;
+    private readonly RamFormFactor _sixthDdrRamFormFactor = new SoDimmFormFactor();
+    private readonly int _sixthDdrPowerConsumption = 16;
+
     // Power Supply
     private readonly int _firstPowerSupplyPeakLoad = 650;
+
+    // Motherboard AM4
+    private readonly int _firstMotherboardCountOfPciExpressPorts = 2;
+    private readonly int _firstMotherboardCountOfSataPorts = 2;
+    private readonly DdrVersion _firstMotherboardDdrVersion = new Ddr4();
+    private readonly int _firstMotherboardCountOfRamPorts = 4;
+    private readonly MotherboardFormFactor _firstMotherboardFormFactor = MotherboardFormFactor.MicroAtx;
+
+    // Motherboard Lga1700
+    private readonly int _secondMotherboardCountOfPciExpressPorts = 4;
+    private readonly int _secondMotherboardCountOfSataPorts = 6;
+    private readonly DdrVersion _secondMotherboardDdrVersion = new Ddr5();
+    private readonly int _secondMotherboardCountOfRamPorts = 8;
+    private readonly MotherboardFormFactor _secondMotherboardFormFactor = MotherboardFormFactor.MiniAtx;
+
+    // Motherboard Lga1366
+    private readonly int _thirdMotherboardCountOfPciExpressPorts = 6;
+    private readonly int _thirdMotherboardCountOfSataPorts = 6;
+    private readonly DdrVersion _thirdMotherboardDdrVersion = new Ddr3();
+    private readonly int _thirdMotherboardCountOfRamPorts = 4;
+    private readonly MotherboardFormFactor _thirdMotherboardFormFactor = MotherboardFormFactor.Atx;
 
     public ShopComponentsDatabase()
     {
@@ -106,8 +170,22 @@ public class ShopComponentsDatabase
             _firstCpuThermalDesignPower,
             _firstCpuPowerConsumption));
 
+        IList<int> firstMotherboardPossibleDdrFrequency = new List<int> { SecondPossibleDdrFrequency };
+        var firstMotherboardChipset = new MotherboardChipset(firstMotherboardPossibleDdrFrequency);
+        IList<string> firstMotherboardBiosSupportedCpu = new List<string> { "Ryzen 5 3600" };
+        var firstMotherboardBios = new MotherboardBios(FirstMotherboardBiosVersion, firstMotherboardBiosSupportedCpu);
+        _computerComponents.Add(new ComputerMotherboard(
+            new Am4(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption),
+            _firstMotherboardCountOfPciExpressPorts,
+            _firstMotherboardCountOfSataPorts,
+            firstMotherboardChipset,
+            _firstMotherboardDdrVersion,
+            _firstMotherboardCountOfRamPorts,
+            _firstMotherboardFormFactor,
+            firstMotherboardBios));
+
         bool secondCpuHasIntegratedGraphics = true;
-        _computerComponents.Add(new Am4(
+        _computerComponents.Add(new Lga1700(
             _secondCpuName,
             _secondCpuNumberOfCores,
             _secondCpuCoresFrequency,
@@ -116,8 +194,22 @@ public class ShopComponentsDatabase
             _secondCpuThermalDesignPower,
             _secondCpuPowerConsumption));
 
+        IList<int> secondMotherboardPossibleDdrFrequency = new List<int> { ThirdPossibleDdrFrequency };
+        var secondMotherboardChipset = new MotherboardChipset(secondMotherboardPossibleDdrFrequency);
+        IList<string> secondMotherboardBiosSupportedCpu = new List<string> { "Ryzen 5 3600" };
+        var secondMotherboardBios = new MotherboardBios(FirstMotherboardBiosVersion, secondMotherboardBiosSupportedCpu);
+        _computerComponents.Add(new ComputerMotherboard(
+            new Lga1700(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption),
+            _secondMotherboardCountOfPciExpressPorts,
+            _secondMotherboardCountOfSataPorts,
+            secondMotherboardChipset,
+            _secondMotherboardDdrVersion,
+            _secondMotherboardCountOfRamPorts,
+            _secondMotherboardFormFactor,
+            secondMotherboardBios));
+
         bool thirdCpuHasIntegratedGraphics = false;
-        _computerComponents.Add(new Am4(
+        _computerComponents.Add(new Lga1366(
             _thirdCpuName,
             _thirdCpuNumberOfCores,
             _thirdCpuCoresFrequency,
@@ -125,6 +217,20 @@ public class ShopComponentsDatabase
             _thirdCpuMemoryFrequency,
             _thirdCpuThermalDesignPower,
             _thirdCpuPowerConsumption));
+
+        IList<int> thirdMotherboardPossibleDdrFrequency = new List<int> { FirstPossibleDdrFrequency };
+        var thirdMotherboardChipset = new MotherboardChipset(thirdMotherboardPossibleDdrFrequency);
+        IList<string> thirdMotherboardBiosSupportedCpu = new List<string> { "Ryzen 5 3600" };
+        var thirdMotherboardBios = new MotherboardBios(FirstMotherboardBiosVersion, thirdMotherboardBiosSupportedCpu);
+        _computerComponents.Add(new ComputerMotherboard(
+            new Lga1700(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption),
+            _thirdMotherboardCountOfPciExpressPorts,
+            _thirdMotherboardCountOfSataPorts,
+            thirdMotherboardChipset,
+            _thirdMotherboardDdrVersion,
+            _thirdMotherboardCountOfRamPorts,
+            _thirdMotherboardFormFactor,
+            thirdMotherboardBios));
 
         _computerComponents.Add(new GpuPciExpressVersion3(
             _firstGpuName,
@@ -157,28 +263,65 @@ public class ShopComponentsDatabase
             _secondSsdMaxSpeed,
             _secondSsdPowerConsumption));
 
-        _computerComponents.Add(new Ddr3(
+        _computerComponents.Add(new Ram(
             _firstDdrNumberOfPads,
             _firstDdrMemorySize,
+            _firstDdrVersion,
             _firstDdrFrequency,
             _firstDdrRamFormFactor,
             _firstDdrPowerConsumption));
 
-        _computerComponents.Add(new Ddr4(
+        _computerComponents.Add(new Ram(
             _secondDdrNumberOfPads,
             _secondDdrMemorySize,
+            _secondDdrVersion,
             _secondDdrFrequency,
             _secondDdrRamFormFactor,
             _secondDdrPowerConsumption));
 
-        _computerComponents.Add(new Ddr5(
+        _computerComponents.Add(new Ram(
             _thirdDdrNumberOfPads,
             _thirdDdrMemorySize,
+            _thirdDdrVersion,
             _thirdDdrFrequency,
             _thirdDdrRamFormFactor,
             _thirdDdrPowerConsumption));
 
+        _computerComponents.Add(new Ram(
+            _fourthDdrNumberOfPads,
+            _fourthDdrMemorySize,
+            _fourthDdrVersion,
+            _fourthDdrFrequency,
+            _fourthDdrRamFormFactor,
+            _fourthDdrPowerConsumption));
+
+        _computerComponents.Add(new Ram(
+            _fifthDdrNumberOfPads,
+            _fifthDdrMemorySize,
+            _fifthDdrVersion,
+            _fifthDdrFrequency,
+            _fifthDdrRamFormFactor,
+            _fifthDdrPowerConsumption));
+
+        _computerComponents.Add(new Ram(
+            _sixthDdrNumberOfPads,
+            _sixthDdrMemorySize,
+            _sixthDdrVersion,
+            _sixthDdrFrequency,
+            _sixthDdrRamFormFactor,
+            _sixthDdrPowerConsumption));
+
         _computerComponents.Add(new PowerSupplyModel(
             _firstPowerSupplyPeakLoad));
+    }
+
+    public IComponent? Find(string name)
+    {
+        return _computerComponents.FirstOrDefault(x => x.Name == name);
+    }
+
+    public void Update(IComponent component)
+    {
+        _computerComponents.Add(component);
     }
 }

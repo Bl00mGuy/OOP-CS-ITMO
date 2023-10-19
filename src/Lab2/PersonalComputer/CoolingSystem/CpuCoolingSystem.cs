@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CoolingSystem;
 
 public class CpuCoolingSystem : ICoolingSystem
 {
-    public CpuCoolingSystem(Dimensions dimensions, IList<ICpuFactory> supportedSockets, int maxThermalDesignPower, int powerConsumption)
+    public CpuCoolingSystem(Dimensions dimensions, IList<ICpu> supportedSockets, int maxThermalDesignPower, int powerConsumption)
     {
         DimensionsOfCoolingSystem = dimensions;
         SupportedSockets = supportedSockets;
@@ -14,13 +14,58 @@ public class CpuCoolingSystem : ICoolingSystem
         PowerConsumption = powerConsumption;
     }
 
-    public Dimensions DimensionsOfCoolingSystem { get; }
+    public string? Name { get; private set; }
 
-    public IList<ICpuFactory> SupportedSockets { get; }
+    public Dimensions DimensionsOfCoolingSystem { get; private set; }
 
-    public int MaxThermalDesignPower { get; }
+    public IList<ICpu> SupportedSockets { get; private set; }
 
-    public int PowerConsumption { get; }
+    public int MaxThermalDesignPower { get; private set; }
 
-    public string? Name { get; }
+    public int PowerConsumption { get; private set; }
+
+    public CpuCoolingSystem Clone()
+    {
+        return new CpuCoolingSystem(
+        DimensionsOfCoolingSystem,
+        SupportedSockets,
+        MaxThermalDesignPower,
+        PowerConsumption);
+    }
+
+    public CpuCoolingSystem SetCoolingSystemDimensions(Dimensions coolingSystemDimensions)
+    {
+        CpuCoolingSystem coolingSystemClone = Clone();
+
+        coolingSystemClone.DimensionsOfCoolingSystem = coolingSystemDimensions;
+
+        return coolingSystemClone;
+    }
+
+    public CpuCoolingSystem SetCoolingSystemSupportedSockets(IList<ICpu> coolingSystemSupportedSockets)
+    {
+        CpuCoolingSystem coolingSystemClone = Clone();
+
+        coolingSystemClone.SupportedSockets = coolingSystemSupportedSockets;
+
+        return coolingSystemClone;
+    }
+
+    public CpuCoolingSystem SetCoolingSystemMaxThermalDesignPower(int coolingSystemMaxThermalDesignPower)
+    {
+        CpuCoolingSystem coolingSystemClone = Clone();
+
+        coolingSystemClone.MaxThermalDesignPower = coolingSystemMaxThermalDesignPower;
+
+        return coolingSystemClone;
+    }
+
+    public CpuCoolingSystem SetCoolingSystemPowerConsumption(int coolingSystemPowerConsumption)
+    {
+        CpuCoolingSystem coolingSystemClone = Clone();
+
+        coolingSystemClone.PowerConsumption = coolingSystemPowerConsumption;
+
+        return coolingSystemClone;
+    }
 }

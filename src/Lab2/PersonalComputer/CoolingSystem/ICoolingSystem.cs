@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CoolingSystem;
 public interface ICoolingSystem : IComponent
 {
     Dimensions DimensionsOfCoolingSystem { get; }
-    IList<ICpuFactory> SupportedSockets { get; }
+    IList<ICpu> SupportedSockets { get; }
     int MaxThermalDesignPower { get; }
     int PowerConsumption { get; }
 }
