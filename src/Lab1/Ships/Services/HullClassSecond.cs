@@ -4,14 +4,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 public class HullClassSecond : IHullStrength
 {
+    private const int InitialHullSafetyMargin = 1785;
+    private int _hullSafetyMargin = InitialHullSafetyMargin;
     private bool _isShipAlive = true;
-    private int HullSafetyMargin { get; set; } = 1785;
 
     public bool HullObstacle(int obstacleDamage)
     {
-        if (_isShipAlive && HullSafetyMargin > 0)
+        if (_isShipAlive && _hullSafetyMargin > 0)
         {
-            HullSafetyMargin -= obstacleDamage;
+            _hullSafetyMargin -= obstacleDamage;
 
             return true;
         }

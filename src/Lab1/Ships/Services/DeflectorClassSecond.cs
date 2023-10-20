@@ -4,12 +4,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Services;
 
 public class DeflectorClassSecond : Deflector
 {
+    private const int InitialDeflectorSafetyMargin = 2100;
     private bool _isDeflectorAlive = true;
 
     public DeflectorClassSecond(bool hasPhotonDeflectAddition)
         : base(hasPhotonDeflectAddition)
     {
-        DeflectorSafetyMargin = 2100;
+        DeflectorSafetyMargin = InitialDeflectorSafetyMargin;
     }
 
     public override bool DeflectObstacle(int obstacleDamage)
