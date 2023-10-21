@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit.Sockets;
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CoolingSystem;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.GraphicsProcessingUnit;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard.BiOs;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.PowerSupply;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Storage;
+using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.WiFi;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Services;
 
@@ -17,6 +20,10 @@ public class ShopComponentsDatabase
     private const int SecondGpuWidth = 175;
     private const int FirstGpuHeight = 130;
     private const int SecondGpuHeight = 150;
+    private const int CoolerHeight = 100;
+    private const int CoolerWidth = 86;
+    private const int CaseHeight = 984;
+    private const int CaseWidth = 939;
     private const int FirstPossibleDdrFrequency = 2400;
     private const int SecondPossibleDdrFrequency = 3200;
     private const int ThirdPossibleDdrFrequency = 5600;
@@ -90,6 +97,7 @@ public class ShopComponentsDatabase
     private readonly int _secondSsdPowerConsumption = 41;
 
     // DDR3 DIMM
+    private readonly string _firstDdrName = "GSkill AEGIS DDR3";
     private readonly int _firstDdrNumberOfPads = 2;
     private readonly int _firstDdrMemorySize = 16;
     private readonly DdrVersion _firstDdrVersion = new Ddr3();
@@ -98,6 +106,7 @@ public class ShopComponentsDatabase
     private readonly int _firstDdrPowerConsumption = 12;
 
     // DDR4 DIMM
+    private readonly string _secondDdrName = "GSkill AEGIS DDR4";
     private readonly int _secondDdrNumberOfPads = 2;
     private readonly int _secondDdrMemorySize = 16;
     private readonly DdrVersion _secondDdrVersion = new Ddr4();
@@ -106,6 +115,7 @@ public class ShopComponentsDatabase
     private readonly int _secondDdrPowerConsumption = 14;
 
     // DDR5 DIMM
+    private readonly string _thirdDdrName = "GSkill AEGIS DDR5";
     private readonly int _thirdDdrNumberOfPads = 2;
     private readonly int _thirdDdrMemorySize = 16;
     private readonly DdrVersion _thirdDdrVersion = new Ddr5();
@@ -114,6 +124,7 @@ public class ShopComponentsDatabase
     private readonly int _thirdDdrPowerConsumption = 16;
 
     // DDR3 SODIMM
+    private readonly string _fourthDdrName = "GSkill AEGIS DDR3 SODIMM";
     private readonly int _fourthDdrNumberOfPads = 2;
     private readonly int _fourthDdrMemorySize = 16;
     private readonly DdrVersion _fourthDdrVersion = new Ddr3();
@@ -122,6 +133,7 @@ public class ShopComponentsDatabase
     private readonly int _fourthDdrPowerConsumption = 12;
 
     // DDR4 SODIMM
+    private readonly string _fifthDdrName = "GSkill AEGIS DDR4 SODIMM";
     private readonly int _fifthDdrNumberOfPads = 2;
     private readonly int _fifthDdrMemorySize = 16;
     private readonly DdrVersion _fifthDdrVersion = new Ddr4();
@@ -130,6 +142,7 @@ public class ShopComponentsDatabase
     private readonly int _fifthDdrPowerConsumption = 14;
 
     // DDR5 SODIMM
+    private readonly string _sixthDdrName = "GSkill AEGIS DDR5 SODIMM";
     private readonly int _sixthDdrNumberOfPads = 2;
     private readonly int _sixthDdrMemorySize = 16;
     private readonly DdrVersion _sixthDdrVersion = new Ddr5();
@@ -138,9 +151,11 @@ public class ShopComponentsDatabase
     private readonly int _sixthDdrPowerConsumption = 16;
 
     // Power Supply
-    private readonly int _firstPowerSupplyPeakLoad = 650;
+    private readonly string _firstPowerSupplyName = "beQuiet 850";
+    private readonly int _firstPowerSupplyPeakLoad = 850;
 
     // Motherboard AM4
+    private readonly string _firstMotherboardName = "MSI B450 GAMING GIGA MEGA PLUS MAX";
     private readonly int _firstMotherboardCountOfPciExpressPorts = 2;
     private readonly int _firstMotherboardCountOfSataPorts = 2;
     private readonly DdrVersion _firstMotherboardDdrVersion = new Ddr4();
@@ -148,6 +163,7 @@ public class ShopComponentsDatabase
     private readonly MotherboardFormFactor _firstMotherboardFormFactor = MotherboardFormFactor.MicroAtx;
 
     // Motherboard Lga1700
+    private readonly string _secondMotherboardName = "ASUS X99 GAMING GIGA MEGA PLUS MAX";
     private readonly int _secondMotherboardCountOfPciExpressPorts = 4;
     private readonly int _secondMotherboardCountOfSataPorts = 6;
     private readonly DdrVersion _secondMotherboardDdrVersion = new Ddr5();
@@ -155,11 +171,34 @@ public class ShopComponentsDatabase
     private readonly MotherboardFormFactor _secondMotherboardFormFactor = MotherboardFormFactor.MiniAtx;
 
     // Motherboard Lga1366
+    private readonly string _thirdMotherboardName = "CHINA X999 GAMING BOARD";
     private readonly int _thirdMotherboardCountOfPciExpressPorts = 6;
     private readonly int _thirdMotherboardCountOfSataPorts = 6;
     private readonly DdrVersion _thirdMotherboardDdrVersion = new Ddr3();
     private readonly int _thirdMotherboardCountOfRamPorts = 4;
     private readonly MotherboardFormFactor _thirdMotherboardFormFactor = MotherboardFormFactor.Atx;
+
+    // First cooler
+    private readonly string _firstCoolerName = "Deepcool WB442";
+    private readonly Dimensions _firstCoolerDimensions = new Dimensions(CoolerWidth, CoolerHeight);
+    private readonly int _firstCoolerTdp = 50;
+    private readonly int _firstCoolerPowerConsumption = 10;
+
+    // Second cooler
+    private readonly string _secondCoolerName = "Deepcool XHD992";
+    private readonly Dimensions _secondCoolerDimensions = new Dimensions(CoolerWidth, CoolerHeight);
+    private readonly int _secondCoolerTdp = 350;
+    private readonly int _secondCoolerPowerConsumption = 12;
+
+    // Case
+    private readonly string _firstCaseName = "NZXT BBW32";
+    private readonly Dimensions _firstCaseDimensions = new Dimensions(CaseWidth, CaseHeight);
+    private readonly Dimensions _firstCaseGpuDimensions = new Dimensions(CaseWidth, CaseHeight);
+
+    private readonly string _firstWifiModuleName = "Intel Accelo Wifi Module";
+    private readonly int _firstWifiModuleVersion = 811;
+    private readonly bool _firstWifiModuleHasBluetooth = true;
+    private readonly int _firstWifiModulePowerConsumption = 4;
 
     public ShopComponentsDatabase()
     {
@@ -178,6 +217,7 @@ public class ShopComponentsDatabase
         IList<string> firstMotherboardBiosSupportedCpu = new List<string> { "Ryzen 5 3600" };
         var firstMotherboardBios = new MotherboardBios(FirstMotherboardBiosVersion, firstMotherboardBiosSupportedCpu);
         _computerComponents.Add(new ComputerMotherboard(
+            _firstMotherboardName,
             new Am4(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption),
             _firstMotherboardCountOfPciExpressPorts,
             _firstMotherboardCountOfSataPorts,
@@ -202,6 +242,7 @@ public class ShopComponentsDatabase
         IList<string> secondMotherboardBiosSupportedCpu = new List<string> { "Ryzen 5 3600" };
         var secondMotherboardBios = new MotherboardBios(FirstMotherboardBiosVersion, secondMotherboardBiosSupportedCpu);
         _computerComponents.Add(new ComputerMotherboard(
+            _secondMotherboardName,
             new Lga1700(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption),
             _secondMotherboardCountOfPciExpressPorts,
             _secondMotherboardCountOfSataPorts,
@@ -226,6 +267,7 @@ public class ShopComponentsDatabase
         IList<string> thirdMotherboardBiosSupportedCpu = new List<string> { "Ryzen 5 3600" };
         var thirdMotherboardBios = new MotherboardBios(FirstMotherboardBiosVersion, thirdMotherboardBiosSupportedCpu);
         _computerComponents.Add(new ComputerMotherboard(
+            _thirdMotherboardName,
             new Lga1700(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption),
             _thirdMotherboardCountOfPciExpressPorts,
             _thirdMotherboardCountOfSataPorts,
@@ -270,6 +312,7 @@ public class ShopComponentsDatabase
             _secondSsdPowerConsumption));
 
         _computerComponents.Add(new Ram(
+            _firstDdrName,
             _firstDdrNumberOfPads,
             _firstDdrMemorySize,
             _firstDdrVersion,
@@ -278,6 +321,7 @@ public class ShopComponentsDatabase
             _firstDdrPowerConsumption));
 
         _computerComponents.Add(new Ram(
+            _secondDdrName,
             _secondDdrNumberOfPads,
             _secondDdrMemorySize,
             _secondDdrVersion,
@@ -286,6 +330,7 @@ public class ShopComponentsDatabase
             _secondDdrPowerConsumption));
 
         _computerComponents.Add(new Ram(
+            _thirdDdrName,
             _thirdDdrNumberOfPads,
             _thirdDdrMemorySize,
             _thirdDdrVersion,
@@ -294,6 +339,7 @@ public class ShopComponentsDatabase
             _thirdDdrPowerConsumption));
 
         _computerComponents.Add(new Ram(
+            _fourthDdrName,
             _fourthDdrNumberOfPads,
             _fourthDdrMemorySize,
             _fourthDdrVersion,
@@ -302,6 +348,7 @@ public class ShopComponentsDatabase
             _fourthDdrPowerConsumption));
 
         _computerComponents.Add(new Ram(
+            _fifthDdrName,
             _fifthDdrNumberOfPads,
             _fifthDdrMemorySize,
             _fifthDdrVersion,
@@ -310,6 +357,7 @@ public class ShopComponentsDatabase
             _fifthDdrPowerConsumption));
 
         _computerComponents.Add(new Ram(
+            _sixthDdrName,
             _sixthDdrNumberOfPads,
             _sixthDdrMemorySize,
             _sixthDdrVersion,
@@ -318,7 +366,36 @@ public class ShopComponentsDatabase
             _sixthDdrPowerConsumption));
 
         _computerComponents.Add(new PowerSupplyModel(
+            _firstPowerSupplyName,
             _firstPowerSupplyPeakLoad));
+
+        var supportedCpus = new List<ICpu> { new Lga1700(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption), new Lga1366(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption), new Am4(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption), };
+        _computerComponents.Add(new CpuCoolingSystem(
+            _firstCoolerName,
+            _firstCoolerDimensions,
+            supportedCpus,
+            _firstCoolerTdp,
+            _firstCoolerPowerConsumption));
+
+        _computerComponents.Add(new CpuCoolingSystem(
+            _secondCoolerName,
+            _secondCoolerDimensions,
+            supportedCpus,
+            _secondCoolerTdp,
+            _secondCoolerPowerConsumption));
+
+        var caseSuppotedMotherboardFormFactor = new List<MotherboardFormFactor> { MotherboardFormFactor.Atx, MotherboardFormFactor.MicroAtx, MotherboardFormFactor.MiniAtx };
+        _computerComponents.Add(new ComputerCase.ComputerCase(
+            _firstCaseName,
+            _firstCaseDimensions,
+            _firstCaseGpuDimensions,
+            caseSuppotedMotherboardFormFactor));
+
+        _computerComponents.Add(new WiFiAdapterPciExpressVersion3(
+            _firstWifiModuleName,
+            _firstWifiModuleVersion,
+            _firstWifiModuleHasBluetooth,
+            _firstWifiModulePowerConsumption));
     }
 
     public IComponent? Find(string name)

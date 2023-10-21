@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
-public class FirstTest
+public class ThirdTest
 {
     public static IEnumerable<object[]> TestParameters()
     {

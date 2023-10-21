@@ -31,4 +31,6 @@ public interface IComputerBuilder
     IComputerBuilder WithPowerSupply(IPowerSupply powerSupply);
 
     IComputerBuilder WithWifi(IWiFi wifi);
+
+    Computer Build();
 }
