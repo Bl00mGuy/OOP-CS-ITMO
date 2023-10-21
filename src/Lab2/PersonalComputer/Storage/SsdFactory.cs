@@ -4,7 +4,7 @@ public class SsdFactory : IStorageFactory
 {
     public ISsd CreateSsd(string? name, DriveConnectionType connectionType, int capacity, int maxSpeed, int powerConsumption)
     {
-        return new SolidStateDrive(connectionType, capacity, maxSpeed, powerConsumption);
+        return new SolidStateDrive(name, connectionType, capacity, maxSpeed, powerConsumption);
     }
 
     public IHdd? CreateHdd(string? name, int capacity, int spindleSpeed, int powerConsumption)

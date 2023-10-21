@@ -2,8 +2,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Storage;
 
 public class SolidStateDrive : ISsd
 {
-    public SolidStateDrive(DriveConnectionType connectionType, int capacity, int maxSpeed, int powerConsumption)
+    public SolidStateDrive(string? name, DriveConnectionType connectionType, int capacity, int maxSpeed, int powerConsumption)
     {
+        Name = name;
         ConnectionType = connectionType;
         Capacity = capacity;
         MaxSpeed = maxSpeed;
@@ -23,6 +24,7 @@ public class SolidStateDrive : ISsd
     public SolidStateDrive Clone()
     {
         return new SolidStateDrive(
+            Name,
             ConnectionType,
             Capacity,
             MaxSpeed,

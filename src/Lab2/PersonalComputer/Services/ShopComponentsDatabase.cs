@@ -70,17 +70,20 @@ public class ShopComponentsDatabase
     private readonly int _secondGpuPowerConsumption = 1175;
 
     // HDD
+    private readonly string _firstHddName = "Seagate BarraCuda";
     private readonly int _firstHddCapacity = 2000;
     private readonly int _firstHddSpindleSpeed = 7200;
     private readonly int _firstHddPowerConsumption = 34;
 
     // Sata SSD
+    private readonly string _firstSsdName = "Samsung 870 EVO";
     private readonly DriveConnectionType _firstSsdConnectionType = new SataConnectionType();
     private readonly int _firstSsdCapacity = 512;
     private readonly int _firstSsdMaxSpeed = 239;
     private readonly int _firstSsdPowerConsumption = 39;
 
     // PCI-E SSD
+    private readonly string _secondSsdName = "Samsung 980 PRO";
     private readonly DriveConnectionType _secondSsdConnectionType = new PciExpressConnectionType();
     private readonly int _secondSsdCapacity = 1024;
     private readonly int _secondSsdMaxSpeed = 241;
@@ -247,17 +250,20 @@ public class ShopComponentsDatabase
             _secondGpuPowerConsumption));
 
         _computerComponents.Add(new HardDiskDrive(
+            _firstHddName,
             _firstHddCapacity,
             _firstHddSpindleSpeed,
             _firstHddPowerConsumption));
 
         _computerComponents.Add(new SolidStateDrive(
+            _firstSsdName,
             _firstSsdConnectionType,
             _firstSsdCapacity,
             _firstSsdMaxSpeed,
             _firstSsdPowerConsumption));
 
         _computerComponents.Add(new SolidStateDrive(
+            _secondSsdName,
             _secondSsdConnectionType,
             _secondSsdCapacity,
             _secondSsdMaxSpeed,
