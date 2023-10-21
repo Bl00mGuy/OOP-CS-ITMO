@@ -12,7 +12,7 @@ public class FirstTest
         var database = new Repository();
 
         IComponent? cpu = database.FindComponent("Xeon X5690");
-        IComponent? ddr = database.FindComponent()
+        IComponent? ddr = database.FindComponent();
 
         yield return new object[] { cpu }
     }
