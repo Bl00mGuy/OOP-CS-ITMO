@@ -9,9 +9,11 @@ public class ComputerValidationAnalysis
     private bool _getSupportedCpu;
     private bool _getSupportedDdrFrequency;
     private bool _getSupportedCaseFormFactor;
+    private ValidationResult _initialResult;
 
     public ComputerValidationAnalysis(Computer computer)
     {
+        _initialResult = new ValidationResult(true, AnalizatorStatus.Valid, RecommendationStatus.Absent);
         ValidationResult result = ValidateComputer(computer);
         IsValid = result.Valid;
         Status = result.Status;
@@ -22,65 +24,59 @@ public class ComputerValidationAnalysis
 
     private ValidationResult ValidateComputer(Computer computer)
     {
-        var totalResult = new ValidationResult(true, AnalizatorStatus.Valid);
-
-        if (computer is null)
-        {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingComputer);
-            return result;
-        }
+        const RecommendationStatus withoutRecommendation = RecommendationStatus.Absent;
 
         if (computer.ComputerCpu is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingCpu);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingCpu, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerMotherboard is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingMotherboard);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingMotherboard, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerCoolingSystem is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingCoolingSystem);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingCoolingSystem, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerDdr is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingDdr);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingDdr, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerGpu is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingGpu);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingGpu, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerSsd is null && computer.ComputerHdd is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingStorage);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingStorage, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerCase is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingCase);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingCase, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerPowerSupply is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingPowerSupply);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingPowerSupply, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerWiFi is null)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingWifi);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingWifi, withoutRecommendation);
             return result;
         }
 
@@ -94,7 +90,7 @@ public class ComputerValidationAnalysis
                 // Check tdp of cpu and tdp of cooling system
                 if (computer.ComputerCpu.ThermalDesignPower < computer.ComputerCoolingSystem.MaxThermalDesignPower)
                 {
-                    var result = new ValidationResult(false, AnalizatorStatus.InsufficientCoolingSystemTdp);
+                    var result = new ValidationResult(false, AnalizatorStatus.InsufficientCoolingSystemTdp, withoutRecommendation);
                     return result;
                 }
             }
@@ -102,14 +98,14 @@ public class ComputerValidationAnalysis
 
         if (_getSupportedCoolingSystemSocket is not true)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.MissingRequiredCoolingSystem);
+            var result = new ValidationResult(false, AnalizatorStatus.MissingRequiredCoolingSystem, withoutRecommendation);
             return result;
         }
 
         // Check case
         if (computer.ComputerCase.DimensionsOfGpu.Height < computer.ComputerGpu.DimensionsOfVideoCard.Height || computer.ComputerCase.DimensionsOfGpu.Width < computer.ComputerGpu.DimensionsOfVideoCard.Width)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.TooBigGpu);
+            var result = new ValidationResult(false, AnalizatorStatus.TooBigGpu, withoutRecommendation);
             return result;
         }
 
@@ -123,25 +119,14 @@ public class ComputerValidationAnalysis
 
         if (_getSupportedCaseFormFactor is not true)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.InaccessibleCaseFormFactor);
+            var result = new ValidationResult(false, AnalizatorStatus.InaccessibleCaseFormFactor, withoutRecommendation);
             return result;
-        }
-
-        // Check power supply
-        if (computer.ComputerPowerSupply.PeakLoad < (computer.ComputerCpu.PowerConsumption + computer.ComputerGpu.PowerConsumption + computer.ComputerDdr.PowerConsumption + computer.ComputerWiFi.PowerConsumption + computer.ComputerCoolingSystem.PowerConsumption))
-        {
-            var result = new ValidationResult(false, AnalizatorStatus.InsufficientPowerSupply);
-            return result;
-        }
-        else
-        {
-            totalResult.SetRecommendedStatus(AnalizatorStatus.ExcessPowerSupply);
         }
 
         // Check cpu and motherboard
         if (computer.ComputerCpu != computer.ComputerMotherboard.Socket)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.IncompatibleCpuSocket);
+            var result = new ValidationResult(false, AnalizatorStatus.IncompatibleCpuSocket, withoutRecommendation);
             return result;
         }
 
@@ -155,14 +140,14 @@ public class ComputerValidationAnalysis
 
         if (_getSupportedCpu is not true)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.IncompatibleCpuSocket);
+            var result = new ValidationResult(false, AnalizatorStatus.IncompatibleCpuSocket, withoutRecommendation);
             return result;
         }
 
         // Check ddr
         if (computer.ComputerMotherboard.RequiredDdrVersion != computer.ComputerDdr.DdrVersion)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.IncompatibleDdrVersion);
+            var result = new ValidationResult(false, AnalizatorStatus.IncompatibleDdrVersion, withoutRecommendation);
             return result;
         }
 
@@ -176,16 +161,27 @@ public class ComputerValidationAnalysis
 
         if (_getSupportedDdrFrequency is not true)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.InaccessibleDdrFrequency);
+            var result = new ValidationResult(false, AnalizatorStatus.InaccessibleDdrFrequency, withoutRecommendation);
             return result;
         }
 
         if (computer.ComputerDdr.DdrFrequency != computer.ComputerCpu.SupportedMemoryFrequencies)
         {
-            var result = new ValidationResult(false, AnalizatorStatus.InaccessibleDdrFrequency);
+            var result = new ValidationResult(false, AnalizatorStatus.InaccessibleDdrFrequency, withoutRecommendation);
             return result;
         }
 
-        return totalResult;
+        // Check power supply
+        if (computer.ComputerPowerSupply.PeakLoad < (computer.ComputerCpu.PowerConsumption + computer.ComputerGpu.PowerConsumption + computer.ComputerDdr.PowerConsumption + computer.ComputerWiFi.PowerConsumption + computer.ComputerCoolingSystem.PowerConsumption))
+        {
+            var result = new ValidationResult(false, AnalizatorStatus.InsufficientPowerSupply, withoutRecommendation);
+            return result;
+        }
+        else
+        {
+            _initialResult = new ValidationResult(true, AnalizatorStatus.Valid, RecommendationStatus.ExcessPowerSupply);
+        }
+
+        return _initialResult;
     }
 }

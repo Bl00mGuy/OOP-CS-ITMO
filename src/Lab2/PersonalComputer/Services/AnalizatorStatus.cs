@@ -23,5 +23,4 @@ public enum AnalizatorStatus
     IncompatibleCpuSocket,
     IncompatibleDdrVersion,
     InaccessibleDdrFrequency,
-    ExcessPowerSupply,
 }
