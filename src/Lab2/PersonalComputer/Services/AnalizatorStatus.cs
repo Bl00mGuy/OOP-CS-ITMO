@@ -15,4 +15,13 @@ public enum AnalizatorStatus
     MissingCase,
     MissingPowerSupply,
     MissingWifi,
+    InsufficientCoolingSystemTdp,
+    MissingRequiredCoolingSystem,
+    TooBigGpu,
+    InaccessibleCaseFormFactor,
+    InsufficientPowerSupply,
+    IncompatibleCpuSocket,
+    IncompatibleDdrVersion,
+    InaccessibleDdrFrequency,
+    ExcessPowerSupply,
 }
