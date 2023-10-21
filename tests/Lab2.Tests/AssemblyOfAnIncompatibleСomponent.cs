@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
-public class FourthTest
+public class AssemblyOfAnIncompatibleСomponent
 {
     public static IEnumerable<object[]> TestParameters()
     {
