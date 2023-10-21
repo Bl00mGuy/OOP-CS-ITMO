@@ -6,8 +6,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.ComputerCase;
 
 public class ComputerCase : ICase
 {
-    public ComputerCase(Dimensions caseDimensions, Dimensions gpuDimensions, IList<MotherboardFormFactor> supportedMotherboards)
+    public ComputerCase(string? name, Dimensions caseDimensions, Dimensions gpuDimensions, IList<MotherboardFormFactor> supportedMotherboards)
     {
+        Name = name;
         DimensionsOfCase = caseDimensions;
         DimensionsOfGpu = gpuDimensions;
         SupportedMotherboards = supportedMotherboards;
@@ -21,9 +22,10 @@ public class ComputerCase : ICase
     public ComputerCase Clone()
     {
         return new ComputerCase(
-        DimensionsOfCase,
-        DimensionsOfGpu,
-        SupportedMotherboards);
+            Name,
+            DimensionsOfCase,
+            DimensionsOfGpu,
+            SupportedMotherboards);
     }
 
     public ComputerCase SetCaseName(string name)

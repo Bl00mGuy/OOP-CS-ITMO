@@ -2,8 +2,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.PowerSupply;
 
 public class PowerSupplyModel : IPowerSupply
 {
-    public PowerSupplyModel(int peakLoad)
+    public PowerSupplyModel(string? name, int peakLoad)
     {
+        Name = name;
         PeakLoad = peakLoad;
     }
 
@@ -13,6 +14,7 @@ public class PowerSupplyModel : IPowerSupply
     public PowerSupplyModel Clone()
     {
         return new PowerSupplyModel(
+            Name,
             PeakLoad);
     }
 

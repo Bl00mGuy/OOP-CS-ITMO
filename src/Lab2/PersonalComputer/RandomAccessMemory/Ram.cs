@@ -2,8 +2,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemor
 
 public class Ram : IRam
 {
-    public Ram(int numberOfRamPads, int memorySize, DdrVersion ddrVersion, int ddrFrequency, RamFormFactor formFactor, int powerConsumption)
+    public Ram(string? name, int numberOfRamPads, int memorySize, DdrVersion ddrVersion, int ddrFrequency, RamFormFactor formFactor, int powerConsumption)
     {
+        Name = name;
         NumberOfRamPads = numberOfRamPads;
         MemorySize = memorySize;
         DdrVersion = ddrVersion;
@@ -23,6 +24,7 @@ public class Ram : IRam
     public Ram Clone()
     {
         return new Ram(
+            Name,
             NumberOfRamPads,
             MemorySize,
             DdrVersion,

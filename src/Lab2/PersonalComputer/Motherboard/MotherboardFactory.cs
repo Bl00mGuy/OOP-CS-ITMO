@@ -6,8 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard;
 
 public class MotherboardFactory : IMotherboardFactory
 {
-    public IMotherboard CreateMotherboard(ICpu socket, int countOfPciExpressPorts, int countOfSataPorts, MotherboardChipset chipset, DdrVersion ddr, int countOfRamPorts, MotherboardFormFactor formFactor, MotherboardBios bios)
+    public IMotherboard CreateMotherboard(string? name, ICpu socket, int countOfPciExpressPorts, int countOfSataPorts, MotherboardChipset chipset, DdrVersion ddr, int countOfRamPorts, MotherboardFormFactor formFactor, MotherboardBios bios)
     {
-        return new ComputerMotherboard(socket, countOfPciExpressPorts, countOfSataPorts, chipset, ddr, countOfRamPorts, formFactor, bios);
+        return new ComputerMotherboard(name, socket, countOfPciExpressPorts, countOfSataPorts, chipset, ddr, countOfRamPorts, formFactor, bios);
     }
 }

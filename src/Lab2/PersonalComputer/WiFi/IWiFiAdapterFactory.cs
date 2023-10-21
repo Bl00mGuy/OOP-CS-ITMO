@@ -2,5 +2,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.WiFi;
 
 public interface IWiFiAdapterFactory
 {
-    IWiFi CreateWiFiAdapter(int wifiStandardVersion, bool hasBluetooth, int powerConsumption);
+    IWiFi CreateWiFiAdapter(string? name, int wifiStandardVersion, bool hasBluetooth, int powerConsumption);
 }

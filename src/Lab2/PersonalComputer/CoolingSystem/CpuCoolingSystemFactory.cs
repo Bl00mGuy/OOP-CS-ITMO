@@ -6,8 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CoolingSystem;
 
 public class CpuCoolingSystemFactory : ICoolingSystemFactory
 {
-    public ICoolingSystem CreateCoolingSystem(Dimensions dimensions, IList<ICpu> supportedSockets, int maxThermalDesignPower, int powerConsumption)
+    public ICoolingSystem CreateCoolingSystem(string? name, Dimensions dimensions, IList<ICpu> supportedSockets, int maxThermalDesignPower, int powerConsumption)
     {
-        return new CpuCoolingSystem(dimensions, supportedSockets, maxThermalDesignPower, powerConsumption);
+        return new CpuCoolingSystem(name, dimensions, supportedSockets, maxThermalDesignPower, powerConsumption);
     }
 }

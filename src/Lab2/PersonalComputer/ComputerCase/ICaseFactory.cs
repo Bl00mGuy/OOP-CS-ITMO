@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.ComputerCase;
 
 public interface ICaseFactory
 {
-    ICase CreateCase(Dimensions caseDimensions, Dimensions gpuDimensions, IList<MotherboardFormFactor> supportedMotherboards);
+    ICase CreateCase(string? name, Dimensions caseDimensions, Dimensions gpuDimensions, IList<MotherboardFormFactor> supportedMotherboards);
 }

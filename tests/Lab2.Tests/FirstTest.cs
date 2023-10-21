@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit;
-using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemory;
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Services;
 using Xunit;
 
@@ -12,8 +11,8 @@ public class FirstTest
     {
         var database = new Repository();
 
-        ICpu cpu = database.FindComponent("Ryzen 5 3600");
-        IRam 
+        IComponent? cpu = database.FindComponent("Xeon X5690");
+        IComponent? ddr = database.FindComponent()
 
         yield return new object[] { cpu }
     }

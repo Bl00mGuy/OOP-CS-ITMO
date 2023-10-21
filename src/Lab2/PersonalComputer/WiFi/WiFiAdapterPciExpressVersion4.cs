@@ -2,8 +2,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.WiFi;
 
 public class WiFiAdapterPciExpressVersion4 : IWiFi
 {
-    public WiFiAdapterPciExpressVersion4(int wifiStandardVersion, bool hasBluetooth, int powerConsumption)
+    public WiFiAdapterPciExpressVersion4(string? name, int wifiStandardVersion, bool hasBluetooth, int powerConsumption)
     {
+        Name = name;
         WifiStandardVersion = wifiStandardVersion;
         HasBluetooth = hasBluetooth;
         PowerConsumption = powerConsumption;
@@ -17,6 +18,7 @@ public class WiFiAdapterPciExpressVersion4 : IWiFi
     public WiFiAdapterPciExpressVersion4 Clone()
     {
         return new WiFiAdapterPciExpressVersion4(
+            Name,
             WifiStandardVersion,
             HasBluetooth,
             PowerConsumption);

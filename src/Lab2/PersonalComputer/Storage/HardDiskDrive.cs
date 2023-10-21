@@ -2,8 +2,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Storage;
 
 public class HardDiskDrive : IHdd
 {
-    public HardDiskDrive(int capacity, int spindleSpeed, int powerConsumption)
+    public HardDiskDrive(string? name, int capacity, int spindleSpeed, int powerConsumption)
     {
+        Name = name;
         Capacity = capacity;
         SpindleSpeed = spindleSpeed;
         PowerConsumption = powerConsumption;
@@ -20,9 +21,10 @@ public class HardDiskDrive : IHdd
     public HardDiskDrive Clone()
     {
         return new HardDiskDrive(
-        Capacity,
-        SpindleSpeed,
-        PowerConsumption);
+            Name,
+            Capacity,
+            SpindleSpeed,
+            PowerConsumption);
     }
 
     public HardDiskDrive SetHddName(string name)

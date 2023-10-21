@@ -6,8 +6,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CoolingSystem;
 
 public class CpuCoolingSystem : ICoolingSystem
 {
-    public CpuCoolingSystem(Dimensions dimensions, IList<ICpu> supportedSockets, int maxThermalDesignPower, int powerConsumption)
+    public CpuCoolingSystem(string? name, Dimensions dimensions, IList<ICpu> supportedSockets, int maxThermalDesignPower, int powerConsumption)
     {
+        Name = name;
         DimensionsOfCoolingSystem = dimensions;
         SupportedSockets = supportedSockets;
         MaxThermalDesignPower = maxThermalDesignPower;
@@ -27,10 +28,11 @@ public class CpuCoolingSystem : ICoolingSystem
     public CpuCoolingSystem Clone()
     {
         return new CpuCoolingSystem(
-        DimensionsOfCoolingSystem,
-        SupportedSockets,
-        MaxThermalDesignPower,
-        PowerConsumption);
+            Name,
+            DimensionsOfCoolingSystem,
+            SupportedSockets,
+            MaxThermalDesignPower,
+            PowerConsumption);
     }
 
     public CpuCoolingSystem SetCoolingSystemDimensions(Dimensions coolingSystemDimensions)

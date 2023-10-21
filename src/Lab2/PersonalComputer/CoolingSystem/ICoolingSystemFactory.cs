@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CoolingSystem;
 
 public interface ICoolingSystemFactory
 {
-    ICoolingSystem CreateCoolingSystem(Dimensions dimensions, IList<ICpu> supportedSockets, int maxThermalDesignPower, int powerConsumption);
+    ICoolingSystem CreateCoolingSystem(string? name, Dimensions dimensions, IList<ICpu> supportedSockets, int maxThermalDesignPower, int powerConsumption);
 }

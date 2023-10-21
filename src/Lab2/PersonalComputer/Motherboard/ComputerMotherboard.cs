@@ -6,8 +6,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard;
 
 public class ComputerMotherboard : IMotherboard
 {
-    public ComputerMotherboard(ICpu socket, int countOfPciExpressPorts, int countOfSataPorts, MotherboardChipset chipset, DdrVersion ddr, int countOfRamPorts, MotherboardFormFactor formFactor, MotherboardBios bios)
+    public ComputerMotherboard(string? name, ICpu socket, int countOfPciExpressPorts, int countOfSataPorts, MotherboardChipset chipset, DdrVersion ddr, int countOfRamPorts, MotherboardFormFactor formFactor, MotherboardBios bios)
     {
+        Name = name;
         Socket = socket;
         CountOfPciExpressPorts = countOfPciExpressPorts;
         CountOfSataPorts = countOfSataPorts;
@@ -31,6 +32,7 @@ public class ComputerMotherboard : IMotherboard
     public ComputerMotherboard Clone()
     {
         return new ComputerMotherboard(
+            Name,
             Socket,
             CountOfPciExpressPorts,
             CountOfSataPorts,
