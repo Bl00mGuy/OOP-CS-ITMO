@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
-public class FirstTest
+public class AssemblyWithCompatibleCoolerButWithInsufficientTdp
 {
     public static IEnumerable<object[]> TestParameters()
     {
@@ -71,7 +71,7 @@ public class FirstTest
         IComputerBuilder computerBuilder = new ComputerBuilder().WithCpu(cpu).WithMotherboard(motherboard).WithCoolingSystem(coolingSystem).WithDdr(ddr).WithGpu(gpu).WithSsd(ssd).WithHdd(hdd).WithCase(pcCase).WithPowerSupply(powerSupply).WithWifi(wifi);
         Computer computer = computerBuilder.Build();
 
-        const AnalizatorStatus expectedOutput = AnalizatorStatus.Valid;
+        const AnalizatorStatus expectedOutput = AnalizatorStatus.InsufficientCoolingSystemTdp;
 
         // Act
         var result = new ComputerValidationAnalysis(computer);

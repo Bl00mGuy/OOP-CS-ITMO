@@ -2,4 +2,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.RandomAccessMemor
 
 public abstract class DdrVersion
 {
+    public string? Name { get; }
 }

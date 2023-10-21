@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
-public class ThirdTest
+public class AssemblyFromExactlyCompatibleComponentsWithRecommendations
 {
     public static IEnumerable<object[]> TestParameters()
     {
@@ -21,7 +21,7 @@ public class ThirdTest
 
         IComponent? cpu = database.FindComponent("Xeon X5690");
         IComponent? motherboard = database.FindComponent("CHINA X999 GAMING BOARD");
-        IComponent? coolingSystem = database.FindComponent("Deepcool WB442");
+        IComponent? coolingSystem = database.FindComponent("Deepcool XHD992");
         IComponent? ddr = database.FindComponent("GSkill AEGIS DDR3");
         IComponent? gpu = database.FindComponent("GTX 1660");
         IComponent? ssd = database.FindComponent("Samsung 870 EVO");

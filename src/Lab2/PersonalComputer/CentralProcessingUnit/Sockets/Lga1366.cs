@@ -101,4 +101,10 @@ public class Lga1366 : ICpu
             ThermalDesignPower,
             PowerConsumption);
     }
+
+    public bool Equally(ICpu cpu)
+    {
+        if (cpu is not Lga1366) return false;
+        return true;
+    }
 }

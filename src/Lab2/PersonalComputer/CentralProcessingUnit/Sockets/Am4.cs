@@ -101,4 +101,10 @@ public class Am4 : ICpu
             ThermalDesignPower,
             PowerConsumption);
     }
+
+    public bool Equally(ICpu cpu)
+    {
+        if (cpu is not Am4) return false;
+        return true;
+    }
 }

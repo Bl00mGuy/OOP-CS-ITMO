@@ -101,4 +101,10 @@ public class Lga1700 : ICpu
             ThermalDesignPower,
             PowerConsumption);
     }
+
+    public bool Equally(ICpu cpu)
+    {
+        if (cpu is not Lga1700) return false;
+        return true;
+    }
 }

@@ -1,5 +1,4 @@
 using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.CentralProcessingUnit;
-using Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Motherboard;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PersonalComputer.Services;
 
@@ -8,7 +7,6 @@ public class ComputerValidationAnalysis
     private bool _getSupportedCoolingSystemSocket;
     private bool _getSupportedCpu;
     private bool _getSupportedDdrFrequency;
-    private bool _getSupportedCaseFormFactor;
     private ValidationResult _initialResult;
 
     public ComputerValidationAnalysis(Computer computer)
@@ -80,15 +78,22 @@ public class ComputerValidationAnalysis
             return result;
         }
 
+        // Check case
+        if (computer.ComputerCase.DimensionsOfGpu.Height < computer.ComputerGpu.DimensionsOfVideoCard.Height || computer.ComputerCase.DimensionsOfGpu.Width < computer.ComputerGpu.DimensionsOfVideoCard.Width)
+        {
+            var result = new ValidationResult(false, AnalizatorStatus.TooBigGpu, withoutRecommendation);
+            return result;
+        }
+
         // Check cooling system
         foreach (ICpu coolingSystemSocket in computer.ComputerCoolingSystem.SupportedSockets)
         {
-            if (computer.ComputerCpu == coolingSystemSocket)
+            if (computer.ComputerCpu.Equally(coolingSystemSocket))
             {
                 _getSupportedCoolingSystemSocket = true;
 
                 // Check tdp of cpu and tdp of cooling system
-                if (computer.ComputerCpu.ThermalDesignPower < computer.ComputerCoolingSystem.MaxThermalDesignPower)
+                if (computer.ComputerCpu.ThermalDesignPower > computer.ComputerCoolingSystem.MaxThermalDesignPower)
                 {
                     var result = new ValidationResult(false, AnalizatorStatus.InsufficientCoolingSystemTdp, withoutRecommendation);
                     return result;
@@ -102,29 +107,8 @@ public class ComputerValidationAnalysis
             return result;
         }
 
-        // Check case
-        if (computer.ComputerCase.DimensionsOfGpu.Height < computer.ComputerGpu.DimensionsOfVideoCard.Height || computer.ComputerCase.DimensionsOfGpu.Width < computer.ComputerGpu.DimensionsOfVideoCard.Width)
-        {
-            var result = new ValidationResult(false, AnalizatorStatus.TooBigGpu, withoutRecommendation);
-            return result;
-        }
-
-        foreach (MotherboardFormFactor formFactor in computer.ComputerCase.SupportedMotherboards)
-        {
-            if (computer.ComputerMotherboard.FormFactor == formFactor)
-            {
-                _getSupportedCaseFormFactor = true;
-            }
-        }
-
-        if (_getSupportedCaseFormFactor is not true)
-        {
-            var result = new ValidationResult(false, AnalizatorStatus.InaccessibleCaseFormFactor, withoutRecommendation);
-            return result;
-        }
-
         // Check cpu and motherboard
-        if (computer.ComputerCpu != computer.ComputerMotherboard.Socket)
+        if (computer.ComputerCpu.Equally(computer.ComputerMotherboard.Socket) is not true)
         {
             var result = new ValidationResult(false, AnalizatorStatus.IncompatibleCpuSocket, withoutRecommendation);
             return result;
@@ -132,7 +116,7 @@ public class ComputerValidationAnalysis
 
         foreach (string cpuName in computer.ComputerMotherboard.MotherboardBiOs.SupportedCpus)
         {
-            if (computer.ComputerCpu.Name == cpuName)
+            if (computer.ComputerCpu.Name is not null && computer.ComputerCpu.Name.Equals(cpuName, System.StringComparison.Ordinal))
             {
                 _getSupportedCpu = true;
             }
@@ -145,7 +129,7 @@ public class ComputerValidationAnalysis
         }
 
         // Check ddr
-        if (computer.ComputerMotherboard.RequiredDdrVersion != computer.ComputerDdr.DdrVersion)
+        if (computer.ComputerMotherboard.RequiredDdrVersion.Name != null && computer.ComputerMotherboard.RequiredDdrVersion.Name.Equals(computer.ComputerDdr.DdrVersion.Name, System.StringComparison.Ordinal))
         {
             var result = new ValidationResult(false, AnalizatorStatus.IncompatibleDdrVersion, withoutRecommendation);
             return result;

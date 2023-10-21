@@ -21,7 +21,7 @@ public class FourthTest
 
         IComponent? cpu = database.FindComponent("Ryzen 5 3600");
         IComponent? motherboard = database.FindComponent("CHINA X999 GAMING BOARD");
-        IComponent? coolingSystem = database.FindComponent("Deepcool WB442");
+        IComponent? coolingSystem = database.FindComponent("Deepcool XHD992");
         IComponent? ddr = database.FindComponent("GSkill AEGIS DDR3");
         IComponent? gpu = database.FindComponent("GTX 1660");
         IComponent? ssd = database.FindComponent("Samsung 870 EVO");

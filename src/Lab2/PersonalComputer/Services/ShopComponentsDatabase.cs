@@ -24,7 +24,7 @@ public class ShopComponentsDatabase
     private const int CoolerWidth = 86;
     private const int CaseHeight = 984;
     private const int CaseWidth = 939;
-    private const int FirstPossibleDdrFrequency = 2400;
+    private const int FirstPossibleDdrFrequency = 1600;
     private const int SecondPossibleDdrFrequency = 3200;
     private const int ThirdPossibleDdrFrequency = 5600;
     private const int FirstMotherboardBiosVersion = 1;
@@ -181,7 +181,7 @@ public class ShopComponentsDatabase
     // First cooler
     private readonly string _firstCoolerName = "Deepcool WB442";
     private readonly Dimensions _firstCoolerDimensions = new Dimensions(CoolerWidth, CoolerHeight);
-    private readonly int _firstCoolerTdp = 50;
+    private readonly int _firstCoolerTdp = 5;
     private readonly int _firstCoolerPowerConsumption = 10;
 
     // Second cooler
@@ -239,7 +239,7 @@ public class ShopComponentsDatabase
 
         IList<int> secondMotherboardPossibleDdrFrequency = new List<int> { ThirdPossibleDdrFrequency };
         var secondMotherboardChipset = new MotherboardChipset(secondMotherboardPossibleDdrFrequency);
-        IList<string> secondMotherboardBiosSupportedCpu = new List<string> { "Ryzen 5 3600" };
+        IList<string> secondMotherboardBiosSupportedCpu = new List<string> { "Core i7-13700" };
         var secondMotherboardBios = new MotherboardBios(FirstMotherboardBiosVersion, secondMotherboardBiosSupportedCpu);
         _computerComponents.Add(new ComputerMotherboard(
             _secondMotherboardName,
@@ -264,11 +264,11 @@ public class ShopComponentsDatabase
 
         IList<int> thirdMotherboardPossibleDdrFrequency = new List<int> { FirstPossibleDdrFrequency };
         var thirdMotherboardChipset = new MotherboardChipset(thirdMotherboardPossibleDdrFrequency);
-        IList<string> thirdMotherboardBiosSupportedCpu = new List<string> { "Ryzen 5 3600" };
+        IList<string> thirdMotherboardBiosSupportedCpu = new List<string> { "Xeon X5690" };
         var thirdMotherboardBios = new MotherboardBios(FirstMotherboardBiosVersion, thirdMotherboardBiosSupportedCpu);
         _computerComponents.Add(new ComputerMotherboard(
             _thirdMotherboardName,
-            new Lga1700(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption),
+            new Lga1366(DefaultCpuName, DefaultCpuNumberOfCores, DefaultCpuCoresFrequency, DefaultCpuHasIntegratedGraphics, DefaultCpuMemoryFrequency, DefaultCpuThermalDesignPower, DefaultCpuPowerConsumption),
             _thirdMotherboardCountOfPciExpressPorts,
             _thirdMotherboardCountOfSataPorts,
             thirdMotherboardChipset,

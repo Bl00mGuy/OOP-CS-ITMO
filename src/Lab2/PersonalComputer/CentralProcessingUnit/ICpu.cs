@@ -10,4 +10,5 @@ public interface ICpu : IComponent
     int SupportedMemoryFrequencies { get; }
     int ThermalDesignPower { get; }
     int PowerConsumption { get; }
+    bool Equally(ICpu cpu);
 }
