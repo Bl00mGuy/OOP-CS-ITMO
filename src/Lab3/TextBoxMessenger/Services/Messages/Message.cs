@@ -6,22 +6,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages
 
 public class Message : IMessage
 {
-    public Message(ITitle title, IParagraph paragraph, MessageImportanceLevel importantLevel)
+    public Message(ITitle? title, IParagraph paragraph, MessageImportanceLevel importantLevel)
     {
         Title = title;
         Paragraph = paragraph;
-        ImportantLevel = importantLevel;
+        ImportanceLevel = importantLevel;
     }
 
-    public ITitle Title { get; }
+    public ITitle? Title { get; }
     public IParagraph Paragraph { get; }
-    public MessageImportanceLevel ImportantLevel { get; private set; }
+    public MessageImportanceLevel ImportanceLevel { get; private set; }
 
     public MessageResultType ChangeImportanceLevel(MessageImportanceLevel importanceLevel)
     {
-        if (ImportantLevel is not MessageImportanceLevel.Read)
+        if (ImportanceLevel is not MessageImportanceLevel.Read)
         {
-            ImportantLevel = importanceLevel;
+            ImportanceLevel = importanceLevel;
             return MessageResultType.Success;
         }
         else

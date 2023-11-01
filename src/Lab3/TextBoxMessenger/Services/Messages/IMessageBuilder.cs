@@ -3,7 +3,9 @@ using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages.Tit
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 
-public interface IMessageFactory
+public interface IMessageBuilder
 {
-    IMessage CreateMessage(ITitle title, IParagraph paragraph, MessageImportanceLevel importantLevel);
+    IMessageBuilder WithTitle(ITitle title);
+    IMessageBuilder WithParagraph(IParagraph paragraph);
+    IMessageBuilder WithImportanceLevel(MessageImportanceLevel importanceLevel);
 }

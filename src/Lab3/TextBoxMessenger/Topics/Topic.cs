@@ -5,18 +5,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Topics;
 
 public class Topic : ITopic
 {
-    private readonly IRecipient _recipient;
-
-    public Topic(string name, IRecipient recipient)
+    public Topic(string name)
     {
         Name = name;
-        _recipient = recipient;
     }
 
     public string Name { get; }
 
-    public void SendMessage(IMessage message)
+    public void SendMessage(IMessage message, MessageImportanceLevel filterImportanceLevel, IRecipient recipient)
     {
-        _recipient.ReceiveMessage(message);
+        if (message is null || recipient is null) return;
+        if (message.ImportanceLevel == filterImportanceLevel)
+        {
+            recipient.ReceiveMessage(message, filterImportanceLoevel);
+        }
     }
 }

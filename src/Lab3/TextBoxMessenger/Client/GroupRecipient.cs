@@ -8,11 +8,11 @@ public class GroupRecipient : IRecipient
 {
     private readonly IList<IRecipient> _recipients = new List<IRecipient>();
 
-    public void ReceiveMessage(IMessage message)
+    public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
     {
         foreach (IRecipient recipient in _recipients)
         {
-            recipient.ReceiveMessage(message);
+            recipient.ReceiveMessage(message, filterImportanceLevel);
         }
     }
 
