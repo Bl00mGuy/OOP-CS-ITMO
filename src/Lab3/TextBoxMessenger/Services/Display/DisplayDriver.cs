@@ -5,6 +5,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Display;
 
 public class DisplayDriver : IDisplayDriver
 {
+    private readonly Display _display;
+    private ConsoleColor _color = ConsoleColor.White;
+
+    public DisplayDriver(Display display)
+    {
+        _display = display;
+    }
+
+    public static IMessage? CleanMessage()
+    {
+        return null;
+    }
+
     public void ClearDisplay()
     {
         Console.Clear();
@@ -12,18 +25,11 @@ public class DisplayDriver : IDisplayDriver
 
     public void SetTextColor(ConsoleColor color)
     {
-        Console.ForegroundColor = color;
+        _color = color;
     }
 
-    public void DisplayText(IMessage data)
+    public void DisplayText()
     {
-        if (data is null) return;
-
-        if (data.Title is not null)
-        {
-            Console.WriteLine(data.Title);
-        }
-
-        Console.WriteLine(data.Paragraph);
+        _display.DisplayMessage(_color);
     }
 }

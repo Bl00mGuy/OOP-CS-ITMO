@@ -17,7 +17,7 @@ public class Topic : ITopic
         if (message is null || recipient is null) return;
         if (message.ImportanceLevel == filterImportanceLevel)
         {
-            recipient.ReceiveMessage(message, filterImportanceLoevel);
+            recipient.ReceiveMessage(message, filterImportanceLevel);
         }
     }
 }

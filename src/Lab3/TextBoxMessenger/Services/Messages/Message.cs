@@ -6,10 +6,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages
 
 public class Message : IMessage
 {
-    public Message(ITitle? title, IParagraph paragraph, MessageImportanceLevel importantLevel)
+    public Message(string? title, string paragraph, MessageImportanceLevel importantLevel)
     {
-        Title = title;
-        Paragraph = paragraph;
+        if (title is not null)
+        {
+            Title = new MessageTitle(title);
+        }
+
+        Paragraph = new MessageParagraph(paragraph);
         ImportanceLevel = importantLevel;
     }
 
