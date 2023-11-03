@@ -12,7 +12,7 @@ public class MarkUserMessageInTheReadStatusAsReadAnErrorShouldReturn
     {
         string messageTitle = "NO WAY";
         string messageParagraph = "02:39";
-        MessageImportanceLevel messageImportanceLevel = MessageImportanceLevel.Low;
+        MessageImportanceLevel messageImportanceLevel = MessageImportanceLevel.High;
         int firstUserId = 334788;
         string firstUserName = "Michael Ganin";
         yield return new object[] { firstUserId, firstUserName, messageTitle, messageParagraph, messageImportanceLevel };
@@ -20,16 +20,17 @@ public class MarkUserMessageInTheReadStatusAsReadAnErrorShouldReturn
 
     [Theory]
     [MemberData(nameof(TestParameters))]
-    public void Test(int firstUserId, string firstUserName, string messageTitle, string messageParagraph, MessageImportanceLevel messageImportanceLevel)
+    public void Test(int firstUserId, string firstUserName, string firstMessageTitle, string firstMessageParagraph, MessageImportanceLevel firstMessageImportanceLevel)
     {
         var user = new UserAddresse(firstUserId, firstUserName);
-        var message = new Message(messageTitle, messageParagraph, messageImportanceLevel);
+        IMessageBuilder firstMessageBuilder = new MessageBuilder().WithTitle(firstMessageTitle).WithParagraph(firstMessageParagraph).WithImportanceLevel(firstMessageImportanceLevel);
+        Message firstMessage = firstMessageBuilder.Build();
 
-        user.ReceiveMessage(message, message.ImportanceLevel);
-        user.ReadMessage(message); // the first time it was marked "Read"
-        MessageResultType asset = user.ReadMessage(message); // the second time tried to mark it as "Read"
+        user.ReceiveMessage(firstMessage, firstMessage.ImportanceLevel);
+        user.ReadMessage(firstMessage); // the first time it was marked "Read"
+        MessageResultType act = user.ReadMessage(firstMessage); // the second time tried to mark it as "Read"
 
         const MessageResultType expected = MessageResultType.MessageAlreadyRead;
-        Assert.Equal(expected, asset);
+        Assert.Equal(expected, act);
     }
 }

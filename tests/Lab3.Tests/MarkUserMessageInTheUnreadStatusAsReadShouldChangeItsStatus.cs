@@ -11,24 +11,25 @@ public class MarkUserMessageInTheUnreadStatusAsReadShouldChangeItsStatus
     public static IEnumerable<object[]> TestParameters()
     {
         string messageTitle = "NO WAY";
-        string messageParagraph = "02:39";
+        string messageParagraph = "⚠️ MESSAGE FROM MICHAEL GANIN ACCOUNTS ⚠️";
         MessageImportanceLevel messageImportanceLevel = MessageImportanceLevel.High;
-        int firstUserId = 334770;
-        string firstUserName = "Emin";
+        int firstUserId = 334788;
+        string firstUserName = "241 BY\n\n@GAYSHAMANIN\n@GAYSHAMANIN241\n@MISHAGANIN\n@ITMO_MISHA\n@GISHAMANIN\n@MISHAGANIN241\n@mishaganinchannel\n@GAYSHAMANIN239\n\nAnd new:\n@itmo_giant_cock\n\nAnd not created @mishelganina";
         yield return new object[] { firstUserId, firstUserName, messageTitle, messageParagraph, messageImportanceLevel };
     }
 
     [Theory]
     [MemberData(nameof(TestParameters))]
-    public void Test(int firstUserId, string firstUserName, string messageTitle, string messageParagraph, MessageImportanceLevel messageImportanceLevel)
+    public void Test(int firstUserId, string firstUserName, string firstMessageTitle, string firstMessageParagraph, MessageImportanceLevel firstMessageImportanceLevel)
     {
         var user = new UserAddresse(firstUserId, firstUserName);
-        var message = new Message(messageTitle, messageParagraph, messageImportanceLevel);
+        IMessageBuilder firstMessageBuilder = new MessageBuilder().WithTitle(firstMessageTitle).WithParagraph(firstMessageParagraph).WithImportanceLevel(firstMessageImportanceLevel);
+        Message firstMessage = firstMessageBuilder.Build();
 
-        user.ReceiveMessage(message, message.ImportanceLevel);
-        MessageResultType asset = user.ReadMessage(message);
+        user.ReceiveMessage(firstMessage, firstMessage.ImportanceLevel);
+        MessageResultType act = user.ReadMessage(firstMessage);
 
         const MessageResultType expected = MessageResultType.Success;
-        Assert.Equal(expected, asset);
+        Assert.Equal(expected, act);
     }
 }

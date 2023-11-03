@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Exceptio
 public class MessageWithoutBodyException : Exception
 {
     public MessageWithoutBodyException()
-        : base("Можешь пом»енять")
+        : base("Message should contain a paragraph!")
     {
     }
 

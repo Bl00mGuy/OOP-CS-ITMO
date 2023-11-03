@@ -11,7 +11,7 @@ public class Display : IRecipient
     public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
     {
         if (message is null) return;
-        _message = DisplayDriver.CleanMessage();
+        _message = null;
         if (message.ImportanceLevel == filterImportanceLevel)
         {
             _message = message;

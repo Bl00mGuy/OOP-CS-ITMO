@@ -5,4 +5,5 @@ public interface IMessageBuilder
     IMessageBuilder WithTitle(string title);
     IMessageBuilder WithParagraph(string paragraph);
     IMessageBuilder WithImportanceLevel(MessageImportanceLevel importanceLevel);
+    Message Build();
 }

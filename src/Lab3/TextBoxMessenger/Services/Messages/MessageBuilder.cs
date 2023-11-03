@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Exceptions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 
-public abstract class MessageBuilder : IMessageBuilder
+public class MessageBuilder : IMessageBuilder
 {
     private string? _title;
     private string? _paragraph;

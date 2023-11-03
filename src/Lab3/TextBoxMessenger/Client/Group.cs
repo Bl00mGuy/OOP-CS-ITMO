@@ -4,9 +4,14 @@ using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Recipient;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Client;
 
-public class GroupRecipient : IRecipient
+public class Group : IRecipient
 {
-    private readonly IList<IRecipient> _recipients = new List<IRecipient>();
+    private readonly IList<IRecipient> _recipients;
+
+    public Group()
+    {
+        _recipients = new List<IRecipient>();
+    }
 
     public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
     {

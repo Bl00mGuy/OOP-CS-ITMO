@@ -13,17 +13,17 @@ public class GroupAddresse : IRecipient
     public GroupAddresse()
     {
         _logger = new MessageLogger();
-        _group = new GroupRecipient();
+        _group = new Group();
     }
 
     public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
     {
-        ((GroupRecipient)_group).ReceiveMessage(message, filterImportanceLevel);
+        ((Group)_group).ReceiveMessage(message, filterImportanceLevel);
         _logger.LogMessage(_group, message);
     }
 
     public void AddRecipient(IRecipient recipient)
     {
-        ((GroupRecipient)_group).AddRecipient(recipient);
+        ((Group)_group).AddRecipient(recipient);
     }
 }

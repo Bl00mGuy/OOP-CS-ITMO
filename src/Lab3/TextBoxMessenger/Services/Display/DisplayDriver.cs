@@ -1,5 +1,4 @@
 using System;
-using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Display;
 
@@ -11,11 +10,6 @@ public class DisplayDriver : IDisplayDriver
     public DisplayDriver(Display display)
     {
         _display = display;
-    }
-
-    public static IMessage? CleanMessage()
-    {
-        return null;
     }
 
     public void ClearDisplay()

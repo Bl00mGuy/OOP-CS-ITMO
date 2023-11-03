@@ -20,15 +20,16 @@ public class ReceiveMessageStatusUnread
 
     [Theory]
     [MemberData(nameof(TestParameters))]
-    public void Test(int firstUserId, string firstUserName, string messageTitle, string messageParagraph, MessageImportanceLevel messageImportanceLevel)
+    public void Test(int firstUserId, string firstUserName, string firstMessageTitle, string firstMessageParagraph, MessageImportanceLevel firstMessageImportanceLevel)
     {
         var user = new UserAddresse(firstUserId, firstUserName);
-        var message = new Message(messageTitle, messageParagraph, messageImportanceLevel);
+        IMessageBuilder firstMessageBuilder = new MessageBuilder().WithTitle(firstMessageTitle).WithParagraph(firstMessageParagraph).WithImportanceLevel(firstMessageImportanceLevel);
+        Message firstMessage = firstMessageBuilder.Build();
 
-        user.ReceiveMessage(message, message.ImportanceLevel);
-        MessageResultType asset = user.ReadMessage(message);
+        user.ReceiveMessage(firstMessage, firstMessage.ImportanceLevel);
+        MessageResultType act = user.ReadMessage(firstMessage);
 
         const MessageResultType expected = MessageResultType.Success;
-        Assert.Equal(expected, asset);
+        Assert.Equal(expected, act);
     }
 }
