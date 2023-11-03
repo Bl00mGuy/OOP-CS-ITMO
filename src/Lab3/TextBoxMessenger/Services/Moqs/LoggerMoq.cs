@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Log;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
+using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.MessagesLogger;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Recipient;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Moqs;

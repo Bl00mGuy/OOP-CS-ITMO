@@ -1,7 +1,7 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Display;
-using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Log;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
+using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.MessagesLogger;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Recipient;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
