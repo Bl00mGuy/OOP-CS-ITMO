@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Client;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 using Xunit;
@@ -12,8 +13,8 @@ public class ReceiveMessageStatusUnread
         string messageTitle = "NO WAY";
         string messageParagraph = "02:39";
         MessageImportanceLevel messageImportanceLevel = MessageImportanceLevel.High;
-        int firstUserId = 334788;
-        string firstUserName = "Michael Ganin";
+        int firstUserId = 367967;
+        string firstUserName = "Dmitry Vasilkov";
         yield return new object[] { firstUserId, firstUserName, messageTitle, messageParagraph, messageImportanceLevel };
     }
 
@@ -21,7 +22,7 @@ public class ReceiveMessageStatusUnread
     [MemberData(nameof(TestParameters))]
     public void Test(int firstUserId, string firstUserName, string messageTitle, string messageParagraph, MessageImportanceLevel messageImportanceLevel)
     {
-        var user = new User(firstUserId, firstUserName);
+        var user = new UserAddresse(firstUserId, firstUserName);
         var message = new Message(messageTitle, messageParagraph, messageImportanceLevel);
 
         user.ReceiveMessage(message, message.ImportanceLevel);

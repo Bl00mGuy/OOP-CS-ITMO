@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Client;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 using Xunit;
@@ -21,7 +22,7 @@ public class MarkUserMessageInTheReadStatusAsReadAnErrorShouldReturn
     [MemberData(nameof(TestParameters))]
     public void Test(int firstUserId, string firstUserName, string messageTitle, string messageParagraph, MessageImportanceLevel messageImportanceLevel)
     {
-        var user = new User(firstUserId, firstUserName);
+        var user = new UserAddresse(firstUserId, firstUserName);
         var message = new Message(messageTitle, messageParagraph, messageImportanceLevel);
 
         user.ReceiveMessage(message, message.ImportanceLevel);

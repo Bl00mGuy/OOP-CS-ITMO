@@ -7,4 +7,5 @@ public interface IUser
     int Id { get; }
     string Name { get; }
     void SendMessage(IMessage message, MessageImportanceLevel filterImportanceLevel, User user);
+    MessageResultType ReadMessage(Message message);
 }

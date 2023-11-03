@@ -2,7 +2,7 @@ using System;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Recipient;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Messenger;
+namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Messengers;
 
 public class Messenger : IRecipient
 {
