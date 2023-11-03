@@ -11,7 +11,7 @@ public class MarkUserMessageInTheUnreadStatusAsReadShouldChangeItsStatus
     public static IEnumerable<object[]> TestParameters()
     {
         string messageTitle = "NO WAY";
-        string messageParagraph = "⚠️ MESSAGE FROM MICHAEL GANIN ACCOUNTS ⚠️";
+        string messageParagraph = "MESSAGE FROM MICHAEL GANIN ACCOUNTS";
         MessageImportanceLevel messageImportanceLevel = MessageImportanceLevel.High;
         int firstUserId = 334788;
         string firstUserName = "241 BY\n\n@GAYSHAMANIN\n@GAYSHAMANIN241\n@MISHAGANIN\n@ITMO_MISHA\n@GISHAMANIN\n@MISHAGANIN241\n@mishaganinchannel\n@GAYSHAMANIN239\n\nAnd new:\n@itmo_giant_cock\n\nAnd not created @mishelganina";
