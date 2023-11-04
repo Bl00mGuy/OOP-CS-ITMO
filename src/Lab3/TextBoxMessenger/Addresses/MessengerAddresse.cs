@@ -8,17 +8,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 public class MessengerAddresse : IRecipient
 {
     private readonly MessageLogger _logger;
-    private readonly IRecipient _messenger;
+    private readonly Messenger _messenger;
 
-    public MessengerAddresse()
+    public MessengerAddresse(MessageLogger logger)
     {
-        _logger = new MessageLogger();
+        _logger = logger;
         _messenger = new Messenger();
     }
 
-    public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
+    public void ReceiveMessage(IMessage message)
     {
-        ((Messenger)_messenger).ReceiveMessage(message, filterImportanceLevel);
+        _messenger.ReceiveMessage(message);
         _logger.LogMessage(_messenger, message);
     }
 }

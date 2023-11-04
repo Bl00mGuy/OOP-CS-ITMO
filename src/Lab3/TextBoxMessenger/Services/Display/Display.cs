@@ -8,14 +8,11 @@ public class Display : IRecipient
 {
     private IMessage? _message;
 
-    public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
+    public void ReceiveMessage(IMessage message)
     {
         if (message is null) return;
         _message = null;
-        if (message.ImportanceLevel == filterImportanceLevel)
-        {
-            _message = message;
-        }
+        _message = message;
     }
 
     public void DisplayMessage(ConsoleColor color)

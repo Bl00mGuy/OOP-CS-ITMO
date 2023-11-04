@@ -18,10 +18,10 @@ public class User : IUser, IRecipient
     public int Id { get; }
     public string Name { get; }
 
-    public void SendMessage(IMessage message, MessageImportanceLevel filterImportanceLevel, User user)
+    public void SendMessage(IMessage message, User user)
     {
         if (user is null) return;
-        user.ReceiveMessage(message, filterImportanceLevel);
+        user.ReceiveMessage(message);
     }
 
     public MessageResultType ReadMessage(Message message)
@@ -30,10 +30,9 @@ public class User : IUser, IRecipient
         return _messages.Contains(message) ? message.ChangeImportanceLevel(MessageImportanceLevel.Read) : MessageResultType.MessageNotFound;
     }
 
-    public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
+    public void ReceiveMessage(IMessage message)
     {
         if (message is null) return;
-        if (message.ImportanceLevel == filterImportanceLevel)
         {
             _messages.Add(message);
         }

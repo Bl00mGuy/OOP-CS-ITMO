@@ -8,22 +8,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 public class GroupAddresse : IRecipient
 {
     private readonly MessageLogger _logger;
-    private readonly IRecipient _group;
+    private readonly Group _group;
 
-    public GroupAddresse()
+    public GroupAddresse(MessageLogger logger)
     {
-        _logger = new MessageLogger();
+        _logger = logger;
         _group = new Group();
     }
 
-    public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
+    public void ReceiveMessage(IMessage message)
     {
-        ((Group)_group).ReceiveMessage(message, filterImportanceLevel);
+        _group.ReceiveMessage(message);
         _logger.LogMessage(_group, message);
     }
 
     public void AddRecipient(IRecipient recipient)
     {
-        ((Group)_group).AddRecipient(recipient);
+        _group.AddRecipient(recipient);
     }
 }

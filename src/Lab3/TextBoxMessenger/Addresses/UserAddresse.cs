@@ -8,27 +8,37 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 public class UserAddresse : IRecipient
 {
     private readonly MessageLogger _logger;
-    private readonly IRecipient _user;
+    private readonly User _user;
+    private MessageImportanceLevel _filter;
 
-    public UserAddresse(int id, string name)
+    public UserAddresse(int id, string name, MessageLogger logger)
     {
-        _logger = new MessageLogger();
+        _logger = logger;
         _user = new User(id, name);
     }
 
-    public void SendMessage(IMessage message, MessageImportanceLevel filterImportanceLevel, User user)
+    public void SetFilterLevel(MessageImportanceLevel level)
     {
-        ((User)_user).SendMessage(message, filterImportanceLevel, user);
+        _filter = level;
     }
 
-    public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
+    public void SendMessage(IMessage message, User user)
     {
-        ((User)_user).ReceiveMessage(message, filterImportanceLevel);
-        _logger.LogMessage(_user, message);
+        _user.SendMessage(message, user);
+    }
+
+    public void ReceiveMessage(IMessage message)
+    {
+        if (message is null) return;
+        if (message.ImportanceLevel == _filter)
+        {
+            _user.ReceiveMessage(message);
+            _logger.LogMessage(_user, message);
+        }
     }
 
     public MessageResultType ReadMessage(Message message)
     {
-        return ((User)_user).ReadMessage(message);
+        return _user.ReadMessage(message);
     }
 }

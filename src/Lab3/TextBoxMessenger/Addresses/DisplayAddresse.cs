@@ -9,22 +9,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 public class DisplayAddresse : IRecipient
 {
     private readonly MessageLogger _logger;
-    private readonly IRecipient _display;
+    private readonly Display _display;
 
-    public DisplayAddresse()
+    public DisplayAddresse(MessageLogger logger)
     {
-        _logger = new MessageLogger();
+        _logger = logger;
         _display = new Display();
     }
 
-    public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
+    public void ReceiveMessage(IMessage message)
     {
-        ((Display)_display).ReceiveMessage(message, filterImportanceLevel);
+        _display.ReceiveMessage(message);
         _logger.LogMessage(_display, message);
     }
 
     public void DisplayMessage(ConsoleColor color)
     {
-        ((Display)_display).DisplayMessage(color);
+        _display.DisplayMessage(color);
     }
 }

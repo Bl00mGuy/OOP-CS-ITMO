@@ -12,12 +12,9 @@ public class Topic : ITopic
 
     public string Name { get; }
 
-    public void SendMessage(IMessage message, MessageImportanceLevel filterImportanceLevel, IRecipient recipient)
+    public void SendMessage(IMessage message, IRecipient recipient)
     {
         if (message is null || recipient is null) return;
-        if (message.ImportanceLevel == filterImportanceLevel)
-        {
-            recipient.ReceiveMessage(message, filterImportanceLevel);
-        }
+        recipient.ReceiveMessage(message);
     }
 }

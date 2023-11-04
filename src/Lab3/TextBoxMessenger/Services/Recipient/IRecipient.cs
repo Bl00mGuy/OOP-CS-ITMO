@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Recipien
 
 public interface IRecipient
 {
-    void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel);
+    void ReceiveMessage(IMessage message);
 }

@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.MessagesLogger;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Recipient;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Moqs;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Tests.Moqs;
 
 public class LoggerMoq : IMessageLogger
 {

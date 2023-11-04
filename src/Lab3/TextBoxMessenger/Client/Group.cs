@@ -13,11 +13,11 @@ public class Group : IRecipient
         _recipients = new List<IRecipient>();
     }
 
-    public void ReceiveMessage(IMessage message, MessageImportanceLevel filterImportanceLevel)
+    public void ReceiveMessage(IMessage message)
     {
         foreach (IRecipient recipient in _recipients)
         {
-            recipient.ReceiveMessage(message, filterImportanceLevel);
+            recipient.ReceiveMessage(message);
         }
     }
 

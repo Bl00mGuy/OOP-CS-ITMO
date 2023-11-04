@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Topics;
 public interface ITopic
 {
     string Name { get; }
-    void SendMessage(IMessage message, MessageImportanceLevel filterImportanceLevel, IRecipient recipient);
+    void SendMessage(IMessage message, IRecipient recipient);
 }

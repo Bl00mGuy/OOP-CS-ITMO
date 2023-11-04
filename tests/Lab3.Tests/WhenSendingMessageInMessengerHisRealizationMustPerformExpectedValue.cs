@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab3.Tests.Moqs;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
-using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Moqs;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
@@ -23,7 +23,7 @@ public class WhenSendingMessageInMessengerHisRealizationMustPerformExpectedValue
         IMessageBuilder firstMessageBuilder = new MessageBuilder().WithTitle(firstMessageTitle).WithParagraph(firstMessageParagraph).WithImportanceLevel(firstMessageImportanceLevel);
         Message firstMessage = firstMessageBuilder.Build();
 
-        firstMessenger.ReceiveMessage(firstMessage, firstMessage.ImportanceLevel);
+        firstMessenger.ReceiveMessage(firstMessage);
         string act = firstMessenger.MessengerOutput;
 
         const string expected = "";

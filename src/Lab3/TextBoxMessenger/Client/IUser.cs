@@ -6,6 +6,6 @@ public interface IUser
 {
     int Id { get; }
     string Name { get; }
-    void SendMessage(IMessage message, MessageImportanceLevel filterImportanceLevel, User user);
+    void SendMessage(IMessage message, User user);
     MessageResultType ReadMessage(Message message);
 }
