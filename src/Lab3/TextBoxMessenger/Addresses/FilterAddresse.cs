@@ -16,7 +16,6 @@ public class FilterAddresse : IRecipient
 
     public void ReceiveMessage(IMessage message)
     {
-        if (message is null) return;
         if (message.ImportanceLevel == _level)
         {
             _recipient.ReceiveMessage(message);
