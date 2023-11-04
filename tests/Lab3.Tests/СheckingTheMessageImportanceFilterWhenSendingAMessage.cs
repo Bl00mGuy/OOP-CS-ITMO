@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Tests.Moqs;
+using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 using Xunit;
 
@@ -25,14 +26,13 @@ public class СheckingTheMessageImportanceFilterWhenSendingAMessage
     public void Test(MessageImportanceLevel filter, int firstUserId, string firstUserName, string firstMessageTitle, string firstMessageParagraph, MessageImportanceLevel firstMessageImportanceLevel)
     {
         var logger = new LoggerMoq();
-        var firstUser = new UserAddresseMoq(firstUserId, firstUserName, logger);
-        firstUser.SetFilterLevel(filter);
+        var firstUser = new SecondLoggerAddresseMoq(new FilterAddresse(new UserAddresse(firstUserId, firstUserName), filter), logger);
         IMessageBuilder firstMessageBuilder = new MessageBuilder().WithTitle(firstMessageTitle).WithParagraph(firstMessageParagraph).WithImportanceLevel(firstMessageImportanceLevel);
         Message firstMessage = firstMessageBuilder.Build();
 
         bool act = firstUser.ReceiveMessage(firstMessage);
 
-        const bool expected = false;
+        const bool expected = true;
         Assert.Equal(expected, act);
     }
 }

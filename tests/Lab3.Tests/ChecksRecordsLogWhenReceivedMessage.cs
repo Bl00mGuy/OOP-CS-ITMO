@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Tests.Moqs;
+using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
 using Xunit;
 
@@ -22,10 +23,9 @@ public class ChecksRecordsLogWhenReceivedMessage
     public void Test(int firstUserId, string firstUserName, string firstMessageTitle, string firstMessageParagraph, MessageImportanceLevel firstMessageImportanceLevel)
     {
         var logger = new LoggerMoq();
-        var firstUser = new UserAddresseMoq(firstUserId, firstUserName, logger);
+        var firstUser = new LoggerAddresseMoq(new FilterAddresse(new UserAddresse(firstUserId, firstUserName), firstMessageImportanceLevel), logger);
         IMessageBuilder firstMessageBuilder = new MessageBuilder().WithTitle(firstMessageTitle).WithParagraph(firstMessageParagraph).WithImportanceLevel(firstMessageImportanceLevel);
         Message firstMessage = firstMessageBuilder.Build();
-        firstUser.SetFilterLevel(firstMessage.ImportanceLevel);
 
         firstUser.ReceiveMessage(firstMessage);
         bool act = firstUser.IsLoggerLogs();

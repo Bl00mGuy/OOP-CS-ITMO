@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Addresses;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Client;
 using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.Messages;
-using Itmo.ObjectOrientedProgramming.Lab3.TextBoxMessenger.Services.MessagesLogger;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests;
@@ -23,15 +22,13 @@ public class MarkUserMessageInTheReadStatusAsReadAnErrorShouldReturn
     [MemberData(nameof(TestParameters))]
     public void Test(int firstUserId, string firstUserName, string firstMessageTitle, string firstMessageParagraph, MessageImportanceLevel firstMessageImportanceLevel)
     {
-        var logger = new MessageLogger();
-        var user = new UserAddresse(firstUserId, firstUserName, logger);
+        var firstUser = new UserAddresse(firstUserId, firstUserName);
         IMessageBuilder firstMessageBuilder = new MessageBuilder().WithTitle(firstMessageTitle).WithParagraph(firstMessageParagraph).WithImportanceLevel(firstMessageImportanceLevel);
         Message firstMessage = firstMessageBuilder.Build();
-        user.SetFilterLevel(firstMessage.ImportanceLevel);
 
-        user.ReceiveMessage(firstMessage);
-        user.ReadMessage(firstMessage); // the first time it was marked "Read"
-        MessageResultType act = user.ReadMessage(firstMessage); // the second time tried to mark it as "Read"
+        firstUser.ReceiveMessage(firstMessage);
+        firstUser.ReadMessage(firstMessage); // the first time it was marked "Read"
+        MessageResultType act = firstUser.ReadMessage(firstMessage); // the second time tried to mark it as "Read"
 
         const MessageResultType expected = MessageResultType.MessageAlreadyRead;
         Assert.Equal(expected, act);
