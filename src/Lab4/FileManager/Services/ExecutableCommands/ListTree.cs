@@ -1,5 +1,5 @@
-using System;
 using System.IO;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.DisplayMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
 
@@ -9,10 +9,12 @@ public class ListTree : ICommands
     private const int InitialDepth = 3;
     private const int StartTraversalDepth = 0;
     private readonly string[] _tokens;
+    private readonly string _mode;
 
-    public ListTree(string[] tokens)
+    public ListTree(string[] tokens, string mode)
     {
         _tokens = tokens;
+        _mode = mode;
     }
 
     public void Execute(ref string path)
@@ -29,22 +31,27 @@ public class ListTree : ICommands
 
     private void TreeTraversal(string root, int maxDepth, int currentDepth)
     {
-        if (currentDepth > maxDepth)
+        if (_mode is "local")
         {
-            return;
-        }
+            var displayMode = new LocalDisplay();
 
-        string indent = new string(' ', currentDepth * 2);
-        Console.WriteLine($"{indent}[{Path.GetFileName(root)}]");
+            if (currentDepth > maxDepth)
+            {
+                return;
+            }
 
-        foreach (string directory in Directory.GetDirectories(root))
-        {
-            TreeTraversal(directory, maxDepth, currentDepth + 1);
-        }
+            string indent = new string(' ', currentDepth * 2);
+            displayMode.DisplayShow($"{indent}[{Path.GetFileName(root)}]");
 
-        foreach (string file in Directory.GetFiles(root))
-        {
-            Console.WriteLine($"{indent}  {Path.GetFileName(file)}");
+            foreach (string directory in Directory.GetDirectories(root))
+            {
+                TreeTraversal(directory, maxDepth, currentDepth + 1);
+            }
+
+            foreach (string file in Directory.GetFiles(root))
+            {
+                displayMode.DisplayShow($"{indent}  {Path.GetFileName(file)}");
+            }
         }
     }
 }

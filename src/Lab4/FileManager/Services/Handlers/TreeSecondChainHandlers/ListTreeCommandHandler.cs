@@ -13,7 +13,7 @@ public class ListTreeCommandHandler : CommandHandler
 
         if (tokens[CommandTypeParseIndex] is CommandType)
         {
-            return new ListTree(tokens);
+            return new ListTree(tokens, mode);
         }
         else
         {

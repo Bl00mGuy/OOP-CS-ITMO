@@ -17,7 +17,7 @@ public class CheckingTreeListRequest
         yield return new object[]
         {
             "tree list -d 4",
-            new ListTree("tree list -d 4".Split(' ')),
+            new ListTree("tree list -d 4".Split(' '), "local"),
         };
     }
 
