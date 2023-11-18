@@ -9,20 +9,15 @@ public abstract class DisconnectionCommandHandler : CommandHandler
 
     public override ICommands? HandleCommand(string command)
     {
-        if (command != null)
+        string[] tokens = command.Split(' ');
+
+        if (tokens[CommandTypeParseIndex] is CommandType)
         {
-            string[] tokens = command.Split(' ');
-
-            if (tokens[CommandTypeParseIndex] is CommandType)
-            {
-                return new Disconnect();
-            }
-            else
-            {
-                return NextHandler?.HandleCommand(command);
-            }
+            return new Disconnect();
         }
-
-        return null;
+        else
+        {
+            return NextHandler?.HandleCommand(command);
+        }
     }
 }

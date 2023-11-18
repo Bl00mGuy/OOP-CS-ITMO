@@ -1,4 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.DisplayMode;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.FileSecondChainHandlers;
 
@@ -9,20 +11,15 @@ public class CopyFileCommandHandler : CommandHandler
 
     public override ICommands? HandleCommand(string command)
     {
-        if (command != null)
+        string[] tokens = command.Split(' ');
+
+        if (tokens[CommandTypeParseIndex] is CommandType)
         {
-            string[] tokens = command.Split(' ');
-
-            if (tokens[CommandTypeParseIndex] is CommandType)
-            {
-                return new CopyFile(tokens);
-            }
-            else
-            {
-                return NextHandler?.HandleCommand(command);
-            }
+            return new CopyFile(tokens, new LocalModeCommandsExecution(), new LocalDisplay());
         }
-
-        return null;
+        else
+        {
+            return NextHandler?.HandleCommand(command);
+        }
     }
 }

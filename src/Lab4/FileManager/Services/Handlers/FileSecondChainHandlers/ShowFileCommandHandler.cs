@@ -1,5 +1,7 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.DisplayMode;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.FileSecondChainHandlers;
 
@@ -13,26 +15,19 @@ public class ShowFileCommandHandler : CommandHandler
 
     public override ICommands? HandleCommand(string command)
     {
-        if (command != null)
-        {
-            string[] tokens = command.Split(' ');
+        string[] tokens = command.Split(' ');
 
-            if (tokens[CommandTypeParseIndex] is CommandType)
+        if (tokens[CommandTypeParseIndex] is CommandType)
+        {
+            if (Array.IndexOf(tokens, CommandFlag) is not DoesntContainsIndex)
             {
-                if (Array.IndexOf(tokens, CommandFlag) is not DoesntContainsIndex)
+                if (Array.IndexOf(tokens, CommandFlagParameter) is not DoesntContainsIndex)
                 {
-                    if (Array.IndexOf(tokens, CommandFlagParameter) is not DoesntContainsIndex)
-                    {
-                        return new ShowFile(tokens);
-                    }
+                    return new ShowFile(tokens, new LocalModeCommandsExecution(), new LocalDisplay());
                 }
-            }
-            else
-            {
-                return NextHandler?.HandleCommand(command);
             }
         }
 
-        return null;
+        return NextHandler?.HandleCommand(command);
     }
 }

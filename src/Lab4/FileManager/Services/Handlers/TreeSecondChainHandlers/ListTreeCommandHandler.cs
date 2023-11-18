@@ -9,20 +9,15 @@ public class ListTreeCommandHandler : CommandHandler
 
     public override ICommands? HandleCommand(string command)
     {
-        if (command != null)
+        string[] tokens = command.Split(' ');
+
+        if (tokens[CommandTypeParseIndex] is CommandType)
         {
-            string[] tokens = command.Split(' ');
-
-            if (tokens[CommandTypeParseIndex] is CommandType)
-            {
-                return new ListTree(tokens);
-            }
-            else
-            {
-                return NextHandler?.HandleCommand(command);
-            }
+            return new ListTree(tokens);
         }
-
-        return null;
+        else
+        {
+            return NextHandler?.HandleCommand(command);
+        }
     }
 }

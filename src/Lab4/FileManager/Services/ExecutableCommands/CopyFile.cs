@@ -1,5 +1,6 @@
-using System;
 using System.IO;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.DisplayMode;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
 
@@ -7,11 +8,15 @@ public class CopyFile : ICommands
 {
     private const int SourcePathOfFileIndex = 2;
     private const int DestinationPathOfFileIndex = 3;
+    private readonly IExecuteMode _executeMode;
+    private readonly IDisplayMode _localDisplay;
     private readonly string[] _tokens;
 
-    public CopyFile(string[] tokens)
+    public CopyFile(string[] tokens, IExecuteMode mode, IDisplayMode localDisplay)
     {
         _tokens = tokens;
+        _executeMode = mode;
+        _localDisplay = localDisplay;
     }
 
     public void Execute(ref string path)
@@ -20,34 +25,34 @@ public class CopyFile : ICommands
         string fullPath = Path.Combine(sourcePath, path);
         string destinationPath = _tokens[DestinationPathOfFileIndex];
 
-        if (File.Exists(sourcePath))
+        if (_executeMode.Exists(sourcePath))
         {
             string fileName = Path.GetFileNameWithoutExtension(destinationPath);
             string fileExtension = Path.GetExtension(destinationPath);
 
-            if (File.Exists(destinationPath))
+            if (_executeMode.Exists(destinationPath))
             {
                 for (int i = 1; ; i++)
                 {
                     string newName = $"{fileName}_({i}){fileExtension}";
                     string newFileDestinationPath = Path.Combine(Path.GetDirectoryName(destinationPath) ?? string.Empty, newName);
 
-                    if (!File.Exists(newFileDestinationPath))
+                    if (!_executeMode.Exists(newFileDestinationPath))
                     {
-                        File.Copy(fullPath, newFileDestinationPath);
+                        _executeMode.Copy(fullPath, newFileDestinationPath);
                     }
                 }
             }
             else
             {
-                File.Copy(fullPath, destinationPath);
+                _executeMode.Copy(fullPath, destinationPath);
             }
 
-            Console.WriteLine($"Copied file from {sourcePath} to {destinationPath}");
+            _localDisplay.DisplayShow($"Copied file from {sourcePath} to {destinationPath}");
         }
         else
         {
-            Console.WriteLine($"File not found: {sourcePath}");
+            _localDisplay.DisplayShow($"File not found: {sourcePath}");
         }
     }
 }

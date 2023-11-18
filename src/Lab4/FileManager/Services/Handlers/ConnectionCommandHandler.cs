@@ -14,26 +14,19 @@ public class ConnectionCommandHandler : CommandHandler
 
     public override ICommands? HandleCommand(string command)
     {
-        if (command != null)
-        {
-            string[] tokens = command.Split(' ');
+        string[] tokens = command.Split(' ');
 
-            if (tokens[CommandTypeParseIndex] is CommandType)
+        if (tokens[CommandTypeParseIndex] is CommandType)
+        {
+            if (Array.IndexOf(tokens, CommandFlag) is not DoesntContainsIndex)
             {
-                if (Array.IndexOf(tokens, CommandFlag) is not DoesntContainsIndex)
+                if (Array.IndexOf(tokens, CommandFlagParameter) is not DoesntContainsIndex)
                 {
-                    if (Array.IndexOf(tokens, CommandFlagParameter) is not DoesntContainsIndex)
-                    {
-                        return new Connect(tokens[CommandPathParseIndex]);
-                    }
+                    return new Connect(tokens[CommandPathParseIndex]);
                 }
-            }
-            else
-            {
-                return NextHandler?.HandleCommand(command);
             }
         }
 
-        return null;
+        return NextHandler?.HandleCommand(command);
     }
 }

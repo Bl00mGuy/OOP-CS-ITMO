@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.DisplayMode;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.FileSecondChainHandlers;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.TreeSecondChainHandlers;
@@ -16,8 +18,8 @@ public class CheckingFileCopyRequest
     {
         yield return new object[]
         {
-            "file copy D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt D://241_DATABASE/ISy26_BANNED_ACCOUNTS/itmo_big_cock",
-            new CopyFile("file copy D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt D://241_DATABASE/ISy26_BANNED_ACCOUNTS/itmo_big_cock".Split(' ')),
+            "file copy D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt D://241_DATABASE/ISy26_BANNED_ACCOUNTS/itmo_big_cocfk",
+            new CopyFile("file copy D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt D://241_DATABASE/ISy26_BANNED_ACCOUNTS/itmo_big_cock".Split(' '), new LocalModeCommandsExecution(), new LocalDisplay()),
         };
     }
 

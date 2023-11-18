@@ -1,16 +1,21 @@
-using System;
 using System.IO;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.DisplayMode;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
 
 public class DeleteFile : ICommands
 {
     private const int FileForDeletePathIndex = 2;
+    private readonly IExecuteMode _executeMode;
+    private readonly IDisplayMode _displayMode;
     private readonly string[] _tokens;
 
-    public DeleteFile(string[] tokens)
+    public DeleteFile(string[] tokens, IExecuteMode mode, IDisplayMode displayMode)
     {
         _tokens = tokens;
+        _executeMode = mode;
+        _displayMode = displayMode;
     }
 
     public void Execute(ref string path)
@@ -18,14 +23,14 @@ public class DeleteFile : ICommands
         string file = _tokens[FileForDeletePathIndex];
         string fullPath = Path.Combine(file, path);
 
-        if (File.Exists(file))
+        if (_executeMode.Exists(file))
         {
-            File.Delete(fullPath);
-            Console.WriteLine($"Deleted file: {file}");
+            _executeMode.Delete(fullPath);
+            _displayMode.DisplayShow($"Deleted file: {file}");
         }
         else
         {
-            Console.WriteLine($"File not found: {file}");
+            _displayMode.DisplayShow($"File not found: {file}");
         }
     }
 }

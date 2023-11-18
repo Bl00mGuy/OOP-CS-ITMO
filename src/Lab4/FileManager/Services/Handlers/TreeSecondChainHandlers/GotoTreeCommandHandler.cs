@@ -10,20 +10,15 @@ public class GotoTreeCommandHandler : CommandHandler
 
     public override ICommands? HandleCommand(string command)
     {
-        if (command != null)
+        string[] tokens = command.Split(' ');
+
+        if (tokens[CommandTypeParseIndex] is CommandType)
         {
-            string[] tokens = command.Split(' ');
-
-            if (tokens[CommandTypeParseIndex] is CommandType)
-            {
-                return new GotoTree(tokens[CommandPathParseIndex]);
-            }
-            else
-            {
-                return NextHandler?.HandleCommand(command);
-            }
+            return new GotoTree(tokens[CommandPathParseIndex]);
         }
-
-        return null;
+        else
+        {
+            return NextHandler?.HandleCommand(command);
+        }
     }
 }
