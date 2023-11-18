@@ -7,8 +7,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager;
 
 public class Request
 {
+    private readonly ICommandHandler _commandHandler;
     private string? _path;
-    private ICommandHandler _commandHandler;
 
     public Request(ICommandHandler commandHandler)
     {
