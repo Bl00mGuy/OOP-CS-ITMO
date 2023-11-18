@@ -1,5 +1,6 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers;
 
@@ -12,7 +13,7 @@ public class ConnectionCommandHandler : CommandHandler
     private const string CommandFlag = "-m";
     private const string CommandFlagParameter = "local";
 
-    public override ICommands? HandleCommand(string command, string mode)
+    public override ICommands? HandleCommand(string command, IMode mode)
     {
         string[] tokens = command.Split(' ');
 

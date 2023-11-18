@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.FileSecondChainHandlers;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.TreeSecondChainHandlers;
@@ -17,7 +18,7 @@ public class CheckingFileDeleteRequest
         yield return new object[]
         {
             "file delete D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt",
-            new DeleteFile("file delete D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt".Split(' '), "local"),
+            new DeleteFile("file delete D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt".Split(' '), new LocalMode()),
         };
     }
 
@@ -40,7 +41,7 @@ public class CheckingFileDeleteRequest
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request, "local");
+        ICommands? parsedCommand = commandParser.Parsing(request, new LocalMode());
 
         var temp = (DeleteFile?)parsedCommand;
 

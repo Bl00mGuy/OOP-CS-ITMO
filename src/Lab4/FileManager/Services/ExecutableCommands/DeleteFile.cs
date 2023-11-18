@@ -1,5 +1,4 @@
 using System.IO;
-using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.DisplayMode;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
@@ -7,10 +6,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCom
 public class DeleteFile : ICommands
 {
     private const int FileForDeletePathIndex = 2;
-    private readonly string _mode;
+    private readonly IMode _mode;
     private readonly string[] _tokens;
 
-    public DeleteFile(string[] tokens, string mode)
+    public DeleteFile(string[] tokens, IMode mode)
     {
         _tokens = tokens;
         _mode = mode;
@@ -18,23 +17,17 @@ public class DeleteFile : ICommands
 
     public void Execute(ref string path)
     {
-        if (_mode is "local")
+        string file = _tokens[FileForDeletePathIndex];
+        string fullPath = Path.Combine(file, path);
+
+        if (_mode.Exists(file))
         {
-            var executeMode = new LocalModeCommandsExecution();
-            var displayMode = new LocalDisplay();
-
-            string file = _tokens[FileForDeletePathIndex];
-            string fullPath = Path.Combine(file, path);
-
-            if (executeMode.Exists(file))
-            {
-                executeMode.Delete(fullPath);
-                displayMode.DisplayShow($"Deleted file: {file}");
-            }
-            else
-            {
-                displayMode.DisplayShow($"File not found: {file}");
-            }
+            _mode.Delete(fullPath);
+            _mode.DisplayShow($"Deleted file: {file}");
+        }
+        else
+        {
+            _mode.DisplayShow($"File not found: {file}");
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.FileSecondChainHandlers;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.TreeSecondChainHandlers;
@@ -17,7 +18,7 @@ public class CheckingFileShowRequest
         yield return new object[]
         {
             "file show D://241_DATABASE/members.txt -m console",
-            new ShowFile("file show D://241_DATABASE/members.txt -m console".Split(' '), "local"),
+            new ShowFile("file show D://241_DATABASE/members.txt -m console".Split(' '), new LocalMode()),
         };
     }
 
@@ -40,7 +41,7 @@ public class CheckingFileShowRequest
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request, "local");
+        ICommands? parsedCommand = commandParser.Parsing(request, new LocalMode());
 
         var temp = (ShowFile?)parsedCommand;
 

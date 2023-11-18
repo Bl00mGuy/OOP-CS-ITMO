@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.TreeSecondChainHandlers;
 
@@ -8,7 +9,7 @@ public class GotoTreeCommandHandler : CommandHandler
     private const int CommandTypeParseIndex = 1;
     private const int CommandPathParseIndex = 2;
 
-    public override ICommands? HandleCommand(string command, string mode)
+    public override ICommands? HandleCommand(string command, IMode mode)
     {
         string[] tokens = command.Split(' ');
 

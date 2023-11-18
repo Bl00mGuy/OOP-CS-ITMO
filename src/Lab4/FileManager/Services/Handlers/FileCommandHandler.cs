@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers;
 
@@ -13,7 +14,7 @@ public class FileCommandHandler : CommandHandler
         _chainLink = chainLink;
     }
 
-    public override ICommands? HandleCommand(string command, string mode)
+    public override ICommands? HandleCommand(string command, IMode mode)
     {
         string[] tokens = command.Split(' ');
 

@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
+using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services;
@@ -12,7 +13,7 @@ public class CommandParser
         _chainOfResponsibility = chainOfResponsibility;
     }
 
-    public ICommands? Parsing(string request, string mode)
+    public ICommands? Parsing(string request, IMode mode)
     {
         return _chainOfResponsibility.HandleCommand(request, mode);
     }
