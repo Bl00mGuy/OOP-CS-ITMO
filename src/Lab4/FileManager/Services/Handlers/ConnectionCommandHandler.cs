@@ -12,7 +12,7 @@ public class ConnectionCommandHandler : CommandHandler
     private const string CommandFlag = "-m";
     private const string CommandFlagParameter = "local";
 
-    public override ICommands? HandleCommand(string command)
+    public override ICommands? HandleCommand(string command, string mode)
     {
         string[] tokens = command.Split(' ');
 
@@ -27,6 +27,6 @@ public class ConnectionCommandHandler : CommandHandler
             }
         }
 
-        return NextHandler?.HandleCommand(command);
+        return NextHandler?.HandleCommand(command, mode);
     }
 }

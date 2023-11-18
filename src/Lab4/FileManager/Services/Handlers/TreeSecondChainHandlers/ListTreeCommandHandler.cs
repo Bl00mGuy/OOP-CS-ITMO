@@ -7,7 +7,7 @@ public class ListTreeCommandHandler : CommandHandler
     private const string CommandType = "list";
     private const int CommandTypeParseIndex = 1;
 
-    public override ICommands? HandleCommand(string command)
+    public override ICommands? HandleCommand(string command, string mode)
     {
         string[] tokens = command.Split(' ');
 
@@ -17,7 +17,7 @@ public class ListTreeCommandHandler : CommandHandler
         }
         else
         {
-            return NextHandler?.HandleCommand(command);
+            return NextHandler?.HandleCommand(command, mode);
         }
     }
 }

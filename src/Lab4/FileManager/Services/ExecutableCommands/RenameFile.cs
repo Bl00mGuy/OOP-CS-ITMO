@@ -8,31 +8,35 @@ public class RenameFile : ICommands
 {
     private const int NameOfFileIndex = 2;
     private const int NewNameOfFileIndex = 3;
-    private readonly IExecuteMode _executeMode;
-    private readonly IDisplayMode _displayMode;
+    private readonly string _mode;
     private readonly string[] _tokens;
 
-    public RenameFile(string[] tokens, IExecuteMode mode, IDisplayMode displayMode)
+    public RenameFile(string[] tokens, string mode)
     {
         _tokens = tokens;
-        _executeMode = mode;
-        _displayMode = displayMode;
+        _mode = mode;
     }
 
     public void Execute(ref string path)
     {
-        string namePath = _tokens[NameOfFileIndex];
-        string fullPath = Path.Combine(namePath, path);
-        string newName = _tokens[NewNameOfFileIndex];
+        if (_mode is "local")
+        {
+            var executeMode = new LocalModeCommandsExecution();
+            var displayMode = new LocalDisplay();
 
-        if (_executeMode.Exists(namePath))
-        {
-            _executeMode.Rename(fullPath, newName);
-            _displayMode.DisplayShow($"Renamed file from {namePath} to {newName}");
-        }
-        else
-        {
-            _displayMode.DisplayShow($"File not found: {namePath}");
+            string namePath = _tokens[NameOfFileIndex];
+            string fullPath = Path.Combine(namePath, path);
+            string newName = _tokens[NewNameOfFileIndex];
+
+            if (executeMode.Exists(namePath))
+            {
+                executeMode.Rename(fullPath, newName);
+                displayMode.DisplayShow($"Renamed file from {namePath} to {newName}");
+            }
+            else
+            {
+                displayMode.DisplayShow($"File not found: {namePath}");
+            }
         }
     }
 }

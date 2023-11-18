@@ -7,7 +7,7 @@ public abstract class DisconnectionCommandHandler : CommandHandler
     private const string CommandType = "disconnect";
     private const int CommandTypeParseIndex = 0;
 
-    public override ICommands? HandleCommand(string command)
+    public override ICommands? HandleCommand(string command, string mode)
     {
         string[] tokens = command.Split(' ');
 
@@ -17,7 +17,7 @@ public abstract class DisconnectionCommandHandler : CommandHandler
         }
         else
         {
-            return NextHandler?.HandleCommand(command);
+            return NextHandler?.HandleCommand(command, mode);
         }
     }
 }

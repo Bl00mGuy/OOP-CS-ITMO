@@ -8,31 +8,35 @@ public class MoveFile : ICommands
 {
     private const int SourcePathOfFileIndex = 2;
     private const int DestinationPathOfFileIndex = 3;
-    private readonly IExecuteMode _executeMode;
-    private readonly IDisplayMode _displayMode;
+    private readonly string _mode;
     private readonly string[] _tokens;
 
-    public MoveFile(string[] tokens, IExecuteMode mode, IDisplayMode displayMode)
+    public MoveFile(string[] tokens, string mode)
     {
         _tokens = tokens;
-        _executeMode = mode;
-        _displayMode = displayMode;
+        _mode = mode;
     }
 
     public void Execute(ref string path)
     {
-        string sourcePath = _tokens[SourcePathOfFileIndex];
-        string fullPath = Path.Combine(sourcePath, path);
-        string destinationPath = _tokens[DestinationPathOfFileIndex];
+        if (_mode is "local")
+        {
+            var executeMode = new LocalModeCommandsExecution();
+            var displayMode = new LocalDisplay();
 
-        if (_executeMode.Exists(sourcePath))
-        {
-            _executeMode.Move(fullPath, destinationPath);
-            _displayMode.DisplayShow($"Moved file from {sourcePath} to {destinationPath}");
-        }
-        else
-        {
-            _displayMode.DisplayShow($"File not found: {sourcePath}");
+            string sourcePath = _tokens[SourcePathOfFileIndex];
+            string fullPath = Path.Combine(sourcePath, path);
+            string destinationPath = _tokens[DestinationPathOfFileIndex];
+
+            if (executeMode.Exists(sourcePath))
+            {
+                executeMode.Move(fullPath, destinationPath);
+                displayMode.DisplayShow($"Moved file from {sourcePath} to {destinationPath}");
+            }
+            else
+            {
+                displayMode.DisplayShow($"File not found: {sourcePath}");
+            }
         }
     }
 }

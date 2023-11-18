@@ -12,8 +12,8 @@ public class CommandParser
         _chainOfResponsibility = chainOfResponsibility;
     }
 
-    public ICommands? Parsing(string request)
+    public ICommands? Parsing(string request, string mode)
     {
-        return _chainOfResponsibility.HandleCommand(request);
+        return _chainOfResponsibility.HandleCommand(request, mode);
     }
 }

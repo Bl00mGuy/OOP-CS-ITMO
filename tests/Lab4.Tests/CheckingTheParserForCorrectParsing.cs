@@ -81,7 +81,7 @@ public class CheckingTheParserForCorrectParsing
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request);
+        ICommands? parsedCommand = commandParser.Parsing(request, "local");
 
         Assert.IsType(expectedType, parsedCommand);
     }

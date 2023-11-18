@@ -19,17 +19,12 @@ public class Request
     {
         while (!string.IsNullOrEmpty(Console.ReadLine()))
         {
-            Console.WriteLine("[root@filemanager ~]$ :");
             string? request = Console.ReadLine();
             ICommands? cmd;
             if (request is not null)
             {
-                cmd = new CommandParser(_commandHandler).Parsing(request);
+                cmd = new CommandParser(_commandHandler).Parsing(request, "local");
                 if (_path is not null) cmd?.Execute(ref _path);
-            }
-            else
-            {
-                Console.WriteLine("Missing request");
             }
         }
     }

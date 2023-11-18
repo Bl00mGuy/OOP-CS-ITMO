@@ -40,7 +40,7 @@ public class CheckingConnectRequest
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request);
+        ICommands? parsedCommand = commandParser.Parsing(request, "local");
 
         var temp = (Connect?)parsedCommand;
 

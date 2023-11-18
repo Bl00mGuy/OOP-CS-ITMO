@@ -13,17 +13,17 @@ public class TreeCommandHandler : CommandHandler
         _chainLink = chainLink;
     }
 
-    public override ICommands? HandleCommand(string command)
+    public override ICommands? HandleCommand(string command, string mode)
     {
         string[] tokens = command.Split(' ');
 
         if (tokens[CommandTypeParseIndex] is CommandType)
         {
-            return _chainLink.HandleCommand(command);
+            return _chainLink.HandleCommand(command, mode);
         }
         else
         {
-            return NextHandler?.HandleCommand(command);
+            return NextHandler?.HandleCommand(command, mode);
         }
     }
 }

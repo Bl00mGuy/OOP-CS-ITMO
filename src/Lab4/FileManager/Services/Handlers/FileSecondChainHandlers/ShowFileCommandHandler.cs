@@ -1,7 +1,5 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
-using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.DisplayMode;
-using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers.FileSecondChainHandlers;
 
@@ -13,7 +11,7 @@ public class ShowFileCommandHandler : CommandHandler
     private const string CommandFlag = "-m";
     private const string CommandFlagParameter = "console";
 
-    public override ICommands? HandleCommand(string command)
+    public override ICommands? HandleCommand(string command, string mode)
     {
         string[] tokens = command.Split(' ');
 
@@ -23,11 +21,11 @@ public class ShowFileCommandHandler : CommandHandler
             {
                 if (Array.IndexOf(tokens, CommandFlagParameter) is not DoesntContainsIndex)
                 {
-                    return new ShowFile(tokens, new LocalModeCommandsExecution(), new LocalDisplay());
+                    return new ShowFile(tokens, mode);
                 }
             }
         }
 
-        return NextHandler?.HandleCommand(command);
+        return NextHandler?.HandleCommand(command, mode);
     }
 }

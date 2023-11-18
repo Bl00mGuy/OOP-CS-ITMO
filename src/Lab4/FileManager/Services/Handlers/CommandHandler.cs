@@ -12,5 +12,5 @@ public abstract class CommandHandler : ICommandHandler
         return this;
     }
 
-    public abstract ICommands? HandleCommand(string command);
+    public abstract ICommands? HandleCommand(string command, string mode);
 }
