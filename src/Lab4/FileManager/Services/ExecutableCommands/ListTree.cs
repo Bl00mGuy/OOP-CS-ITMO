@@ -17,8 +17,13 @@ public class ListTree : ICommands
         _mode = mode;
     }
 
-    public void Execute(ref string path)
+    public void Execute(ref string? path)
     {
+        if (path is null)
+        {
+            return;
+        }
+
         if (int.TryParse(_tokens[CommandTreeListDeepParseIndex], out int depth))
         {
             TreeTraversal(path, depth, StartTraversalDepth);

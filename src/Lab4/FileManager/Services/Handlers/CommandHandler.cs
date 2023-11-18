@@ -9,7 +9,15 @@ public abstract class CommandHandler : ICommandHandler
 
     public ICommandHandler SetNextHandler(ICommandHandler handler)
     {
-        NextHandler = handler;
+        if (NextHandler is null)
+        {
+            NextHandler = handler;
+        }
+        else
+        {
+            NextHandler.SetNextHandler(handler);
+        }
+
         return this;
     }
 

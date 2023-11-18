@@ -2,5 +2,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCom
 
 public interface ICommands
 {
-    void Execute(ref string path);
+    void Execute(ref string? path);
 }

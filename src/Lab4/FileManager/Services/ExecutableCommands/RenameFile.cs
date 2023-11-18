@@ -16,8 +16,13 @@ public class RenameFile : ICommands
         _mode = mode;
     }
 
-    public void Execute(ref string path)
+    public void Execute(ref string? path)
     {
+        if (path is null)
+        {
+            return;
+        }
+
         string namePath = _tokens[NameOfFileIndex];
         string fullPath = Path.Combine(namePath, path);
         string newName = _tokens[NewNameOfFileIndex];

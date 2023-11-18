@@ -15,8 +15,13 @@ public class ShowFile : ICommands
         _mode = mode;
     }
 
-    public void Execute(ref string path)
+    public void Execute(ref string? path)
     {
+        if (path is null)
+        {
+            return;
+        }
+
         string showPath = _tokens[CommandPathParseIndex];
         string fullPath = Path.Combine(showPath, path);
 

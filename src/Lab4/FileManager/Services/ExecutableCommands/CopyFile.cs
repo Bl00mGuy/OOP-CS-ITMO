@@ -16,8 +16,13 @@ public class CopyFile : ICommands
         _mode = mode;
     }
 
-    public void Execute(ref string path)
+    public void Execute(ref string? path)
     {
+        if (path is null)
+        {
+            return;
+        }
+
         string sourcePath = _tokens[SourcePathOfFileIndex];
         string fullPath = Path.Combine(sourcePath, path);
         string destinationPath = _tokens[DestinationPathOfFileIndex];

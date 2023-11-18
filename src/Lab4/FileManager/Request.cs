@@ -18,14 +18,14 @@ public class Request
 
     public void ProcessRequest()
     {
-        while (!string.IsNullOrEmpty(Console.ReadLine()))
+        string? request;
+        while (!string.IsNullOrEmpty(request = Console.ReadLine()))
         {
-            string? request = Console.ReadLine();
             ICommands? cmd;
             if (request is not null)
             {
                 cmd = new CommandParser(_commandHandler).Parsing(request, new LocalMode());
-                if (_path is not null) cmd?.Execute(ref _path);
+                cmd?.Execute(ref _path);
             }
         }
     }

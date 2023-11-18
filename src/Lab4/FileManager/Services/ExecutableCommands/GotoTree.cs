@@ -9,9 +9,12 @@ public class GotoTree : ICommands
         _absolutePath = absolutePath;
     }
 
-    public void Execute(ref string path)
+    public void Execute(ref string? path)
     {
-        _absolutePath = path;
-        path = _absolutePath;
+        if (path is not null)
+        {
+            _absolutePath = path;
+            path = _absolutePath;
+        }
     }
 }

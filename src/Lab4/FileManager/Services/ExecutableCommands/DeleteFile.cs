@@ -15,8 +15,13 @@ public class DeleteFile : ICommands
         _mode = mode;
     }
 
-    public void Execute(ref string path)
+    public void Execute(ref string? path)
     {
+        if (path is null)
+        {
+            return;
+        }
+
         string file = _tokens[FileForDeletePathIndex];
         string fullPath = Path.Combine(file, path);
 

@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCom
 
 public class Disconnect : ICommands
 {
-    public void Execute(ref string path)
+    public void Execute(ref string? path)
     {
         path = string.Empty;
         Environment.Exit(0);

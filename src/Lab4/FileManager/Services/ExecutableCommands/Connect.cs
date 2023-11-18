@@ -9,9 +9,8 @@ public class Connect : ICommands
         _absolutePath = absolutePath;
     }
 
-    public void Execute(ref string path)
+    public void Execute(ref string? path)
     {
-        _absolutePath = path;
         path = _absolutePath;
     }
 }
