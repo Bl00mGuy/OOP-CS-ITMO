@@ -28,9 +28,9 @@ public class ShowFile : ICommands
         if (_mode.Exists(showPath))
         {
             string content = _mode.Show(fullPath);
-            _mode.DisplayShow($"🤓🤓🤓{Path.GetFileNameWithoutExtension(showPath)} CONTENT🤓🤓🤓");
+            _mode.DisplayShow($"#-----{Path.GetFileNameWithoutExtension(showPath)} CONTENT-----#");
             _mode.DisplayShow(content);
-            _mode.DisplayShow("🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓🤓");
+            _mode.DisplayShow("#---------------#");
         }
         else
         {
