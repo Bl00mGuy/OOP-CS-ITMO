@@ -37,22 +37,22 @@ public class CheckingFileShowRequest
             new GotoTreeCommandHandler().SetNextHandler(
                 new ListTreeCommandHandler()));
 
-        ICommandHandler chain = new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler));
+        ICommandHandler chain = new TypeOfConnectionHandler(new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler)));
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request, new LocalMode());
+        ICommands? parsedCommand = commandParser.Parsing(request);
 
         var temp = (ShowFile?)parsedCommand;
 
         ParameterExpression keeperArg = Expression.Parameter(typeof(ShowFile), "temp");
-        Expression secretAccessor = Expression.Field(keeperArg, "_tokens");
-        var lambda = Expression.Lambda<Func<ShowFile, string[]>>(secretAccessor, keeperArg);
-        Func<ShowFile, string[]> func = lambda.Compile();
+        Expression secretAccessor = Expression.Field(keeperArg, "_showPath");
+        var lambda = Expression.Lambda<Func<ShowFile, string>>(secretAccessor, keeperArg);
+        Func<ShowFile, string> func = lambda.Compile();
         if (temp != null)
         {
-            string[] result1 = func(temp);
-            string[] result2 = func(showFile);
+            string result1 = func(temp);
+            string result2 = func(showFile);
             Assert.Equal(result1, result2);
         }
     }

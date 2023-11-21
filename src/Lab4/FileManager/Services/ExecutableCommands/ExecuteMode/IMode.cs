@@ -2,11 +2,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCom
 
 public interface IMode
 {
-    void Copy(string sourcePath, string destinationPath);
-    void Delete(string path);
-    void Move(string sourcePath, string destinationPath);
-    bool Exists(string path);
-    string Show(string path);
-    void Rename(string oldName, string newName);
-    void DisplayShow(string content);
+    void Connect(ref string? path, string? newPath);
+    void Disconnect(ref string? path);
+    void Copy(string? path, string sourcePath, string destinationPath);
+    void Delete(string? path, string filePath);
+    void Move(string? path, string sourcePath, string destinationPath);
+    void Show(string? path, string showPath);
+    void Rename(string? path, string namePath, string newName);
+    void TreeGoTo(ref string? path, string? newPath);
+    void TreeList(string? path, string requestDepth, int initialDepth, int startTraversalDepth);
 }

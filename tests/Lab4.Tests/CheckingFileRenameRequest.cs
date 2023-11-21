@@ -37,22 +37,22 @@ public class CheckingFileRenameRequest
             new GotoTreeCommandHandler().SetNextHandler(
                 new ListTreeCommandHandler()));
 
-        ICommandHandler chain = new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler));
+        ICommandHandler chain = new TypeOfConnectionHandler(new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler)));
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request, new LocalMode());
+        ICommands? parsedCommand = commandParser.Parsing(request);
 
         var temp = (RenameFile?)parsedCommand;
 
         ParameterExpression keeperArg = Expression.Parameter(typeof(RenameFile), "temp");
-        Expression secretAccessor = Expression.Field(keeperArg, "_tokens");
-        var lambda = Expression.Lambda<Func<RenameFile, string[]>>(secretAccessor, keeperArg);
-        Func<RenameFile, string[]> func = lambda.Compile();
+        Expression secretAccessor = Expression.Field(keeperArg, "_newName");
+        var lambda = Expression.Lambda<Func<RenameFile, string>>(secretAccessor, keeperArg);
+        Func<RenameFile, string> func = lambda.Compile();
         if (temp != null)
         {
-            string[] result1 = func(temp);
-            string[] result2 = func(renameFile);
+            string result1 = func(temp);
+            string result2 = func(renameFile);
             Assert.Equal(result1, result2);
         }
     }

@@ -1,5 +1,4 @@
 using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands;
-using Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.ExecutableCommands.ExecuteMode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileManager.Services.Handlers;
 
@@ -14,17 +13,17 @@ public class FileCommandHandler : CommandHandler
         _chainLink = chainLink;
     }
 
-    public override ICommands? HandleCommand(string command, IMode mode)
+    public override ICommands? HandleCommand(Command command)
     {
-        string[] tokens = command.Split(' ');
+        string[] tokens = command.CmdRequest.Split(' ');
 
         if (tokens[CommandTypeParseIndex] is CommandType)
         {
-            return _chainLink.HandleCommand(command, mode);
+            return _chainLink.HandleCommand(command);
         }
         else
         {
-            return NextHandler?.HandleCommand(command, mode);
+            return NextHandler?.HandleCommand(command);
         }
     }
 }

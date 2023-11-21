@@ -18,7 +18,7 @@ public class CheckingTreeGotoRequest
         yield return new object[]
         {
             "tree goto D://239_DATABASE",
-            new GotoTree("D://239_DATABASE"),
+            new GotoTree("D://239_DATABASE", new LocalMode()),
         };
     }
 
@@ -37,11 +37,11 @@ public class CheckingTreeGotoRequest
             new GotoTreeCommandHandler().SetNextHandler(
                 new ListTreeCommandHandler()));
 
-        ICommandHandler chain = new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler));
+        ICommandHandler chain = new TypeOfConnectionHandler(new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler)));
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request, new LocalMode());
+        ICommands? parsedCommand = commandParser.Parsing(request);
 
         var temp = (GotoTree?)parsedCommand;
 

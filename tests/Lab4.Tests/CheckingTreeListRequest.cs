@@ -37,22 +37,22 @@ public class CheckingTreeListRequest
             new GotoTreeCommandHandler().SetNextHandler(
                 new ListTreeCommandHandler()));
 
-        ICommandHandler chain = new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler));
+        ICommandHandler chain = new TypeOfConnectionHandler(new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler)));
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request, new LocalMode());
+        ICommands? parsedCommand = commandParser.Parsing(request);
 
         var temp = (ListTree?)parsedCommand;
 
         ParameterExpression keeperArg = Expression.Parameter(typeof(ListTree), "temp");
-        Expression secretAccessor = Expression.Field(keeperArg, "_tokens");
-        var lambda = Expression.Lambda<Func<ListTree, string[]>>(secretAccessor, keeperArg);
-        Func<ListTree, string[]> func = lambda.Compile();
+        Expression secretAccessor = Expression.Field(keeperArg, "_depth");
+        var lambda = Expression.Lambda<Func<ListTree, string>>(secretAccessor, keeperArg);
+        Func<ListTree, string> func = lambda.Compile();
         if (temp != null)
         {
-            string[] result1 = func(temp);
-            string[] result2 = func(listTree);
+            string result1 = func(temp);
+            string result2 = func(listTree);
             Assert.Equal(result1, result2);
         }
     }

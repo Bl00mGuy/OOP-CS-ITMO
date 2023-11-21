@@ -17,6 +17,7 @@ public class CheckingFileDeleteRequest
     {
         yield return new object[]
         {
+            "connect D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin -m local",
             "file delete D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt",
             new DeleteFile("file delete D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin/241.txt".Split(' '), new LocalMode()),
         };
@@ -24,7 +25,7 @@ public class CheckingFileDeleteRequest
 
     [Theory]
     [MemberData(nameof(TestParameters))]
-    public void ShouldParseCorrectly(string request, DeleteFile deleteFile)
+    public void ShouldParseCorrectly(string connectRequest, string deleteRequest, DeleteFile deleteFile)
     {
         ICommandHandler fileCommandHandler = new FileCommandHandler(
             new CopyFileCommandHandler().SetNextHandler(
@@ -37,22 +38,23 @@ public class CheckingFileDeleteRequest
             new GotoTreeCommandHandler().SetNextHandler(
                 new ListTreeCommandHandler()));
 
-        ICommandHandler chain = new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler));
+        ICommandHandler chain = new TypeOfConnectionHandler(new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler)));
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request, new LocalMode());
+        commandParser.Parsing(connectRequest);
+        ICommands? parsedCommand = commandParser.Parsing(deleteRequest);
 
         var temp = (DeleteFile?)parsedCommand;
 
         ParameterExpression keeperArg = Expression.Parameter(typeof(DeleteFile), "temp");
-        Expression secretAccessor = Expression.Field(keeperArg, "_tokens");
-        var lambda = Expression.Lambda<Func<DeleteFile, string[]>>(secretAccessor, keeperArg);
-        Func<DeleteFile, string[]> func = lambda.Compile();
+        Expression secretAccessor = Expression.Field(keeperArg, "_filePath");
+        var lambda = Expression.Lambda<Func<DeleteFile, string>>(secretAccessor, keeperArg);
+        Func<DeleteFile, string> func = lambda.Compile();
         if (temp != null)
         {
-            string[] result1 = func(temp);
-            string[] result2 = func(deleteFile);
+            string result1 = func(temp);
+            string result2 = func(deleteFile);
             Assert.Equal(result1, result2);
         }
     }

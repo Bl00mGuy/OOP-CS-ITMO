@@ -18,7 +18,7 @@ public class CheckingConnectRequest
         yield return new object[]
         {
             "connect D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin -m local",
-            new Connect("D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin"),
+            new Connect("D://241_DATABASE/ISy26_BANNED_ACCOUNTS/cyberronin", new LocalMode()),
         };
     }
 
@@ -37,11 +37,11 @@ public class CheckingConnectRequest
             new GotoTreeCommandHandler().SetNextHandler(
                 new ListTreeCommandHandler()));
 
-        ICommandHandler chain = new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler));
+        ICommandHandler chain = new TypeOfConnectionHandler(new ConnectionCommandHandler().SetNextHandler(fileCommandHandler.SetNextHandler(treeCommandHandler)));
 
         var commandParser = new CommandParser(chain);
 
-        ICommands? parsedCommand = commandParser.Parsing(request, new LocalMode());
+        ICommands? parsedCommand = commandParser.Parsing(request);
 
         var temp = (Connect?)parsedCommand;
 
