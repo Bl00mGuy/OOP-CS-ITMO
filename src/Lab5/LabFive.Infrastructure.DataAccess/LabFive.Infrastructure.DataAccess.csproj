@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>LabFive.Infrastructure.DataAccess</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Itmo.Dev.Platform.Postgres" />
+      <PackageReference Include="Npgsql" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LabFive.Application.Abstractions\LabFive.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\LabFive.Application.Models\LabFive.Application.Models.csproj" />
+      <ProjectReference Include="..\LabFive.Application.Contracts\LabFive.Application.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>
