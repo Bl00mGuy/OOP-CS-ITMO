@@ -1,9 +1,10 @@
 using LabFive.Application.Contracts.Users;
+using LabFive.Presentation.Console.IntermediateLayer;
 using Spectre.Console;
 
 namespace LabFive.Presentation.Console.Scenarios.CreateBill;
 
-public class CreateBillScenario : IScenario
+public class CreateBillScenario : IIntermediateScenario
 {
     private readonly IUserService _userService;
 
@@ -12,15 +13,15 @@ public class CreateBillScenario : IScenario
         _userService = userService;
     }
 
-    public string Name => "Create Bill";
+    public string Name => "Create Account";
 
     public void Run()
     {
-        string name = AnsiConsole.Ask<string>("Enter password: ");
+        string name = AnsiConsole.Ask<string>("Enter name: ");
         string password = AnsiConsole.Ask<string>("Enter password: ");
 
         _userService.CreateBill(name, password);
 
-        AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.WriteLine("#OPERATION COMPLETED#");
     }
 }

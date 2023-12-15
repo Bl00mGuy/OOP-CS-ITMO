@@ -15,12 +15,12 @@ public class LoginUserScenario : IIntermediateScenario
         _scenarioRunner = scenarioRunner;
     }
 
-    public string Name => "Login as User";
+    public string Name => "USER Login";
 
     public void Run()
     {
         string name = AnsiConsole.Ask<string>("Enter your Name: ");
-        string password = AnsiConsole.Ask<string>("Enter your Password, he-he: ");
+        string password = AnsiConsole.Ask<string>("Enter your Password: ");
 
         LoginResult result = _userService.Login(name, password);
 
@@ -32,7 +32,7 @@ public class LoginUserScenario : IIntermediateScenario
         };
 
         AnsiConsole.WriteLine(message);
-        AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.WriteLine("#OPERATION COMPLETED#");
 
         while (true)
         {

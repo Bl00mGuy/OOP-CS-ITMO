@@ -24,6 +24,6 @@ public class TransactionsHistoryScenario : IScenario
             System.Console.WriteLine($"TRANSACTION INFO: ID[{transaction.TransactionId}] USER ID[{transaction.UserId}] INFO[{transaction.TransactionText}]");
         }
 
-        AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.WriteLine("#OPERATION COMPLETED#");
     }
 }

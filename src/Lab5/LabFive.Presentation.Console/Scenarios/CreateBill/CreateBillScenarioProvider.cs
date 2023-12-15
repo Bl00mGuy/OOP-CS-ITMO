@@ -1,9 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using LabFive.Application.Contracts.Users;
+using LabFive.Presentation.Console.IntermediateLayer;
 
 namespace LabFive.Presentation.Console.Scenarios.CreateBill;
 
-public class CreateBillScenarioProvider : IScenarioProvider
+public class CreateBillScenarioProvider : IIntermediateScenarioProvider
 {
     private readonly IUserService _service;
     private readonly ICurrentUserService _currentUser;
@@ -15,15 +16,15 @@ public class CreateBillScenarioProvider : IScenarioProvider
     }
 
     public bool TryGetScenario(
-        [NotNullWhen(true)] out IScenario? scenario)
+        [NotNullWhen(true)] out IIntermediateScenario? intermediateScenario)
     {
-        if (_currentUser.User is null)
+        if (_currentUser.User is not null)
         {
-            scenario = null;
+            intermediateScenario = null;
             return false;
         }
 
-        scenario = new CreateBillScenario(_service);
+        intermediateScenario = new CreateBillScenario(_service);
         return true;
     }
 }

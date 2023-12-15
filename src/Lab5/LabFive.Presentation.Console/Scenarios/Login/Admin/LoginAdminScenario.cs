@@ -15,11 +15,11 @@ public class LoginAdminScenario : IIntermediateScenario
         _scenarioRunner = scenarioRunner;
     }
 
-    public string Name => "Login as Admin";
+    public string Name => "ADMIN Login";
 
     public void Run()
     {
-        string passwd = AnsiConsole.Ask<string>("Enter secret password: ");
+        string passwd = AnsiConsole.Ask<string>("Sudo su password: ");
 
         LoginResult result = _adminService.Login(passwd);
 
@@ -31,7 +31,7 @@ public class LoginAdminScenario : IIntermediateScenario
         };
 
         AnsiConsole.WriteLine(message);
-        AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.WriteLine("#OPERATION COMPLETED#");
 
         while (true)
         {

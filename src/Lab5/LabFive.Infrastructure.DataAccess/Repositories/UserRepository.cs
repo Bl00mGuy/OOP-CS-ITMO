@@ -13,7 +13,7 @@ public class UserRepository : IUserRepository
         const string sql = @"
                            SELECT user_id, user_name, user_password
                            FROM users
-                           WHERE user_name = @name AND user_password = @password;";
+                           WHERE user_name = @user_name AND user_password = @user_password;";
 
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
         {
@@ -26,8 +26,8 @@ public class UserRepository : IUserRepository
         connection.Open();
 
         using var command = new NpgsqlCommand(sql, connection);
-        command.AddParameter("name", name);
-        command.AddParameter("password", password);
+        command.AddParameter("user_name", name);
+        command.AddParameter("user_password", password);
 
         using NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -36,13 +36,13 @@ public class UserRepository : IUserRepository
         return new User(
             Id: reader.GetInt64(0),
             Name: reader.GetString(1),
-            Password: reader.GetInt64(2));
+            Password: reader.GetString(2));
     }
 
     public void CreateBill(string name, string password)
     {
         const string sql = @"
-                INSERT INTO users (user_id, user_password, balance)
+                INSERT INTO users (user_name, user_password, user_balance)
                 VALUES (@name, @password, @balance);";
 
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
@@ -116,8 +116,8 @@ public class UserRepository : IUserRepository
     {
         const string sql = @"
                 UPDATE users
-                WHERE user_id = @user AND user_balance > @money
-                SET user_balance = user_balance - @money;";
+                SET user_balance = user_balance - @money
+                WHERE user_id = @user;";
 
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
         {

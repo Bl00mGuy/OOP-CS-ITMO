@@ -20,6 +20,6 @@ public class RemoveMoneyScenario : IScenario
 
         _userService.RemoveMoney(password);
 
-        AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.WriteLine("#OPERATION COMPLETED#");
     }
 }

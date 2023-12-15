@@ -20,6 +20,6 @@ public class PutMoneyScenario : IScenario
 
         _userService.PutMoney(password);
 
-        AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.WriteLine("#OPERATION COMPLETED#");
     }
 }

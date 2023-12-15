@@ -21,6 +21,6 @@ public class GetBalanceScenario : IScenario
 
         if (result is null) return;
         AnsiConsole.WriteLine(CultureInfo.InvariantCulture, "{0}", result);
-        AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.WriteLine("#OPERATION COMPLETED#");
     }
 }

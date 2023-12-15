@@ -42,7 +42,7 @@ public class AdminRepository : IAdminRepository
         const string sql = @"
                            SELECT admin_name, admin_password
                            FROM admins
-                           WHERE admin_password = password;";
+                           WHERE admin_password = @admin_password;";
 
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
         {
@@ -55,7 +55,7 @@ public class AdminRepository : IAdminRepository
         connection.Open();
 
         using var command = new NpgsqlCommand(sql, connection);
-        command.AddParameter("password", password);
+        command.AddParameter("admin_password", password);
 
         using NpgsqlDataReader reader = command.ExecuteReader();
 
