@@ -35,14 +35,19 @@ internal class UserService : IUserService
         return null;
     }
 
-    public void PutMoney(long money)
+    public void PutMoney(decimal money)
     {
         if (_currentUserManager.User != null) _repository.PutMoney(_currentUserManager.User.Id, money);
     }
 
-    public OperationStatus RemoveMoney(long money)
+    public OperationStatus RemoveMoney(decimal money)
     {
         if (_currentUserManager.User != null) return _repository.RemoveMoney(_currentUserManager.User.Id, money);
         return OperationStatus.None;
+    }
+
+    public void LogTransaction(string type, decimal amount)
+    {
+        if (_currentUserManager.User != null) _repository.LogTransaction(_currentUserManager.User.Id, type, amount);
     }
 }

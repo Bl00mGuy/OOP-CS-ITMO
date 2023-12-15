@@ -8,6 +8,7 @@ public interface IUserRepository
     User? FindUser(string name, string password);
     void CreateBill(string name, string password);
     decimal? GetUserBalance(long user);
-    void PutMoney(long user, long money);
-    OperationStatus RemoveMoney(long user, long money);
+    void PutMoney(long user, decimal money);
+    OperationStatus RemoveMoney(long user, decimal money);
+    void LogTransaction(long user, string type, decimal amount);
 }

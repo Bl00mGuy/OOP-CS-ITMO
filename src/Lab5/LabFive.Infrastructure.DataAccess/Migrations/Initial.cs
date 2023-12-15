@@ -20,7 +20,8 @@ public class Initial : SqlMigration
     (
         transaction_id bigint primary key generated always as identity,
         user_id bigint not null,
-        transaction_text text not null
+        transaction_type text not null,
+        transaction_amount numeric
     );
 
     create table admins

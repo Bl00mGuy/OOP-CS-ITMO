@@ -89,7 +89,7 @@ public class UserRepository : IUserRepository
         return reader.GetDecimal(0);
     }
 
-    public void PutMoney(long user, long money)
+    public void PutMoney(long user, decimal money)
     {
         const string sql = @"
                 UPDATE users
@@ -112,7 +112,7 @@ public class UserRepository : IUserRepository
         command.ExecuteNonQuery();
     }
 
-    public OperationStatus RemoveMoney(long user, long money)
+    public OperationStatus RemoveMoney(long user, decimal money)
     {
         const string sql = @"
                 UPDATE users
@@ -138,5 +138,28 @@ public class UserRepository : IUserRepository
 
         if (reader.Read() is false) return OperationStatus.Failed;
         return OperationStatus.Success;
+    }
+
+    public void LogTransaction(long user, string type, decimal amount)
+    {
+        const string sql = @"
+                INSERT INTO transactions (user_id, transaction_type, transaction_amount)
+                VALUES (@user, @type, @amount);";
+
+        using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
+        {
+            Host = "localhost",
+            Port = 6432,
+            Username = "postgres",
+            Password = "postgres",
+            SslMode = SslMode.Prefer,
+        }.ConnectionString);
+        connection.Open();
+
+        using var command = new NpgsqlCommand(sql, connection);
+        command.AddParameter("user", user);
+        command.AddParameter("type", type);
+        command.AddParameter("amount", amount);
+        command.ExecuteNonQuery();
     }
 }

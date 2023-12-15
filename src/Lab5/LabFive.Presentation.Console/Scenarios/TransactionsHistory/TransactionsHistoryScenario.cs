@@ -21,7 +21,7 @@ public class TransactionsHistoryScenario : IScenario
 
         foreach (Transaction transaction in history)
         {
-            System.Console.WriteLine($"TRANSACTION INFO: ID[{transaction.TransactionId}] USER ID[{transaction.UserId}] INFO[{transaction.TransactionText}]");
+            System.Console.WriteLine($"TRANSACTION INFO: ID[{transaction.TransactionId}] USER ID[{transaction.UserId}] INFO[{transaction.TransactionType}, AMOUNT[{transaction.TransactionAmount}]]");
         }
 
         AnsiConsole.WriteLine("#OPERATION COMPLETED#");

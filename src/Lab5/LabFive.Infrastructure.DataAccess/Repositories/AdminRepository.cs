@@ -11,7 +11,7 @@ public class AdminRepository : IAdminRepository
     public IEnumerable<Transaction> GetTransactionsHistory()
     {
         const string sql = @"
-                           SELECT transaction_id, user_id, transaction_text
+                           SELECT transaction_id, user_id, transaction_type, transaction_amount
                            FROM transactions";
 
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
@@ -33,7 +33,8 @@ public class AdminRepository : IAdminRepository
             yield return new Transaction(
                 reader.GetInt64(0),
                 reader.GetInt64(1),
-                reader.GetString(2));
+                reader.GetString(2),
+                reader.GetInt64(3));
         }
     }
 

@@ -16,9 +16,10 @@ public class PutMoneyScenario : IScenario
 
     public void Run()
     {
-        long password = AnsiConsole.Ask<long>("How much money you wish to deposit into the account: ");
+        decimal money = AnsiConsole.Ask<long>("How much money you wish to deposit into the account: ");
 
-        _userService.PutMoney(password);
+        _userService.PutMoney(money);
+        _userService.LogTransaction("PutMoney", money);
 
         AnsiConsole.WriteLine("#OPERATION COMPLETED#");
     }

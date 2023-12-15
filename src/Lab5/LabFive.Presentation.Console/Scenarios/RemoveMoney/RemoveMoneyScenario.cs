@@ -16,9 +16,10 @@ public class RemoveMoneyScenario : IScenario
 
     public void Run()
     {
-        long password = AnsiConsole.Ask<long>("How much money you wish to withdraw from your account: ");
+        decimal money = AnsiConsole.Ask<long>("How much money you wish to withdraw from your account: ");
 
-        _userService.RemoveMoney(password);
+        _userService.RemoveMoney(money);
+        _userService.LogTransaction("RemoveMoney", money);
 
         AnsiConsole.WriteLine("#OPERATION COMPLETED#");
     }
