@@ -1,3 +1,4 @@
+using LabFive.Application.Contracts.Transactions;
 using LabFive.Application.Contracts.Users;
 using Spectre.Console;
 
@@ -16,10 +17,18 @@ public class RemoveMoneyScenario : IScenario
 
     public void Run()
     {
+        AnsiConsole.Clear();
+
         decimal money = AnsiConsole.Ask<long>("How much money you wish to withdraw from your account: ");
 
-        _userService.RemoveMoney(money);
+        var status = (OperationStatus)_userService.RemoveMoney(money);
         _userService.LogTransaction("RemoveMoney", money);
+
+        if (status is OperationStatus.Failed)
+        {
+            AnsiConsole.WriteLine("#OPERATION FAILED#");
+            return;
+        }
 
         AnsiConsole.WriteLine("#OPERATION COMPLETED#");
     }

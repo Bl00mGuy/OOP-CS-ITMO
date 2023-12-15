@@ -1,6 +1,6 @@
 using Itmo.Dev.Platform.Postgres.Extensions;
 using LabFive.Application.Abstractions.Repositories;
-using LabFive.Application.Contracts.Users;
+using LabFive.Application.Contracts.Transactions;
 using LabFive.Application.Models.Users;
 using Npgsql;
 
@@ -93,7 +93,7 @@ public class UserRepository : IUserRepository
     {
         const string sql = @"
                 UPDATE users
-                SET user_balance = @money
+                SET user_balance = user_balance + @money
                 WHERE user_id = @user;";
 
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
@@ -117,7 +117,7 @@ public class UserRepository : IUserRepository
         const string sql = @"
                 UPDATE users
                 SET user_balance = user_balance - @money
-                WHERE user_id = @user;";
+                WHERE user_id = @user AND user_balance >= @money;";
 
         using var connection = new NpgsqlConnection(new NpgsqlConnectionStringBuilder
         {

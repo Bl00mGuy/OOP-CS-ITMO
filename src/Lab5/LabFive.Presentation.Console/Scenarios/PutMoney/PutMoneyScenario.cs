@@ -16,6 +16,8 @@ public class PutMoneyScenario : IScenario
 
     public void Run()
     {
+        AnsiConsole.Clear();
+
         decimal money = AnsiConsole.Ask<long>("How much money you wish to deposit into the account: ");
 
         _userService.PutMoney(money);

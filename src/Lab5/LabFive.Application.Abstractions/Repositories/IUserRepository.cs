@@ -1,4 +1,4 @@
-using LabFive.Application.Contracts.Users;
+using LabFive.Application.Contracts.Transactions;
 using LabFive.Application.Models.Users;
 
 namespace LabFive.Application.Abstractions.Repositories;

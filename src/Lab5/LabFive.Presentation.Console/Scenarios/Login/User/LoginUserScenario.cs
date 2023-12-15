@@ -19,6 +19,8 @@ public class LoginUserScenario : IIntermediateScenario
 
     public void Run()
     {
+        AnsiConsole.Clear();
+
         string name = AnsiConsole.Ask<string>("Enter your Name: ");
         string password = AnsiConsole.Ask<string>("Enter your Password: ");
 
@@ -30,6 +32,12 @@ public class LoginUserScenario : IIntermediateScenario
             LoginResult.NotFound => "User not found!",
             _ => throw new ArgumentOutOfRangeException(nameof(result)),
         };
+
+        if (result is LoginResult.NotFound)
+        {
+            AnsiConsole.Clear();
+            return;
+        }
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.WriteLine("#OPERATION COMPLETED#");

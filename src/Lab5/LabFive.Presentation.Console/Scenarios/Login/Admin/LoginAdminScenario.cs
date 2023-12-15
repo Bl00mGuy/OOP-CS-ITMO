@@ -19,6 +19,8 @@ public class LoginAdminScenario : IIntermediateScenario
 
     public void Run()
     {
+        AnsiConsole.Clear();
+
         string passwd = AnsiConsole.Ask<string>("Sudo su password: ");
 
         LoginResult result = _adminService.Login(passwd);
@@ -29,6 +31,12 @@ public class LoginAdminScenario : IIntermediateScenario
             LoginResult.NotFound => "Incorrect password!",
             _ => throw new ArgumentOutOfRangeException(nameof(result)),
         };
+
+        if (result is LoginResult.NotFound)
+        {
+            AnsiConsole.Clear();
+            return;
+        }
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.WriteLine("#OPERATION COMPLETED#");

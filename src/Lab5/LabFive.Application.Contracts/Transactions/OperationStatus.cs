@@ -1,4 +1,4 @@
-namespace LabFive.Application.Contracts.Users;
+namespace LabFive.Application.Contracts.Transactions;
 
 public enum OperationStatus
 {

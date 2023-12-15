@@ -17,6 +17,8 @@ public class TransactionsHistoryScenario : IScenario
 
     public void Run()
     {
+        AnsiConsole.Clear();
+
         IEnumerable<Transaction> history = _adminService.GetTransactionsHistory();
 
         foreach (Transaction transaction in history)

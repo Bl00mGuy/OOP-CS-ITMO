@@ -17,6 +17,8 @@ public class GetBalanceScenario : IScenario
 
     public void Run()
     {
+        AnsiConsole.Clear();
+
         decimal? result = _userService.GetBalance();
 
         if (result is null) return;

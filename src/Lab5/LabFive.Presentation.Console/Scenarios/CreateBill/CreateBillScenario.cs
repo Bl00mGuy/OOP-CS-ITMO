@@ -17,6 +17,8 @@ public class CreateBillScenario : IIntermediateScenario
 
     public void Run()
     {
+        AnsiConsole.Clear();
+
         string name = AnsiConsole.Ask<string>("Enter name: ");
         string password = AnsiConsole.Ask<string>("Enter password: ");
 
